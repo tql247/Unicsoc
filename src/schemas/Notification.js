@@ -6,11 +6,7 @@ const NotificationSchema = new Schema({
         type: String,
         required: [true, 'Why no title?']
     },
-    content: {
-        type: String,
-        required: [true, 'Why no content?']
-    },
-    description: {
+    detail: {
         type: String,
         required: [true, 'Why no description?']
     },
