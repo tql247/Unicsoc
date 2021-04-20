@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express');
 const router_path = require('./routes');
 const mongoose = require("mongoose");
+const ErrorHandler = require("./handlers");
 // const cors = require('cors');
 // const cookieParser = require('cookie-parser');
 
@@ -21,6 +22,7 @@ app.use("/public", express.static(path.join(__dirname, '/public')))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(router)
+app.use(ErrorHandler)
 
 app.listen(PORT, () => console.log(`Listening at http://localhost:${PORT}`))
 

@@ -5,6 +5,7 @@ const ErrorHandler = async (err, req, res, next) => {
     return res.status(err.status).json({
         name: err.name,
         message: err.message,
+        check: "admin"
     });
 };
 
