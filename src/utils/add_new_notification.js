@@ -4,8 +4,7 @@ const add_new_notification = async function (notification) {
     return await NotificationModel.create(
         {
             title: notification.title,
-            content: notification.content,
-            description: notification.description,
+            detail: notification.detail,
             topic: notification.topic,
             uploader : notification.uploader
         }
