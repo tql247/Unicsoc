@@ -8,4 +8,7 @@ router.get('/', (req, res) => {
 const user = require('./user');
 router.use('/user', user);
 
+const test = require('./test');
+router.use('/test', test);
+
 module.exports = router;

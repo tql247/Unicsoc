@@ -1,7 +1,5 @@
-try {
+const AccountModel = require("./Account");
 
-} catch (e) {
-
-} finally {
-
+module.exports = {
+    AccountModel
 }
