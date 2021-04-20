@@ -11,4 +11,7 @@ router.use('/user', user);
 const test = require('./test');
 router.use('/test', test);
 
+const notification = require('./notification');
+router.use('/notification', notification);
+
 module.exports = router;
