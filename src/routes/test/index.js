@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const { add_new_account, connect } = require('@utils');
 
 
@@ -20,7 +19,6 @@ router.get('/', async function (req, res, next) {
     } catch (e) {
         next(e)
     } finally {
-        await mongoose.connection.close()
     }
 })
 
