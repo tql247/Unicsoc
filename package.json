@@ -4,6 +4,7 @@
   "main": "server.js",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cookie-session": "^1.4.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
@@ -28,6 +29,8 @@
     "start": "node server.js"
   },
   "devDependencies": {
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "jsonwebtoken": "^8.5.1"
   }
 }
