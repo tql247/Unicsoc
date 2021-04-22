@@ -1,34 +1,31 @@
-const AccountModel = require("../models/Account");
-const {hash_password} = require("../utils");
-const connect = require("./connection");
-const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
+const add_new_account = require("../accessor/add_new_account");
+const find_account_by_email = require("../accessor/find_account_by_email");
 const {check_password} = require("../utils/bcrypt");
 
 
 async function login_by_google(user) {
     try {
-        await connect();
         // if (!user.email.match("@student.tdt.edu.vn")) return {}
 
-        let acc = await AccountModel.findOne().where('email').equals(user.email).exec();
+        let acc = await find_account_by_email(user.email);
 
         if (!acc) {
-            acc = await AccountModel.create(
+            acc = await add_new_account(
                 {
                     email: user.email,
-                    password: await hash_password('12345678'),
+                    password: '12345678',
                     full_name: user.name,
                     role: "student"
-                }
-            );
+                })
         }
 
         const token = jwt.sign(
             {
-                id: acc._id,
-                email: acc.email,
-                full_name: acc.full_name,
+                id: acc["_id"],
+                email: acc["email"],
+                full_name: acc["full_name"],
+                password: acc["password"],
                 role: "student"
             },
             process.env.JWT_KEY,
@@ -37,10 +34,6 @@ async function login_by_google(user) {
             }
         );
 
-        await AccountModel.findOneAndUpdate({email: acc.email}, {
-            token: token,
-        });
-
         return {
             code: 202,
             message: "Accepted - Login success",
@@ -48,15 +41,12 @@ async function login_by_google(user) {
         }
     } catch (e) {
         throw e
-    } finally {
-        await mongoose.connection.close()
     }
 }
 
 async function login_by_account(user) {
     try {
-        await connect();
-        let acc = await AccountModel.findOne().where('email').equals(user.email).exec();
+        let acc = await find_account_by_email(user.email);
 
         if (!acc) {
             const e = new Error();
@@ -66,7 +56,7 @@ async function login_by_account(user) {
             throw e
         }
 
-        let verify = check_password(acc.password, user.password)
+        let verify = await check_password(user.password, acc["password"]);
 
         if (!verify) {
             const e = new Error();
@@ -78,9 +68,10 @@ async function login_by_account(user) {
 
         const token = jwt.sign(
             {
-                id: acc._id,
-                email: acc.email,
-                full_name: acc.full_name,
+                id: acc["_id"],
+                email: acc["email"],
+                full_name: acc["full_name"],
+                password: acc["password"],
                 role: "student"
             },
             process.env.JWT_KEY,
@@ -89,10 +80,6 @@ async function login_by_account(user) {
             }
         );
 
-        await AccountModel.findOneAndUpdate({email: acc.email}, {
-            token: token,
-        });
-
         return {
             code: 202,
             message: "Accepted - Login success",
@@ -100,8 +87,6 @@ async function login_by_account(user) {
         }
     } catch (e) {
         throw e
-    } finally {
-        await mongoose.connection.close()
     }
 }
 

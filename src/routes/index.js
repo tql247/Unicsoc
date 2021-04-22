@@ -5,6 +5,9 @@ router.get('/', (req, res) => {
     res.render('index')
 })
 
+const admin = require('./admin');
+router.use('/admin', admin);
+
 const user = require('./user');
 router.use('/user', user);
 

@@ -1,6 +1,6 @@
 const {AccountModel} = require("../models");
 const mongoose = require('mongoose');
-const connect = require("../services/connection");
+const connect = require("./connection");
 
 const find_account_by_email = async function (email) {
     try {

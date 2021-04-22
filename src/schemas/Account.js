@@ -15,9 +15,18 @@ const AccountSchema = new Schema({
         type: String,
         required: [true, 'Why no name?']
     },
+    class_id: {
+        type: String
+    },
+    falcuty: {
+        type: String
+    },
+    avatar: {
+        type: String
+    },
     role: {
         type: String,
-        enum: ['admin', 'student', 'groups'],
+        enum: ['admin', 'student', 'faculty'],
         required: [true, 'Why no role?']
     },
     token: {
