@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const {login_by_google} = require("../../services/login");
-const find_account_by_email = require("../../accessor/find_account_by_email");
-const google_authenticate = require("../../thirdparty/google");
+const find_account_by_email = require("../../services/accessor/find_account_by_email");
+const google_authenticate = require("../../services/thirdparty/google");
 const auth = require("../../middlewares/auth");
-const {update_account_info} = require("../../accessor/update_account_info");
+const update_user_info = require("../../services/update_user_info");
 const {login_by_account} = require("../../services/login");
 
 
@@ -34,7 +34,7 @@ router.get('/me', [auth], async function (req, res, next) {
 
 router.post('/me/update', [auth], async function (req, res, next) {
     try {
-        const new_user_info = {
+        const user_req = {
             email: req["user_profile"].email,
             full_name: req.body["full_name"] || req["user_profile"].full_name,
             password: req.body["password"],
@@ -43,10 +43,9 @@ router.post('/me/update', [auth], async function (req, res, next) {
             avatar: req.body["avatar"]
         }
 
-        res.send(await update_account_info(new_user_info));
+        res.send(await update_user_info(user_req));
     } catch (e) {
         next(e)
-    } finally {
     }
 })
 
@@ -94,12 +93,16 @@ router.get(
                     const {displayName, email} = info
                     const token = await login_by_google({email: email, name: displayName})
                     res.cookie('jwt', token)
-                    return res.redirect('back');
+                    next();
                 } catch (e) {
                     next(e);
                 }
             }
         )(req, res, next);
+    },
+    (req, res, next) => {
+        return res.redirect('/');
+        // return res.redirect('back');
     }
 );
 

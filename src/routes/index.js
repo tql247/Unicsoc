@@ -10,9 +10,12 @@ router.use('/admin', admin);
 
 const user = require('./user');
 router.use('/user', user);
+//
+// const test = require('./test');
+// router.use('/test', test);
 
-const test = require('./test');
-router.use('/test', test);
+const feed = require('./feed');
+router.use('/feed', feed);
 
 const notification = require('./notification');
 router.use('/notification', notification);

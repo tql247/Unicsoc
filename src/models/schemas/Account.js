@@ -22,7 +22,8 @@ const AccountSchema = new Schema({
         type: String
     },
     avatar: {
-        type: String
+        data: Buffer,
+        contentType: String
     },
     role: {
         type: String,

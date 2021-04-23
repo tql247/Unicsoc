@@ -1,6 +1,5 @@
-const { NotificationModel } = require("@models");
-
-const get_all_notification = async function (index) {
+const NotificationModel = require("../../models/Notification");
+const find_all_notification = async function (index) {
     return await NotificationModel.
         find().
         sort({"date": "desc"}).
@@ -9,4 +8,4 @@ const get_all_notification = async function (index) {
         exec();
 }
 
-module.exports = get_all_notification
+module.exports = find_all_notification

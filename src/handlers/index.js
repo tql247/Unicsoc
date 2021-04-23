@@ -9,6 +9,7 @@ const ErrorHandler = (err, req, res, next) => {
         err.status = 401
     }
 
+    if (!err.status) err.status = 400
     return res.status(err.status).json({
         name: err.name,
         message: err.message

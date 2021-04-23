@@ -1,7 +1,7 @@
 const express = require('express');
-const add_new_account = require("../../accessor/add_new_account");
 const auth = require("../../middlewares/auth");
 const moderator_verify = require("../../middlewares/moderator_verify");
+const create_new_user = require("../../services/create_new_user");
 const router = express.Router();
 
 router.get('/', async function (req, res, next) {
@@ -25,7 +25,7 @@ router.post('/create', [auth, moderator_verify], async function (req, res, next)
             role: req.body["role"]
         }
 
-        res.send(await add_new_account(new_user))
+        res.send(await create_new_user(new_user))
     } catch (e) {
         next(e)
     } finally {
