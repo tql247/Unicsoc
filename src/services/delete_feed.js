@@ -1,4 +1,4 @@
-const soft_delete = require("./accessor/soft_delete");
+const soft_delete = require("./accessor/soft_delete_feed");
 
 async function edit_feed(feed_id) {
     try {

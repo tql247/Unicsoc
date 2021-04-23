@@ -2,7 +2,7 @@ const connect = require("./connection");
 const mongoose = require('mongoose');
 const FeedModel = require("../../models/Feed");
 
-async function soft_delete(feed_id) {
+async function soft_delete_feed(feed_id) {
     try {
         await connect();
         return await FeedModel.findByIdAndUpdate(
@@ -18,4 +18,4 @@ async function soft_delete(feed_id) {
     }
 }
 
-module.exports = soft_delete
+module.exports = soft_delete_feed

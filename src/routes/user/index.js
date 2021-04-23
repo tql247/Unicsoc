@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const {login_by_google} = require("../../services/login");
-const find_account_by_email = require("../../services/accessor/find_account_by_email");
 const google_authenticate = require("../../services/thirdparty/google");
 const auth = require("../../middlewares/auth");
 const update_user_info = require("../../services/update_user_info");
+const view_all_user_feeds = require("../../services/view_all_user_feeds");
 const {login_by_account} = require("../../services/login");
 
 
@@ -12,9 +12,9 @@ router.get('/', async function (req, res) {
     res.send('user.ejs');
 })
 
-router.get('/info/:email', [auth], async function (req, res, next) {
+router.get('/visit/:email', [auth], async function (req, res, next) {
     try {
-        const user = await find_account_by_email(req.params["email"])
+        const user = await view_all_user_feeds(req.params["email"])
         res.send(user);
     } catch (e) {
         next(e)

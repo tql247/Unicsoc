@@ -22,6 +22,16 @@ const NotificationSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Account'
     },
+    created_at: {
+        type: Date,
+        default: Date.now
+    },
+    updated_at: {
+        type: Date
+    },
+    deleted_at: {
+        type: Date
+    },
 })
 
 module.exports = NotificationSchema

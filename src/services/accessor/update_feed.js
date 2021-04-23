@@ -10,7 +10,8 @@ async function update_feed(feed) {
             {
                 content: feed["content"],
                 embed_url: feed["embed_url"],
-                image: feed["image"]
+                image: feed["image"],
+                updated_at: Date.now()
             }
         );
     } catch (e) {

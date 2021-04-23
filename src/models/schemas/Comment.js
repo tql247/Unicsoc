@@ -1,17 +1,14 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const FeedSchema = new Schema({
+const CommentSchema = new Schema({
     content: {
         type: String,
         required: [true, 'Content empty?']
     },
-    image: {
-        contentType: String,
-        data: Buffer
-    },
-    embed_url: {
-        type: String
+    feed_id: {
+        type: Schema.Types.ObjectId,
+        ref: 'Feed'
     },
     uploader_id: {
         type: Schema.Types.ObjectId,
@@ -29,4 +26,4 @@ const FeedSchema = new Schema({
     },
 })
 
-module.exports = FeedSchema
+module.exports = CommentSchema
