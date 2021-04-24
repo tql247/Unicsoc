@@ -25,7 +25,6 @@ app.use(express.urlencoded({extended: false}))
 app.use(router)
 app.use([not_found_url, ErrorHandler])
 
-
 app.listen(PORT, () => console.log(`Listening at http://localhost:${PORT}`))
 
 module.exports = app

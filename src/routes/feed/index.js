@@ -3,7 +3,7 @@ const post_a_feed = require("../../services/post_a_feed");
 const uploader = require("../../middlewares/uploader");
 const edit_feed = require("../../services/edit_feed");
 const view_all_notification = require("../../services/view_all_notifications");
-const delete_feed = require("../../services/accessor/delete_feed");
+const soft_delete_feed = require("../../services/accessor/soft_delete_feed");
 const router = express.Router();
 
 router.get('/', async function (req, res) {
@@ -50,13 +50,8 @@ router.post('/update', uploader.single('picture'),async function (req, res, next
 
 router.post('/delete', uploader.single('picture'),async function (req, res, next) {
     try {
-        const req_feed = {
-            _id: req.body["feed_id"],
-            content: req.body["content"],
-            image: req["file"],
-            embed_url: req.body["embed_url"]
-        }
-        res.send(await delete_feed(req_feed));
+        const feed_id = req.body["feed_id"];
+        res.send(await soft_delete_feed(feed_id));
     } catch (e) {
         next(e)
     }

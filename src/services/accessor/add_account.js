@@ -1,7 +1,7 @@
 const connect = require("./connection");
 const mongoose = require('mongoose');
 const AccountModel = require("../../models/Account");
-const {hash_password} = require("../../utils");
+const {hash_password} = require("../../utils/bcrypt");
 
 async function add_account(acc) {
     try {

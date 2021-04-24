@@ -1,4 +1,5 @@
 require('dotenv').config()
 require('module-alias/register')
 require('./src/index')
+// require('./src/utils/socket')
 console.log('Server is running...')
