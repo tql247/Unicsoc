@@ -27,7 +27,7 @@ const AccountSchema = new Schema({
     },
     role: {
         type: String,
-        enum: ['admin', 'student', 'faculty'],
+        enum: ['admin', 'student', 'officer'],
         required: [true, 'Why no role?']
     },
     token: {

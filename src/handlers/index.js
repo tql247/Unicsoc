@@ -1,5 +1,5 @@
 const not_found_url = (req, res) => {
-    return res.type('txt').send('Not found');
+    return res.type('txt').send('Not found url');
 }
 
 const ErrorHandler = (err, req, res, next) => {

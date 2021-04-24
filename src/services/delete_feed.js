@@ -1,6 +1,6 @@
 const soft_delete = require("./accessor/soft_delete_feed");
 
-async function edit_feed(feed_id) {
+async function delete_feed(feed_id) {
     try {
         return await soft_delete(feed_id)
     } catch (e) {
@@ -8,4 +8,4 @@ async function edit_feed(feed_id) {
     }
 }
 
-module.exports = edit_feed
+module.exports = delete_feed
