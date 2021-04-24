@@ -4,7 +4,7 @@ const {login_by_google} = require("../../services/login");
 const google_authenticate = require("../../services/thirdparty/google");
 const auth = require("../../middlewares/auth");
 const update_user_info = require("../../services/update_user_info");
-const view_all_user_feeds = require("../../services/view_all_user_feeds");
+const view_all_user_feeds = require("../../services/view_feeds");
 const {login_by_account} = require("../../services/login");
 
 

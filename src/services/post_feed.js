@@ -1,6 +1,6 @@
 const add_new_feed = require("./accessor/add_feed");
 
-async function post_a_feed(feed) {
+async function post_feed(feed) {
     try {
         let image = null
 
@@ -19,7 +19,7 @@ async function post_a_feed(feed) {
     }
 }
 
-module.exports = post_a_feed
+module.exports = post_feed
 
 
 // const imbase64 = Buffer.from(image.data).toString('base64')

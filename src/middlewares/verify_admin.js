@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const moderator_verify = async (req, res, next) => {
+const verify_admin = async (req, res, next) => {
     try {
         console.log('---------------')
         if (req["user_profile"].role !== "admin") {
@@ -16,4 +16,4 @@ const moderator_verify = async (req, res, next) => {
     }
 };
 
-module.exports = moderator_verify;
+module.exports = verify_admin;

@@ -1,8 +1,8 @@
 const express = require('express');
-const post_a_feed = require("../../services/post_a_feed");
+const post_a_feed = require("../../services/post_feed");
 const uploader = require("../../middlewares/uploader");
 const edit_feed = require("../../services/edit_feed");
-const view_all_notification = require("../../services/view_all_notifications");
+const view_all_notification = require("../../services/view_notifications");
 const soft_delete_feed = require("../../services/accessor/soft_delete_feed");
 const router = express.Router();
 
