@@ -51,7 +51,16 @@ router.post('/me/update', [auth], async function (req, res, next) {
 
 router.get('/login', async function (req, res, next) {
     try {
-        res.send('login.ejs');
+        res.render('login/index');
+    } catch (e) {
+    } finally {
+    }
+})
+
+router.get('/logout', async function (req, res, next) {
+    try {
+        res.clearCookie('jwt');
+        res.redirect('/')
     } catch (e) {
     } finally {
     }
@@ -90,8 +99,8 @@ router.get(
             },
             async ($, info) => {
                 try {
-                    const {displayName, email} = info
-                    const token = await login_by_google({email: email, name: displayName})
+                    const {displayName, email, picture} = info
+                    const token = await login_by_google({email: email, name: displayName, google_avatar: picture})
                     res.cookie('jwt', token)
                     next();
                 } catch (e) {
