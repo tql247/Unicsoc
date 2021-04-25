@@ -25,6 +25,9 @@ const AccountSchema = new Schema({
         data: Buffer,
         contentType: String
     },
+    google_avatar: {
+        type: String
+    },
     role: {
         type: String,
         enum: ['admin', 'student', 'officer'],
