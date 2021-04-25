@@ -13,6 +13,7 @@ async function add_account(acc) {
                 class_id: acc.class_id,
                 falcuty: acc.falcuty,
                 avatar: null,
+                google_avatar: acc.google_avatar,
                 role: acc.role,
             }
         );

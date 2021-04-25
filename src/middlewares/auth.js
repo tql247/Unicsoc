@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const get_account_data = require("../services/get_account_data");
 
 const auth = async (req, res, next) => {
     try {
@@ -11,7 +12,14 @@ const auth = async (req, res, next) => {
             return next(err);
         }
 
-        const token = cookie["jwt"].token
+        if (!cookie["jwt"]) {
+            const err = new Error();
+            err.name = 'Unauthorized'
+            err.status = 401;
+            return next(err);
+        }
+
+        const token = cookie["jwt"]
         const data = jwt.verify(token, process.env.JWT_KEY);
 
         if (!data) {
@@ -19,7 +27,9 @@ const auth = async (req, res, next) => {
             err.status = 401;
             return next(err);
         }
-        req.user_profile = data;
+
+        req.user_profile = await get_account_data(data.email);
+
         return next();
     } catch (error) {
         return next(error);

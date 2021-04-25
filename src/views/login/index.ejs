@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/public/stylesheets/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+<body class="centroid">
+<div class="loginbox">
+    <form action="" method="POST">
+        <div class="imgcontainer">
+            <img src="/public/images/avatar.png" alt="Avatar" class="avatar">
+            <h1>ĐĂNG NHẬP</h1> </br>
+        </div>
+
+        <div class="form-group">
+            <label for="username">Username/Email</label>
+            <input type="text" class="form-control" name="username" id="username" placeholder="Nhập username">
+        </div>
+        <div class="form-group">
+            <label for="password">Mật khẩu</label>
+            <input type="password" class="form-control" name="password" id="password" placeholder="Mật khẩu">
+        </div>
+        <br>
+        <input type="submit" name="" class="lam-input hv-3d-lam account-btn bg-lam" value="Login">
+        <div>
+            <a class="btn btn-outline hv-3d blur-border" href="http://localhost:5000/user/login/google">
+                <img src="https://img.icons8.com/color/16/000000/google-logo.png"> Sign in with google
+            </a>
+        </div>
+    </form>
+</div>
+
+<script src="/public/javascripts/main.js"></script>
+</body>
+</html>

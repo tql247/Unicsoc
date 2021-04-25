@@ -7,6 +7,12 @@ const ErrorHandler = (err, req, res, next) => {
 
     if (err.name === "TokenExpiredError") {
         err.status = 401
+        res.redirect('/user/login')
+    }
+
+    if (err.name === "Unauthorized") {
+        err.status = 401
+        res.redirect('/user/login')
     }
 
     if (!err.status) err.status = 400
@@ -18,5 +24,5 @@ const ErrorHandler = (err, req, res, next) => {
 
 module.exports = {
     not_found_url,
-    ErrorHandler
+    ErrorHandler,
 }
