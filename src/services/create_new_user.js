@@ -1,3 +1,4 @@
+const add_account = require("./accessor/add_account");
 
 async function create_new_user(new_user) {
     try {

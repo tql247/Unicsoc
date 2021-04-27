@@ -1,4 +1,5 @@
-const {update_account_info} = require("./accessor/update_account");
+const make_image_obj = require("../utils/make_image_obj");
+const update_account = require("./accessor/update_account");
 
 async function update_user_info(user_req) {
     try {
@@ -8,12 +9,10 @@ async function update_user_info(user_req) {
             password: user_req.password,
             class_id: user_req.class_id,
             falcuty: user_req.falcuty,
-            avatar: user_req.avatar
+            avatar: make_image_obj(user_req.avatar)
         }
 
-        await update_account_info(new_user_info)
-
-        return "await update_account_info(new_feed)"
+        return await update_account(new_user_info)
     } catch (e) {
         throw e
     }

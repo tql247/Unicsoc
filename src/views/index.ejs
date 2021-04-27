@@ -4,135 +4,345 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timeline</title>
+    <link rel="shortcut icon" href="/public/images/UNISOC.png" type="image/png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/public/stylesheets/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="public/javascripts/main.js"></script>
 </head>
 <body class="container">
-<main>
-    <div>
-        <p></p>
-    </div>
-</main>
 
-<div class="user-info d-middle-y">
-    <div>
-        <div>
-            <a href="">
-                <% if (google_avatar) { %>
-                    <img class="avatar_cover" src="<%= google_avatar %>">
-                <% } else { %>
-                <img class="avatar_cover"  src="data:image/<%= avatar.contentType %>;base64,<%= avatar.data.toString('base64') %>">
-                <% } %>
-            </a>
-        </div>
-    </div>
-    &nbsp;&nbsp;
-    <div class="item-text">
-        <div class="item-subtitle"><strong><%= full_name %></strong></div>
-        <div class="font-sm"><%= email %></div>
-        <a class="color-danger" href="/user/logout">Logout</a>
-        <!--        <div class="item-content">-->
-        <!--            AI developer, at <span class="text-express">Co., Ltd. Dai Phat</span><br>-->
-        <!--            Web developer - <span class="text-comfor">Freelancer</span>-->
-        <!--        </div>-->
-    </div>
-</div>
-<hr>
-
-
-<br>
-
-<div id="feed_id_" class="mb-5 feed-item list-group-item flex-column align-items-start w-100">
-    <div class="w-100 mb-3 pd-sm">
-        <div class="float-right btn-float-right">
-            <span type="button" data-toggle="modal" data-whatever="" data-target="#editFeed"
-                  class="material-icons hv-3d">
-            edit
-            </span>
-            <span type="button" data-toggle="modal" data-whatever="" data-target="#confirmDeleteFeed"
-                  class="material-icons hv-3d c-danger">
-            delete
-            </span>
-        </div>
-        <div class="d-middle-y">
-            <a href=""><img class="feed_user_avatar" src="/public/images/avatar.png"></a>
-            &nbsp;
-            <div class="feed_title"><strong>User</strong></div>
-        </div>
-        <div class="pd-sm">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto autem consequatur, delectus distinctio,
-            dolore doloremque ea est eveniet impedit in incidunt magni numquam porro quam qui quisquam sunt suscipit
-            veniam.
-        </div>
-        <div class="pd-sm">
-            <div>
-                <img width=" 100%" class="feed_cover" src="" alt="Ảnh đính kèm">
-            </div>
-            <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/Wvq9HBirtrU"
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="cmt mt-1 pd-sm">
-        <div class="title mb-4 pd-sm">
-            <h5>Thảo luận</h5>
-        </div>
-        <div class="cmt-section pd-sm">
-            <div class="ls-cmt">
-
-                <div class="cmt">
-                    <div class="list-group-item flex-column align-items-start mb-3">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h6><strong>
-                                </strong></h6>
-                            <span type="button" data-toggle="modal" data-target="#confirmDeleteCMT" data-cmt-id=""
-                                  class="c-danger material-icons btn-float-right hv-3d">
-                        delete_forever
-                        </span>
-                        </div>
+<div class="row main">
+    <div class="col-xl-5 col-lg-4 col-md-4 p-relative">
+        <div class="side-float">
+            <div class="navigation">
+                <div class="user-info d-flex-top">
+                    <div>
                         <div>
-                                            <span>
-                                            </span>
+                            <% if (google_avatar) { %>
+                                <img class="avatar_cover" src="<%= google_avatar %>">
+                            <% } else { %>
+                                <img class="avatar_cover"
+                                     src="data:image/<%= avatar.contentType %>;base64,<%= avatar.data.toString('base64') %>">
+                            <% } %>
+                        </div>
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="item-text">
+                        <div class="item-subtitle"><strong><%= full_name %></strong></div>
+                        <div class="font-sm"><%= email %></div>
+                        <div>
+                            <div>
+                                <div class="div-controll font-md font-weigh-md color-main" onclick="openUpdateModal()">Tài khoản</div>
+                            </div>
+                            <div class="pdt-sm">
+                                <a class="color-danger" href="/user/logout">Logout</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="new-cmt">
-                <form action="../../service/addComment.php" method="POST">
-                    <div class="input-group mb-1">
-                        <input type="text" name="content_comment" class="form-control" placeholder="Nhập thảo luận mới"
-                               aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <input type="hidden" name="id_feed" value="<?= $feed['id'] ?>">
-                        <input type="hidden" name="id_user_current" value="">
-                        <div class="input-group-append">
-                            <button class="btn btn-secondary x-center" type="submit">
+            <div class="qw-notify">
+                <div class="notify-item">
+                    <div class="d-flex-top">
+                        <div>
+                            <img class="notify-user-avatar" src="/public/images/avatar.png">
+                        </div>
+                        <div>
+                            <strong>Tên phòng ban</strong>
+                            <div>Tiêu đề thông báo</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="al-right">
+                    <br>
+                    <a href="#">>> Xem tất cả</a>&emsp;
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--    feed -->
+    <div class="col-xl-7 col-lg-8 col-md-8 col-sm-9 col-10 no-margin p-relative">
+        <div class="mt-10">
+            <div class="">
+                <div id="feed_id_" class="mb-5 feed-item list-group-item flex-column align-items-start w-100">
+                    <div class="w-100 mb-3 pd-sm">
+                        <div class="float-right btn-float-right">
+            <span type="button" data-toggle="modal" data-whatever="" data-target="#editFeed"
+                  class="material-icons hv-3d">
+            edit
+            </span>
+                            <span type="button" data-toggle="modal" data-whatever="" data-target="#confirmDeleteFeed"
+                                  class="material-icons hv-3d c-danger">
+            delete
+            </span>
+                        </div>
+                        <div class="d-middle-y">
+                            <a href=""><img class="feed_user_avatar" src="/public/images/avatar.png"></a>
+                            <div class="feed_title"><strong>User</strong></div>
+                        </div>
+                        <div class="pd-sm">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto autem consequatur,
+                            delectus
+                            distinctio,
+                            dolore doloremque ea est eveniet impedit in incidunt magni numquam porro quam qui quisquam
+                            sunt suscipit
+                            veniam.
+                        </div>
+                        <div class="pd-sm">
+                            <div>
+                                <img width=" 100%" class="feed_cover" src="" alt="Ảnh đính kèm">
+                            </div>
+                            <div class="video-container">
+                                <iframe class="embed_iframe" src="https://www.youtube.com/embed/Wvq9HBirtrU"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="cmt mt-1 pd-sm">
+                        <div class="title mb-4 pd-sm">
+                            <h5>Thảo luận</h5>
+                        </div>
+                        <div class="cmt-section pd-sm">
+                            <div class="ls-cmt">
+                                <div class="cmt">
+                                    <div class="list-group-item flex-column align-items-start mb-3">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6><strong>
+                                                </strong></h6>
+                                            <span type="button" data-toggle="modal" data-target="#confirmDeleteCMT"
+                                                  data-cmt-id=""
+                                                  class="c-danger material-icons btn-float-right hv-3d">
+                        delete_forever
+                        </span>
+                                        </div>
+                                        <div>
+                                            <span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="new-cmt">
+                                <form action="../../service/addComment.php" method="POST">
+                                    <div class="input-group mb-1">
+                                        <input type="text" name="content_comment" class="form-control"
+                                               placeholder="Nhập thảo luận mới"
+                                               aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                        <input type="hidden" name="id_feed" value="<?= $feed['id'] ?>">
+                                        <input type="hidden" name="id_user_current" value="">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-secondary x-center" type="submit">
                                         <span class="material-icons">
                                             send
                                         </span>
-                            </button>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
+            <div class="">
+                <div id="feed_id_" class="mb-5 feed-item list-group-item flex-column align-items-start w-100">
+                    <div class="w-100 mb-3 pd-sm">
+                        <div class="float-right btn-float-right">
+            <span type="button" data-toggle="modal" data-whatever="" data-target="#editFeed"
+                  class="material-icons hv-3d">
+            edit
+            </span>
+                            <span type="button" data-toggle="modal" data-whatever="" data-target="#confirmDeleteFeed"
+                                  class="material-icons hv-3d c-danger">
+            delete
+            </span>
+                        </div>
+                        <div class="d-middle-y">
+                            <a href=""><img class="feed_user_avatar" src="/public/images/avatar.png"></a>
+                            <div class="feed_title"><strong>User</strong></div>
+                        </div>
+                        <div class="pd-sm">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto autem consequatur,
+                            delectus
+                            distinctio,
+                            dolore doloremque ea est eveniet impedit in incidunt magni numquam porro quam qui quisquam
+                            sunt suscipit
+                            veniam.
+                        </div>
+                        <div class="pd-sm">
+                            <div>
+                                <img width=" 100%" class="feed_cover" src="" alt="Ảnh đính kèm">
+                            </div>
+                            <div class="video-container">
+                                <iframe class="embed_iframe" src="https://www.youtube.com/embed/Wvq9HBirtrU"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="cmt mt-1 pd-sm">
+                        <div class="title mb-4 pd-sm">
+                            <h5>Thảo luận</h5>
+                        </div>
+                        <div class="cmt-section pd-sm">
+                            <div class="ls-cmt">
+                                <div class="cmt">
+                                    <div class="list-group-item flex-column align-items-start mb-3">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6><strong>
+                                                </strong></h6>
+                                            <span type="button" data-toggle="modal" data-target="#confirmDeleteCMT"
+                                                  data-cmt-id=""
+                                                  class="c-danger material-icons btn-float-right hv-3d">
+                        delete_forever
+                        </span>
+                                        </div>
+                                        <div>
+                                            <span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="new-cmt">
+                                <form action="../../service/addComment.php" method="POST">
+                                    <div class="input-group mb-1">
+                                        <input type="text" name="content_comment" class="form-control"
+                                               placeholder="Nhập thảo luận mới"
+                                               aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                        <input type="hidden" name="id_feed" value="<?= $feed['id'] ?>">
+                                        <input type="hidden" name="id_user_current" value="">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-secondary x-center" type="submit">
+                                        <span class="material-icons">
+                                            send
+                                        </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- float -->
+        <div class="btn-sticky-bottom-left btn-circle-sm bg-main d-text-center blur-border hv-3d">
+            &plus;
         </div>
     </div>
 </div>
 
-<div class="btn-fixed-bottom-left btn-circle-sm color-main d-text-center blur-border hv-3d">
-    &plus;
+
+<div class="update-info-modal" id="update_info_modal">
+    <div class="p-relative centroid"
+         style="width: inherit; height: inherit; position: relative; ">
+            <table>
+                <form action="/user/me/update" method="POST" enctype="multipart/form-data">
+                <tr>
+                    <td class="" align="right">
+                        <div class="m-sm">
+                            <% if (google_avatar) { %>
+                                <img id="avatar" class="avatar_cover" src="<%= google_avatar %>">
+                            <% } else { %>
+                                <img id="avatar" class="avatar_cover"
+                                     src="data:image/<%= avatar.contentType %>;base64,<%= avatar.data.toString('base64') %>">
+                            <% } %>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <div class="font-lg"><%= email %></div>
+                            <div class="div-controll font-sm font-strong color-main">
+                                Đổi ảnh đại diện
+                            </div>
+                            <input type="file" name="new_avatar" class="hidden">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="al-right">
+                        <div class="m-sm font-strong">
+                            Tên hiển thị
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <input name="full_name" class="border-tiny radius-sm pd-5-10" type="text" value="<%= full_name %>">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+                    </td>
+                    <td>
+                        <p class="font-sm">
+                            Hãy sử dụng tên mà mọi người dễ nhận ra bạn,<br>  tránh sử dụng các ký tự đặc biệt.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="al-right">
+                        <div class="m-sm font-strong">
+                            Khoa
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <input value="<%= falcuty %>" name="falcuty" class="border-tiny radius-sm pd-5-10" type="text">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="al-right">
+                        <div class="m-sm font-strong">
+                            Lớp
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <input value="<%= class_id %>" name="class_id" class="border-tiny radius-sm pd-5-10" type="text">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="al-right">
+                        <div class="m-sm font-strong">
+                            Mật khẩu
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <input name="password" class="border-tiny radius-sm pd-5-10" type="password">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="al-right">
+                        <button class="border-tiny radius-sm pd-5-10 w-100 cancel-update-sm-btn m-sm" onclick="closeUpdateModal()" type="submit">Huỷ</button>
+                    </td>
+                    <td>
+                        <button class="border-tiny radius-sm pd-5-10 w-100 update-sm-btn" type="submit">Cập nhật</button>
+                    </td>
+                </tr>
+                </form>
+            </table>
+    </div>
 </div>
 
 <footer>
 </footer>
 
-<script src="public/javascripts/main.js">
-</script>
+
 </body>
 </html>

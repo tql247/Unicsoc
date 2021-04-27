@@ -12,7 +12,7 @@ async function update_account(user) {
             });
         }
 
-        if (user.avatar) {
+        if (user.avatar.data) {
             await AccountModel.findOneAndUpdate({email: user.email}, {
                 avatar: user.avatar
             });
