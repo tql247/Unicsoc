@@ -6,7 +6,7 @@ async function find_all_feed(index) {
     try {
         await connect();
         return await FeedModel.find({}).skip((index - 1) * 10).limit(10)
-            .populate('accounts').exec();
+            .populate('uploader_id').exec();
     } catch (e) {
         throw e
     } finally {
