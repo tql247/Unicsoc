@@ -50,6 +50,10 @@
     width: 282px;
 }
 
+.item-text {
+    overflow: hidden;
+}
+
 .btn-full {
     display: flex;
     margin: -6px;
@@ -470,6 +474,7 @@ input,
 
 .feed_user_avatar {
     width: 4em;
+    border-radius: 10000px;
 }
 
 .pd-sm {
