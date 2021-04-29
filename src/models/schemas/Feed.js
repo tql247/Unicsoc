@@ -15,7 +15,10 @@ const FeedSchema = new Schema({
     },
     uploader_id: {
         type: Schema.Types.ObjectId,
-        ref: 'Account'
+        ref: 'account',
+        localField: 'uploader_id',
+        foreignField: '_id',
+        justOne: true
     },
     created_at: {
         type: Date,

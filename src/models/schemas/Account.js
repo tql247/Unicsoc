@@ -18,7 +18,7 @@ const AccountSchema = new Schema({
     class_id: {
         type: String
     },
-    falcuty: {
+    faculty: {
         type: String
     },
     avatar: {

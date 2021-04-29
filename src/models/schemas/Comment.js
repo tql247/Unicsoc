@@ -8,11 +8,11 @@ const CommentSchema = new Schema({
     },
     feed_id: {
         type: Schema.Types.ObjectId,
-        ref: 'Feed'
+        ref: 'feed'
     },
     uploader_id: {
         type: Schema.Types.ObjectId,
-        ref: 'Account'
+        ref: 'account'
     },
     created_at: {
         type: Date,

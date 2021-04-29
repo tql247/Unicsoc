@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require("../middlewares/auth");
 
-router.get('/', auth, (req, res) => {
+router.get('/', auth, async (req, res) => {
 // router.get('/', (req, res) => {
     req["user_profile"] = {
         email: 'toitenlalinh9xpro@gmail.com',
@@ -17,7 +17,9 @@ router.get('/', auth, (req, res) => {
     const google_avatar = req["user_profile"]["google_avatar"]
     const falcuty = req["user_profile"]["falcuty"] || ""
     const class_id = req["user_profile"]["class_id"] || ""
-    return res.render('index', {email, full_name, avatar, google_avatar, falcuty, class_id})
+    const feed_list = await view_feeds(1, null)
+    console.log(feed_list)
+    return res.render('index', {email, full_name, avatar, google_avatar, falcuty, class_id, feed_list})
 })
 
 const admin = require('./admin');
@@ -33,6 +35,7 @@ const feed = require('./feed');
 router.use('/feed', feed);
 
 const notification = require('./notification');
+const view_feeds = require("../services/view_feeds");
 router.use('/notification', notification);
 
 module.exports = router;
