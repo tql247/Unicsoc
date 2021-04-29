@@ -1,5 +1,6 @@
 async function make_image_obj(image_file) {
     if (!image_file) return null;
+    if (!image_file.data || !image_file.contentType) return null;
 
     const fs = require('fs');
     const image_data = fs.readFileSync(image_file.path);

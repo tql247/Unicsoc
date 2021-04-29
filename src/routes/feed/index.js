@@ -4,6 +4,7 @@ const uploader = require("../../middlewares/uploader");
 const edit_feed = require("../../services/edit_feed");
 const view_all_notification = require("../../services/view_notifications");
 const soft_delete_feed = require("../../services/accessor/soft_delete_feed");
+const auth = require("../../middlewares/auth");
 const router = express.Router();
 
 router.get('/', async function (req, res) {
@@ -20,15 +21,16 @@ router.post('/all', async function (req, res, next) {
     }
 })
 
-router.post('/post', uploader.single('picture'),async function (req, res, next) {
+router.post('/post', auth, uploader.single('picture'),async function (req, res, next) {
     try {
         const req_feed = {
             content: req.body["content"],
-            image: req["file"],
-            embed_url: req.body["embed_url"],
-            uploader_id: req.body["uploader_id"]
+            image: req["file"] || null,
+            uploader_id: req["user_profile"]._id
         }
-        res.send(await post_a_feed(req_feed));
+        console.log(req_feed)
+
+        return res.send(await post_a_feed(req_feed));
     } catch (e) {
         next(e)
     }

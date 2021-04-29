@@ -23,10 +23,24 @@ router.get('/visit/:email', [auth], async function (req, res, next) {
     }
 })
 
-router.get('/me', [auth], async function (req, res, next) {
+router.get('/me',  async function (req, res, next) {
+// router.get('/me', [auth], async function (req, res, next) {
     try {
         // const user = await find_account_by_email(req["user_profile"].email)
-        res.send(req["user_profile"]);
+        req["user_profile"] = {
+            email: 'toitenlalinh9xpro@gmail.com',
+            password: '$2a$10$HKTfMlPfcSW08y0J21BzaeRNRRJKYcfq01F2AqkNPbb94VN7mjj.m',
+            full_name: 'Lian',
+            google_avatar: 'https://lh3.googleusercontent.com/a-/AOh14GgRu9Fj3nBP-CZo6qr8D_DoW6RTrks4gwTxXnq0Fw=s96-c',
+            role: 'student'
+        }
+        const full_name = req["user_profile"]["full_name"]
+        const email = req["user_profile"]["email"]
+        const avatar = req["user_profile"]["avatar"]
+        const google_avatar = req["user_profile"]["google_avatar"]
+        const falcuty = req["user_profile"]["falcuty"] || ""
+        const class_id = req["user_profile"]["class_id"] || ""
+        return res.render('user/profile', {email, full_name, avatar, google_avatar, falcuty, class_id})
     } catch (e) {
         next(e)
     } finally {

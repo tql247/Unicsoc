@@ -1,19 +1,20 @@
 const add_new_feed = require("./accessor/add_feed");
+const extract_url_from_text = require("../utils/extract_url_from_text");
+const make_image_obj = require("../utils/make_image_obj");
 
 async function post_feed(feed) {
     try {
-        let image = null
+        const image = make_image_obj(feed.image)
+        const extract_url = extract_url_from_text(feed["content"])
 
         const new_feed = {
-            content: feed["content"],
+            content: feed["content"].trim(),
             image: image,
-            embed_url: feed["embed_url"],
-            uploader_id: feed["uploader_id"]
+            uploader_id: feed["uploader_id"],
+            embed_url: extract_url
         }
 
-        await add_new_feed(new_feed)
-
-        return "await add_new_feed(new_feed)"
+        return await add_new_feed(new_feed)
     } catch (e) {
         throw e
     }

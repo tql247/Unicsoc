@@ -11,7 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="public/javascripts/main.js"></script>
+    <script src="/public/javascripts/main.js"></script>
 </head>
 <body class="container">
 
@@ -46,22 +46,20 @@
                         <div>
                             <div>
                                 <% if (google_avatar) { %>
-                                    <img id="user-avatar" class="avatar_cover" src="<%= google_avatar %>">
+                                    <img class="avatar_cover" src="<%= google_avatar %>">
                                 <% } else { %>
-                                    <img id="user-avatar" class="avatar_cover"
+                                    <img class="avatar_cover"
                                          src="data:image/<%= avatar.contentType %>;base64,<%= avatar.data.toString('base64') %>">
                                 <% } %>
                             </div>
                         </div>
                         &nbsp;&nbsp;
                         <div class="item-text">
-                            <div id="user_full_name" class="item-subtitle"><strong><%= full_name %></strong></div>
+                            <div class="item-subtitle"><strong><%= full_name %></strong></div>
                             <div class="font-sm"><%= email %></div>
                             <div>
                                 <div>
-                                    <a href="/user/me">
-                                        <div class="div-controll font-md font-weigh-md color-main">Tài khoản</div>
-                                    </a>
+                                    <a href="/user/me"><div class="div-controll font-md font-weigh-md color-main">Tài khoản</div></a>
                                 </div>
                                 <div class="pdt-sm">
                                     <a class="color-danger" href="/user/logout">Logout</a>
@@ -76,9 +74,27 @@
 
     <!--    feed -->
     <div class="col-xl-7 col-lg-8 col-md-8 col-sm-9 col-10 no-margin p-relative">
-        <div class="mt-10">
-            <div class="" id="feed_list">
-                <div id="feed_id_" class="mb-5 feed-item list-group-item flex-column align-items-start w-100">
+        <div class="border-tiny">
+            <br>
+            <div class="d-middle">
+                <% if (google_avatar) { %>
+                    <img id="avatar" class="avatar_cover" src="<%= google_avatar %>">
+                <% } else { %>
+                    <img id="avatar" class="avatar_cover"
+                         src="data:image/<%= avatar.contentType %>;base64,<%= avatar.data.toString('base64') %>">
+                <% } %>
+            </div>
+            <div class="d-middle-x mt-10">
+                <div class="font-strong font-lg"><%= full_name %></div>
+                <div class="font-sm"><%= email %></div>
+                <div class="">Khoa: <%= falcuty %></div>
+                <div class="">Lớp: <%= class_id %></div>
+                <div class="div-controll font-md font-weigh-md color-main mt-10 btn" onclick="openUpdateModal()">Thay đổi</div>
+            </div>
+        </div>
+        <div class="border-tiny mt-10">
+            <div class="">
+                <div id="feed_id_" class="mb-5 feed-item list-group-item no-border flex-column align-items-start w-100">
                     <div class="w-100 mb-3 pd-sm">
                         <div class="float-right btn-float-right">
             <span type="button" data-toggle="modal" data-whatever="" data-target="#editFeed"
@@ -148,9 +164,9 @@
                                         <input type="hidden" name="id_user_current" value="">
                                         <div class="input-group-append">
                                             <button class="btn btn-secondary x-center" type="submit">
-                                                <span class="material-icons">
-                                                    send
-                                                </span>
+                                        <span class="material-icons">
+                                            send
+                                        </span>
                                             </button>
                                         </div>
                                     </div>
@@ -163,56 +179,107 @@
         </div>
 
         <!-- float -->
-        <div class="btn-sticky-bottom-left btn-circle-sm bg-main d-text-center blur-border hv-3d"
-             onclick="openAddFeedModal()">
+        <div class="btn-sticky-bottom-left btn-circle-sm bg-main d-text-center blur-border hv-3d">
             &plus;
         </div>
     </div>
 </div>
 
 
-<div id="loading" class="loading">
-    <div class="loading-overlay"></div>
-    <div class="spinner"></div>
-</div>
-
-<div class="add-feed-modal centroid" id="add_feed_modal">
-    <div class="overlay" onclick="closeAddFeedModal()">
+<div class="update-info-modal" id="update_info_modal">
+    <div class="p-relative centroid content">
+        <table>
+            <form action="/user/me/update" method="POST" enctype="multipart/form-data">
+                <tr>
+                    <td class="" align="right">
+                        <div class="m-sm">
+                            <% if (google_avatar) { %>
+                                <img id="avatar" class="avatar_cover" src="<%= google_avatar %>">
+                            <% } else { %>
+                                <img id="avatar" class="avatar_cover"
+                                     src="data:image/<%= avatar.contentType %>;base64,<%= avatar.data.toString('base64') %>">
+                            <% } %>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <div class="font-lg"><%= email %></div>
+                            <div class="div-controll font-sm font-strong color-main">
+                                Đổi ảnh đại diện
+                            </div>
+                            <input type="file" name="new_avatar" class="hidden">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="al-right">
+                        <div class="m-sm font-strong">
+                            Tên hiển thị
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <input name="full_name" class="border-tiny radius-sm pd-5-10" type="text" value="<%= full_name %>">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+                    </td>
+                    <td>
+                        <p class="font-sm">
+                            Hãy sử dụng tên mà mọi người dễ nhận ra bạn,<br>  tránh sử dụng các ký tự đặc biệt.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="al-right">
+                        <div class="m-sm font-strong">
+                            Khoa
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <input value="<%= falcuty %>" name="falcuty" class="border-tiny radius-sm pd-5-10" type="text">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="al-right">
+                        <div class="m-sm font-strong">
+                            Lớp
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <input value="<%= class_id %>" name="class_id" class="border-tiny radius-sm pd-5-10" type="text">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="al-right">
+                        <div class="m-sm font-strong">
+                            Mật khẩu
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <input name="password" class="border-tiny radius-sm pd-5-10" type="password">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="al-right">
+                        <div class="border-tiny radius-sm pd-5-10 w-100 cancel-update-sm-btn m-sm btn" onclick="closeUpdateModal()">Huỷ</div>
+                    </td>
+                    <td>
+                        <button class="border-tiny radius-sm pd-5-10 w-100 update-sm-btn" type="submit">Cập nhật</button>
+                    </td>
+                </tr>
+            </form>
+        </table>
     </div>
-    <div class="content border-tiny bg-white">
-        <form action="" id="add-feed-form">
-            <div class="d-flex-top">
-                <div class="m-sm d-middle-x toolbar">
-                    <div class="font-strong">
-                        Nội dung
-                    </div>
-                    <div>
-                        <div class="div-controll font-md font-weigh-md color-main mt-10 btn" onclick="clickElement('add-feed-image')">Thêm ảnh</div>
-                        <input name="picture" id="add-feed-image" class="hidden" type="file">
-                    </div>
-                    <div>
-                        <button class="border-tiny radius-sm pd-5-10 w-100 update-sm-btn" type="submit">Thêm</button>
-                    </div>
-                </div>
-
-                <div style="width: 100%; " class="ml-2">
-                    <div
-                        class="r-text border-tiny pd-sm"
-                        id="feed-input-text"
-                        contenteditable="True"
-                    >
-                        <input id="feed-input-text-hidden" name="content" type="text" class="hidden">
-                    </div>
-                </div>
-            </div>
-            <div>
-            </div>
-        </form>
-    </div>
 </div>
-
-
-
 
 <footer>
 </footer>
