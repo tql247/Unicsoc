@@ -50,6 +50,10 @@
     width: 282px;
 }
 
+.item-text {
+    overflow: hidden;
+}
+
 .btn-full {
     display: flex;
     margin: -6px;
@@ -470,6 +474,7 @@ input,
 
 .feed_user_avatar {
     width: 4em;
+    border-radius: 10000px;
 }
 
 .pd-sm {
@@ -504,7 +509,7 @@ body {
     margin: 10px;
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-    padding: 10px 0px 10px 30px;
+    padding: 10px 0px 10px 10px;
 }
 
 .left-content .info-card .navigator {

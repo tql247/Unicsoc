@@ -21,7 +21,7 @@ const NotificationSchema = new Schema({
     },
     uploader : {
         type: Schema.Types.ObjectId,
-        ref: 'Account'
+        ref: 'account'
     },
     created_at: {
         type: Date,
