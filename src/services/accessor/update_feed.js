@@ -12,7 +12,8 @@ async function update_feed(feed) {
                 embed_url: feed["embed_url"],
                 image: feed["image"],
                 updated_at: Date.now()
-            }
+            },
+            {new: true}
         );
     } catch (e) {
         throw e

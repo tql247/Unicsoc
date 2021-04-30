@@ -48,11 +48,33 @@ function addNewFeed(data) {
     $(data).prependTo("#feed_list");
 }
 
+function updateFeed(_id, data) {
+    console.log('data')
+    console.log(data)
+    $(`#${_id}`).replaceWith(data)
+    $(".edit-feed-btn").on('click', handleEditFeedBtn)
+}
+
+function clearQueryUrl() {
+    const uri = window.location.toString();
+    if (uri.indexOf("?") > 0) {
+        const clean_uri = uri.substring(0, uri.indexOf("?"));
+        window.history.replaceState({}, document.title, clean_uri);
+    }
+}
+
 function setFeedModalContent(_id) {
+    const parentModal = $("#edit_feed_modal")
     const content = $(`#${_id}`).find(".feed-content").text().trim();
     // const image_url = $(`#${_id}`).querySelector("")
-    console.log(content);
-    $("#edit_feed_modal").find(".edit-feed-content").text(content)
+    parentModal.find("#edit-feed-id").val(_id)
+    parentModal.find(".edit-feed-content").text(content)
+}
+
+function handleEditFeedBtn(e) {
+    const target_id = e.currentTarget.closest('.feed-item').id;
+    setFeedModalContent(target_id);
+    openEditFeedModal();
 }
 
 $(document).ready(function () {
@@ -61,7 +83,7 @@ $(document).ready(function () {
 
         document.getElementById("feed-input-text-hidden").value = document.getElementById("feed-input-text").textContent
         const dataString = $(this).serialize();
-        const response = $.ajax({
+        $.ajax({
             type: "POST",
             url: "/feed/post",
             data: dataString,
@@ -84,9 +106,30 @@ $(document).ready(function () {
         return false;
     });
 
-    $(".edit-feed-btn").on('click', function (e) {
-        const target_id = e.currentTarget.closest('.feed-item').id;
-        setFeedModalContent(target_id);
-        openEditFeedModal();
-    })
+    $("#edit-feed-form").on("submit", function (e) {
+        console.log('edit')
+        activeLoading();
+
+        document.getElementById("edit_feed_content_hidden").value = document.getElementById("edit-feed-input-text").textContent
+        const dataString = $(this).serialize();
+        const _id = document.getElementById("edit-feed-id").value
+        $.ajax({
+            type: "POST",
+            url: "/feed/update",
+            data: dataString,
+            async: true,
+            success: (res) => {
+                clearQueryUrl()
+                if (res.status !== 200) location.reload()
+                updateFeed(_id, res.data)
+                closeEditFeedModal();
+                inactiveLoading();
+            }
+        });
+
+        e.preventDefault();
+        return false;
+    });
+
+    $(".edit-feed-btn").on('click', handleEditFeedBtn)
 })

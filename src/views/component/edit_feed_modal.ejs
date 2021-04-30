@@ -2,8 +2,8 @@
     <div class="overlay" onclick="closeEditFeedModal()">
     </div>
     <div class="content border-tiny bg-white">
-        <form action="" class="edit-feed-form">
-            <input type="text" name="_id" class="hidden">
+        <form action="" id="edit-feed-form">
+            <input id="edit-feed-id" type="text" name="_id" class="hidden">
             <div class="d-flex-top">
                 <div class="m-sm d-middle-x toolbar">
                     <div class="font-strong">
@@ -24,11 +24,11 @@
                 <div class="ml-2 w-100">
                     <div
                             class="edit-feed-content r-text border-tiny pd-sm"
-                            id="feed-input-text"
+                            id="edit-feed-input-text"
                             contenteditable="True"
                     >
-                        <input id="feed-input-text-hidden" name="content" type="text" class="hidden">
                     </div>
+                    <input id="edit_feed_content_hidden" name="edit_content" type="text" class="hidden">
                 </div>
             </div>
             <div>
