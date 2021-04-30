@@ -1,25 +1,27 @@
 <div id="feed_id_" class="mb-3 feed-item list-group-item flex-column align-items-start w-100">
     <div class="w-100 mb-3 pd-sm">
         <div class="float-right btn-float-right">
-            <span type="button" data-toggle="modal" data-whatever="" data-target="#editFeed"
-                  class="material-icons hv-3d">
+            <% if(you.id === owner.id) { %>
+                <span type="button" data-toggle="modal" data-whatever="" data-target="#editFeed"
+                      class="material-icons hv-3d">
             edit
             </span>
-            <span type="button" data-toggle="modal" data-whatever="" data-target="#confirmDeleteFeed"
-                  class="material-icons hv-3d c-danger">
+                <span type="button" data-toggle="modal" data-whatever="" data-target="#confirmDeleteFeed"
+                      class="material-icons hv-3d c-danger">
             delete
             </span>
+            <% } %>
         </div>
         <div class="d-middle-y">
             <a href="" class="mr-sm">
-                <% if (you.google_avatar) { %>
-                    <img id="user-avatar" class="feed_user_avatar" src="<%= you.google_avatar %>">
+                <% if (owner.google_avatar) { %>
+                    <img id="user-avatar" class="feed_user_avatar" src="<%= owner.google_avatar %>">
                 <% } else { %>
                     <img id="user-avatar" class="feed_user_avatar"
-                         src="data:image/<%= you.image.contentType %>;base64,<%= you.image.data.toString('base64') %>">
+                         src="data:image/<%= owner.image.contentType %>;base64,<%= owner.image.data.toString('base64') %>">
                 <% } %>
             </a>
-            <div class="feed_title"><strong> <%= you.full_name %> </strong></div>
+            <div class="feed_title"><strong> <%= owner.full_name %> </strong></div>
         </div>
         <div class="pd-sm">
             <%= feed["content"] %>

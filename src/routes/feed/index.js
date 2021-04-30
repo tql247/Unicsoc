@@ -7,6 +7,7 @@ const soft_delete_feed = require("../../services/accessor/soft_delete_feed");
 const auth = require("../../middlewares/auth");
 const router = express.Router();
 const ejs = require('ejs');
+const path = require("path");
 
 router.get('/', async function (req, res) {
     res.send('feed');
@@ -31,14 +32,12 @@ router.post('/post', auth, uploader.single('picture'),async function (req, res, 
         }
         const new_feed = await post_a_feed(req_feed);
         const you = req["user_profile"];
-        const path = require("path")
         const template_path = path.join(process.cwd(), '/src/views/component/feed.ejs')
         return res.send({
             status: 200,
-            data: await ejs.renderFile(template_path, {feed: new_feed, you: you}, {async: true})
+            data: await ejs.renderFile(template_path, {feed: new_feed, owner: you, you: you}, {async: true})
         });
     } catch (e) {
-        console.log(e)
         next(e)
     }
 })
