@@ -11,7 +11,7 @@
             </span>
         </div>
         <div class="d-middle-y">
-            <a href="">
+            <a href="" class="mr-sm">
                 <% if (you.google_avatar) { %>
                     <img id="user-avatar" class="feed_user_avatar" src="<%= you.google_avatar %>">
                 <% } else { %>
@@ -19,7 +19,6 @@
                          src="data:image/<%= you.image.contentType %>;base64,<%= you.image.data.toString('base64') %>">
                 <% } %>
             </a>
-
             <div class="feed_title"><strong> <%= you.full_name %> </strong></div>
         </div>
         <div class="pd-sm">
@@ -55,8 +54,8 @@
                         </span>
                         </div>
                         <div>
-                                            <span>
-                                            </span>
+                                <span>
+                                </span>
                         </div>
                     </div>
                 </div>
@@ -71,9 +70,9 @@
                         <input type="hidden" name="id_user_current" value="">
                         <div class="input-group-append">
                             <button class="btn btn-secondary x-center" type="submit">
-                                                <span class="material-icons">
-                                                    send
-                                                </span>
+                                    <span class="material-icons">
+                                        send
+                                    </span>
                             </button>
                         </div>
                     </div>

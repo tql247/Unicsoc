@@ -1,0 +1,52 @@
+<div class="navside">
+    <a href="/">
+        <div class="logo-main border-tiny border-circle">
+            <img class="" src="/public/images/UNISOC.png" alt="">
+        </div>
+    </a>
+    <div class="qw-notify">
+        <div class="notify-item">
+            <div class="d-flex-top">
+                <div>
+                    <img class="notify-user-avatar" src="/public/images/avatar.png">
+                </div>
+                <div>
+                    <strong>Tên phòng ban</strong>
+                    <div>Tiêu đề thông báo</div>
+                </div>
+            </div>
+        </div>
+        <div class="al-right">
+            <br>
+            <a href="#">>> Xem tất cả</a>&emsp;
+        </div>
+    </div>
+    <div class="info-card bg-white">
+        <div class="user-info d-flex-top">
+            <div>
+                <div class="mr-sm">
+                    <% if (user.google_avatar) { %>
+                        <img id="user-avatar" class="avatar_cover" src="<%= user.google_avatar %>">
+                    <% } else { %>
+                        <img id="user-avatar" class="avatar_cover"
+                             src="data:image/<%= user.avatar.contentType %>;base64,<%= user.avatar.data.toString('base64') %>">
+                    <% } %>
+                </div>
+            </div>
+            <div class="item-text">
+                <div id="user_full_name" class="item-subtitle"><strong><%= user.full_name %></strong></div>
+                <div class="font-sm"><%= user.email %></div>
+                <div>
+                    <div>
+                        <a href="/user/me">
+                            <div class="div-controll font-md font-weigh-md color-main">Tài khoản</div>
+                        </a>
+                    </div>
+                    <div class="pdt-sm">
+                        <a class="color-danger" href="/user/logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

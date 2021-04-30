@@ -18,59 +18,7 @@
 <div class="row main">
     <div class="col-xl-5 col-lg-4 col-md-4 p-relative">
         <div class="side-float">
-            <div class="navside">
-                <a href="/">
-                    <div class="logo-main border-tiny border-circle">
-                        <img class="" src="/public/images/UNISOC.png" alt="">
-                    </div>
-                </a>
-                <div class="qw-notify">
-                    <div class="notify-item">
-                        <div class="d-flex-top">
-                            <div>
-                                <img class="notify-user-avatar" src="/public/images/avatar.png">
-                            </div>
-                            <div>
-                                <strong>Tên phòng ban</strong>
-                                <div>Tiêu đề thông báo</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="al-right">
-                        <br>
-                        <a href="#">>> Xem tất cả</a>&emsp;
-                    </div>
-                </div>
-                <div class="info-card">
-                    <div class="user-info d-flex-top">
-                        <div>
-                            <div>
-                                <% if (google_avatar) { %>
-                                    <img id="user-avatar" class="avatar_cover" src="<%= google_avatar %>">
-                                <% } else { %>
-                                    <img id="user-avatar" class="avatar_cover"
-                                         src="data:image/<%= avatar.contentType %>;base64,<%= avatar.data.toString('base64') %>">
-                                <% } %>
-                            </div>
-                        </div>
-                        &nbsp;&nbsp;
-                        <div class="item-text">
-                            <div id="user_full_name" class="item-subtitle"><strong><%= full_name %></strong></div>
-                            <div class="font-sm"><%= email %></div>
-                            <div>
-                                <div>
-                                    <a href="/user/me">
-                                        <div class="div-controll font-md font-weigh-md color-main">Tài khoản</div>
-                                    </a>
-                                </div>
-                                <div class="pdt-sm">
-                                    <a class="color-danger" href="/user/logout">Logout</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <%- include('component/user_sidebar.ejs', {user: user}) %>
         </div>
     </div>
 
@@ -90,47 +38,8 @@
     </div>
 </div>
 
-
-<div id="loading" class="loading">
-    <div class="loading-overlay"></div>
-    <div class="spinner"></div>
-</div>
-
-<div class="add-feed-modal centroid" id="add_feed_modal">
-    <div class="overlay" onclick="closeAddFeedModal()">
-    </div>
-    <div class="content border-tiny bg-white">
-        <form action="" id="add-feed-form">
-            <div class="d-flex-top">
-                <div class="m-sm d-middle-x toolbar">
-                    <div class="font-strong">
-                        Nội dung
-                    </div>
-                    <div>
-                        <div class="div-controll font-md font-weigh-md color-main mt-10 btn" onclick="clickElement('add-feed-image')">Thêm ảnh</div>
-                        <input name="picture" id="add-feed-image" class="hidden" type="file">
-                    </div>
-                    <div>
-                        <button class="border-tiny radius-sm pd-5-10 w-100 update-sm-btn" type="submit">Thêm</button>
-                    </div>
-                </div>
-
-                <div style="width: 100%; " class="ml-2">
-                    <div
-                        class="r-text border-tiny pd-sm"
-                        id="feed-input-text"
-                        contenteditable="True"
-                    >
-                        <input id="feed-input-text-hidden" name="content" type="text" class="hidden">
-                    </div>
-                </div>
-            </div>
-            <div>
-            </div>
-        </form>
-    </div>
-</div>
-
+<%- include('../component/loading.ejs') %>
+<%- include('../component/add_feed_modal.ejs') %>
 
 
 

@@ -1,5 +1,5 @@
 <% feed_list.forEach((feed) => { %>
-    <div id="feed_id_" class="mb-5 feed-item list-group-item flex-column align-items-start w-100">
+    <div id="feed_id_" class="mb-3 feed-item list-group-item flex-column align-items-start w-100">
         <div class="w-100 mb-3 pd-sm">
             <div class="float-right btn-float-right">
             <span type="button" data-toggle="modal" data-whatever="" data-target="#editFeed"
@@ -20,10 +20,10 @@
                              src="data:image/<%= feed["uploader_id"].avatar.contentType %>;base64,<%= feed["uploader_id"].avatar.data.toString('base64') %>">
                     <% } %>
                 </a>
-                <div class="feed_title"><strong><%= feed["uploader_id"].full_name %>></strong></div>
+                <div class="feed_title"><strong><%= feed["uploader_id"].full_name %></strong></div>
             </div>
             <div class="pd-sm">
-                <%= feed.content %>>
+                <%= feed.content %>
             </div>
             <div class="pd-sm">
                 <% if (feed.image.contentType) {%>
