@@ -1,9 +1,9 @@
-<div id="feed_id_" class="mb-3 feed-item list-group-item flex-column align-items-start w-100">
+<div id="<%= feed["_id"] %>" class="mb-3 feed-item list-group-item flex-column align-items-start w-100">
     <div class="w-100 mb-3 pd-sm">
         <div class="float-right btn-float-right">
             <% if(you.id === owner.id) { %>
                 <span type="button" data-toggle="modal" data-whatever="" data-target="#editFeed"
-                      class="material-icons hv-3d">
+                      class="edit-feed-btn material-icons hv-3d">
             edit
             </span>
                 <span type="button" data-toggle="modal" data-whatever="" data-target="#confirmDeleteFeed"
@@ -23,7 +23,7 @@
             </a>
             <div class="feed_title"><strong> <%= owner.full_name %> </strong></div>
         </div>
-        <div class="pd-sm">
+        <div class="pd-sm feed-content">
             <%= feed["content"] %>
         </div>
         <div class="pd-sm">

@@ -1,8 +1,9 @@
-<div class="add-feed-modal centroid" id="add_feed_modal">
-    <div class="overlay" onclick="closeAddFeedModal()">
+<div class="edit-feed-modal centroid" id="edit_feed_modal">
+    <div class="overlay" onclick="closeEditFeedModal()">
     </div>
     <div class="content border-tiny bg-white">
-        <form action="" id="add-feed-form">
+        <form action="" class="edit-feed-form">
+            <input type="text" name="_id" class="hidden">
             <div class="d-flex-top">
                 <div class="m-sm d-middle-x toolbar">
                     <div class="font-strong">
@@ -10,18 +11,19 @@
                     </div>
                     <div>
                         <div class="div-controll font-md font-weigh-md color-main mt-10 btn"
-                             onclick="clickElement('add-feed-image')">Thêm ảnh
+                             onclick="clickElement('edit-feed-image')">Chọn ảnh khác
                         </div>
-                        <input name="picture" id="add-feed-image" class="hidden" type="file">
+                        <input name="picture" id="edit-feed-image" class="hidden" type="file">
                     </div>
                     <div>
-                        <button class="border-tiny radius-sm pd-5-10 w-100 update-sm-btn" type="submit">Thêm</button>
+                        <button class="border-tiny radius-sm pd-5-10 w-100 update-sm-btn" type="submit">Cập nhật
+                        </button>
                     </div>
                 </div>
 
                 <div class="ml-2 w-100">
                     <div
-                            class="r-text border-tiny pd-sm"
+                            class="edit-feed-content r-text border-tiny pd-sm"
                             id="feed-input-text"
                             contenteditable="True"
                     >

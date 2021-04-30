@@ -20,10 +20,21 @@ function closeAddFeedModal(event) {
     document.getElementById("add_feed_modal").style.zIndex = "-100";
 }
 
+function openEditFeedModal() {
+    document.querySelector("#edit_feed_modal .overlay").style.opacity = "0.7";
+    document.querySelector("#edit_feed_modal .content").style.zIndex = "101";
+    document.getElementById("edit_feed_modal").style.zIndex = "100";
+}
+
+function closeEditFeedModal(event) {
+    document.querySelector("#edit_feed_modal .overlay").style.opacity = "1";
+    document.querySelector("#edit_feed_modal .content").style.zIndex = "-11";
+    document.getElementById("edit_feed_modal").style.zIndex = "-100";
+}
+
 function clickElement(id) {
     document.getElementById(id).click();
 }
-
 
 function activeLoading() {
     document.getElementById("loading").classList.add("active");
@@ -35,6 +46,13 @@ function inactiveLoading() {
 
 function addNewFeed(data) {
     $(data).prependTo("#feed_list");
+}
+
+function setFeedModalContent(_id) {
+    const content = $(`#${_id}`).find(".feed-content").text().trim();
+    // const image_url = $(`#${_id}`).querySelector("")
+    console.log(content);
+    $("#edit_feed_modal").find(".edit-feed-content").text(content)
 }
 
 $(document).ready(function () {
@@ -65,4 +83,10 @@ $(document).ready(function () {
         e.preventDefault();
         return false;
     });
+
+    $(".edit-feed-btn").on('click', function (e) {
+        const target_id = e.currentTarget.closest('.feed-item').id;
+        setFeedModalContent(target_id);
+        openEditFeedModal();
+    })
 })

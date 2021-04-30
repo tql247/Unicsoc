@@ -661,6 +661,36 @@ body {
     transition: ease-in-out;
 }
 
+.edit-feed-modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -100;
+    transition: ease-in-out;
+}
+
+.edit-feed-modal .overlay{
+    background-color: #FAFAFA;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -10;
+    opacity: 1;
+    transition: ease-in-out 100ms;
+}
+
+.edit-feed-modal .content{
+    z-index: -11;
+    width: 100%;
+    max-width: 700px;
+    margin: 10px 10px calc(100vw - 80%);
+    height: fit-content;
+}
+
 
 .inactive {
     display: none !important;
