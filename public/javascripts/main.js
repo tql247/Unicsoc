@@ -26,7 +26,7 @@ function openEditFeedModal() {
     document.getElementById("edit_feed_modal").style.zIndex = "100";
 }
 
-function closeEditFeedModal(event) {
+function closeEditFeedModal() {
     document.querySelector("#edit_feed_modal .overlay").style.opacity = "1";
     document.querySelector("#edit_feed_modal .content").style.zIndex = "-11";
     document.getElementById("edit_feed_modal").style.zIndex = "-100";
@@ -53,6 +53,10 @@ function updateFeed(_id, data) {
     console.log(data)
     $(`#${_id}`).replaceWith(data)
     $(".edit-feed-btn").on('click', handleEditFeedBtn)
+}
+
+function deleteFeed(_id) {
+    $(`#${_id}`).replaceWith('')
 }
 
 function clearQueryUrl() {
@@ -85,6 +89,8 @@ function handleDeleteFeedBtn(e) {
 
 $(document).ready(function () {
     $("#add-feed-form").on("submit", function (e) {
+        e.preventDefault();
+        console.log('add')
         activeLoading();
 
         document.getElementById("feed-input-text-hidden").value = document.getElementById("feed-input-text").textContent
@@ -108,7 +114,6 @@ $(document).ready(function () {
             }
         });
 
-        e.preventDefault();
         return false;
     });
 
@@ -128,6 +133,30 @@ $(document).ready(function () {
                 clearQueryUrl()
                 if (res.status !== 200) location.reload()
                 updateFeed(_id, res.data)
+                closeEditFeedModal();
+                inactiveLoading();
+            }
+        });
+
+        e.preventDefault();
+        return false;
+    });
+
+    $("#delete-feed-form").on("submit", function (e) {
+        $('#confirmDeleteFeed').modal('hide');
+        activeLoading();
+
+        const dataString = $(this).serialize();
+        const _id = document.getElementById("delete-feed-id").value
+        $.ajax({
+            type: "POST",
+            url: "/feed/delete",
+            data: dataString,
+            async: true,
+            success: (res) => {
+                clearQueryUrl()
+                if (res.status !== 200) location.reload()
+                deleteFeed(_id, res.data)
                 closeEditFeedModal();
                 inactiveLoading();
             }

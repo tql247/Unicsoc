@@ -15,6 +15,12 @@ const ErrorHandler = (err, req, res, next) => {
         res.redirect('/user/login')
     }
 
+    if (err.name === "Access Denies") {
+        err.status = 401
+        res.clearCookie('jwt')
+        res.redirect('/user/login')
+    }
+
     if (!err.status) err.status = 400
     return res.status(err.status).json({
         name: err.name,

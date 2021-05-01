@@ -8,7 +8,7 @@ async function soft_delete_feed(feed_id) {
         return await FeedModel.findByIdAndUpdate(
             feed_id,
             {
-                updated_at: Date.now()
+                deleted_at: Date.now()
             }
         );
     } catch (e) {

@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 async function find_all_feed(index) {
     try {
         await connect();
-        return await FeedModel.find({}).skip((index - 1) * 10).limit(10).sort({'created_at': 'desc'})
+        return await FeedModel.find({'deleted_at': null}).skip((index - 1) * 10).limit(10).sort({'created_at': 'desc'})
             .populate('uploader_id').exec();
     } catch (e) {
         throw e

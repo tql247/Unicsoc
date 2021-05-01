@@ -2,11 +2,11 @@ const express = require('express');
 const post_a_feed = require("../../services/post_feed");
 const uploader = require("../../middlewares/uploader");
 const edit_feed = require("../../services/edit_feed");
-const soft_delete_feed = require("../../services/accessor/soft_delete_feed");
 const auth = require("../../middlewares/auth");
 const router = express.Router();
 const ejs = require('ejs');
 const path = require("path");
+const delete_feed = require("../../services/delete_feed");
 
 router.get('/', async function (req, res) {
     res.send('feed');
@@ -20,11 +20,11 @@ router.post('/all', async function (req, res, next) {
     }
 })
 
-router.post('/post', auth, uploader.single('picture'),async function (req, res, next) {
+router.post('/post', auth, uploader.single('feed_picture'), async function (req, res, next) {
     try {
         const you = req["user_profile"];
         const req_feed = {
-            content: req.body["content"],
+            content: req.body["feed_content"],
             image: req["file"] || null,
             uploader_id: you._id
         }
@@ -39,7 +39,7 @@ router.post('/post', auth, uploader.single('picture'),async function (req, res, 
     }
 })
 
-router.post('/update', auth, uploader.single('picture'),async function (req, res, next) {
+router.post('/update', auth, uploader.single('edit_picture'), async function (req, res, next) {
     try {
         const you = req["user_profile"];
         const req_feed = {
@@ -48,10 +48,8 @@ router.post('/update', auth, uploader.single('picture'),async function (req, res
             image: req["file"] || null,
             uploader_id: you._id
         }
-        console.log(req_feed)
         const new_feed = await edit_feed(req_feed);
         const template_path = path.join(process.cwd(), '/src/views/component/feed.ejs')
-        console.log(new_feed)
         return res.send({
             status: 200,
             data: await ejs.renderFile(template_path, {feed: new_feed, owner: you, you: you}, {async: true})
@@ -61,10 +59,13 @@ router.post('/update', auth, uploader.single('picture'),async function (req, res
     }
 })
 
-router.post('/delete', uploader.single('picture'),async function (req, res, next) {
+router.post('/delete', auth, async function (req, res, next) {
     try {
-        const feed_id = req.body["feed_id"];
-        res.send(await soft_delete_feed(feed_id));
+        const feed_id = req.body["_id_delete"];
+        return res.send({
+            status: 200,
+            data: await delete_feed(feed_id, req["user_profile"]._id)
+        });
     } catch (e) {
         next(e)
     }
