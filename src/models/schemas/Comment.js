@@ -6,13 +6,19 @@ const CommentSchema = new Schema({
         type: String,
         required: [true, 'Content empty?']
     },
-    feed_id: {
+    feed: {
         type: Schema.Types.ObjectId,
-        ref: 'feed'
+        ref: 'Feed',
+        localField: 'feed',
+        foreignField: '_id',
+        justOne: true
     },
-    uploader_id: {
+    commenter: {
         type: Schema.Types.ObjectId,
-        ref: 'account'
+        ref: 'Account',
+        localField: 'commenter',
+        foreignField: '_id',
+        justOne: true
     },
     created_at: {
         type: Date,
