@@ -21,6 +21,10 @@ const ErrorHandler = (err, req, res, next) => {
         res.redirect('/user/login')
     }
 
+    if (err.name === "Page not found") {
+        err.status = 404;
+    }
+
     if (!err.status) err.status = 400
     return res.status(err.status).json({
         name: err.name,
