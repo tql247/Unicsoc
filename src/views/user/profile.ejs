@@ -37,124 +37,27 @@
             <div class="d-middle-x mt-10">
                 <div class="font-strong font-lg"><%= user.full_name %></div>
                 <div class="font-sm"><%= user.email %></div>
-                <div class="">Khoa: <%= user.falcuty %></div>
+                <div class="">Khoa: <%= user.faculty %></div>
                 <div class="">Lớp: <%= user.class_id %></div>
                 <div class="div-controll font-md font-weigh-md color-main mt-10 btn" onclick="openUpdateModal()">Thay đổi</div>
             </div>
         </div>
         <div class="mt-10">
-            <div class="">
-                <%- include('../component/feed_list.ejs', {feed_list: feed_list}) %>
+            <div class="" id="feed_list">
+                <%- include('../component/feed_list.ejs', {feed_list: feed_list, you: user}) %>
             </div>
         </div>
 
-        <!-- float -->
-        <div class="btn-sticky-bottom-left btn-circle-sm bg-main d-text-center blur-border hv-3d">
-            &plus;
-        </div>
+
+        <%- include('../component/add_feed_btn.ejs') %>
     </div>
 </div>
 
 
-<div class="update-info-modal" id="update_info_modal">
-    <div class="p-relative centroid content">
-        <table>
-            <form action="/user/me/update" method="POST" enctype="multipart/form-data">
-                <tr>
-                    <td class="" align="right">
-                        <div class="m-sm">
-                            <% if (user.google_avatar) { %>
-                                <img id="avatar" class="avatar_cover" src="<%= user.google_avatar %>">
-                            <% } else { %>
-                                <img id="avatar" class="avatar_cover"
-                                     src="data:image/<%= user.avatar.contentType %>;base64,<%= user.avatar.data.toString('base64') %>">
-                            <% } %>
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            <div class="font-lg"><%= user.email %></div>
-                            <div class="div-controll font-sm font-strong color-main">
-                                Đổi ảnh đại diện
-                            </div>
-                            <input type="file" name="new_avatar" class="hidden">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="al-right">
-                        <div class="m-sm font-strong">
-                            Tên hiển thị
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            <input name="full_name" class="border-tiny radius-sm pd-5-10" type="text" value="<%= user.full_name %>">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td >
-                    </td>
-                    <td>
-                        <p class="font-sm">
-                            Hãy sử dụng tên mà mọi người dễ nhận ra bạn,<br>  tránh sử dụng các ký tự đặc biệt.
-                        </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="al-right">
-                        <div class="m-sm font-strong">
-                            Khoa
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            <input value="<%= user.falcuty %>" name="falcuty" class="border-tiny radius-sm pd-5-10" type="text">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="al-right">
-                        <div class="m-sm font-strong">
-                            Lớp
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            <input value="<%= user.class_id %>" name="class_id" class="border-tiny radius-sm pd-5-10" type="text">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="al-right">
-                        <div class="m-sm font-strong">
-                            Mật khẩu
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            <input name="password" class="border-tiny radius-sm pd-5-10" type="password">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="al-right">
-                        <div class="border-tiny radius-sm pd-5-10 w-100 cancel-update-sm-btn m-sm btn" onclick="closeUpdateModal()">Huỷ</div>
-                    </td>
-                    <td>
-                        <button class="border-tiny radius-sm pd-5-10 w-100 update-sm-btn" type="submit">Cập nhật</button>
-                    </td>
-                </tr>
-            </form>
-        </table>
-    </div>
-</div>
-
-
+<%- include('../component/update_info_modal.ejs', {user: user}) %>
 <%- include('../component/loading.ejs') %>
 <%- include('../component/add_feed_modal.ejs') %>
-
+<%- include('../component/confirm_delete.ejs') %>
 
 <footer>
 </footer>

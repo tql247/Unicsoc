@@ -8,7 +8,7 @@ async function update_user_info(user_req) {
             full_name: user_req.full_name,
             password: user_req.password,
             class_id: user_req.class_id,
-            falcuty: user_req.falcuty,
+            faculty: user_req.faculty,
             avatar: make_image_obj(user_req.avatar)
         }
 

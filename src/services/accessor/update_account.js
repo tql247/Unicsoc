@@ -21,7 +21,7 @@ async function update_account(user) {
         return await AccountModel.findOneAndUpdate({email: user.email}, {
             full_name: user.full_name,
             class_id: user.class_id,
-            falcuty: user.falcuty,
+            faculty: user.faculty,
         });
     } catch (e) {
         throw e

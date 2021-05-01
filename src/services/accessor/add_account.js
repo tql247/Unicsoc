@@ -11,7 +11,7 @@ async function add_account(acc) {
                 password: await hash_password(acc.password),
                 full_name: acc.full_name,
                 class_id: acc.class_id,
-                falcuty: acc.falcuty,
+                faculty: acc.faculty,
                 avatar: null,
                 google_avatar: acc.google_avatar,
                 role: acc.role,

@@ -77,6 +77,12 @@ function handleEditFeedBtn(e) {
     openEditFeedModal();
 }
 
+function handleDeleteFeedBtn(e) {
+    const target_id = e.currentTarget.closest('.feed-item').id;
+    $("#delete-feed-id").val(target_id)
+    $('#confirmDeleteFeed').modal('show');
+}
+
 $(document).ready(function () {
     $("#add-feed-form").on("submit", function (e) {
         activeLoading();
@@ -132,4 +138,5 @@ $(document).ready(function () {
     });
 
     $(".edit-feed-btn").on('click', handleEditFeedBtn)
+    $(".delete-feed-btn").on('click', handleDeleteFeedBtn)
 })

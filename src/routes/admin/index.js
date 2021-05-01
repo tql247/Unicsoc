@@ -20,7 +20,7 @@ router.post('/create', [auth, moderator_verify], async function (req, res, next)
             full_name: req.body["full_name"],
             password: req.body["password"],
             class_id: req.body["class_id"],
-            falcuty: req.body["falcuty"],
+            faculty: req.body["faculty"],
             avatar: req.body["avatar"],
             role: req.body["role"]
         }

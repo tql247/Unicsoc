@@ -42,7 +42,7 @@ router.post('/me/update', auth, uploader.single('new_avatar'), async function (r
             full_name: req.body["full_name"] || req["user_profile"].full_name,
             password: req.body["password"],
             class_id: req.body["class_id"],
-            falcuty: req.body["falcuty"],
+            faculty: req.body["faculty"],
             // avatar: req.body["avatar"]
         }
 
