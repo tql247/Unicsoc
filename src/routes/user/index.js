@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 const {login_by_google} = require("../../services/login");
 const google_authenticate = require("../../services/thirdparty/google");
-const auth = require("../../middlewares/auth");
+const {auth} = require("../../middlewares/auth");
 const update_user_info = require("../../services/update_user_info");
-const view_all_user_feeds = require("../../services/view_feeds");
 const uploader = require("../../middlewares/uploader");
 const view_feeds = require("../../services/view_feeds");
+const get_account_data = require("../../services/get_account_data");
 const {login_by_account} = require("../../services/login");
 
 
@@ -16,8 +16,9 @@ router.get('/', async function (req, res) {
 
 router.get('/visit/:email', auth, async function (req, res, next) {
     try {
-        const user = await view_all_user_feeds(req.params["email"])
-        res.send(user);
+        const user = await get_account_data(req.params["email"])
+        const feed_list = await view_feeds(1, user["_id"])
+        return res.render('user/profile', {user, feed_list})
     } catch (e) {
         next(e)
     }

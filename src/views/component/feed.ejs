@@ -44,39 +44,12 @@
         </div>
         <div class="cmt-section pd-sm">
             <div class="ls-cmt">
-                <div class="cmt">
-                    <div class="list-group-item flex-column align-items-start mb-3">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h6><strong>
-                                </strong></h6>
-                            <span type="button" data-toggle="modal" data-target="#confirmDeleteCMT"
-                                  data-cmt-id=""
-                                  class="c-danger material-icons btn-float-right hv-3d">
-                        delete_forever
-                        </span>
-                        </div>
-                        <div>
-                        </div>
-                    </div>
-                </div>
+                <% feed["comments"].forEach((comment) => { %>
+                    <%- include('comment.ejs', {comment}) %>
+                <% }) %>
             </div>
             <div class="new-cmt">
-                <form action="../../service/addComment.php" method="POST">
-                    <div class="input-group mb-1">
-                        <input type="text" name="content_comment" class="form-control"
-                               placeholder="Nhập thảo luận mới"
-                               aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <input type="hidden" name="id_feed" value="<?= $feed['id'] ?>">
-                        <input type="hidden" name="id_user_current" value="">
-                        <div class="input-group-append">
-                            <button class="btn btn-secondary x-center" type="submit">
-                                    <span class="material-icons">
-                                        send
-                                    </span>
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                <%- include('add_comment.ejs', {feed}) %>
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 const express = require('express');
-const auth = require("../../middlewares/auth");
+const {auth} = require("../../middlewares/auth");
 const moderator_verify = require("../../middlewares/verify_admin");
 const create_new_user = require("../../services/create_new_user");
 const router = express.Router();

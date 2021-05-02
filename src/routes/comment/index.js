@@ -2,15 +2,24 @@ const express = require('express');
 const router = express.Router();
 const comment_a_feed = require("../../services/comment_feed");
 const delete_comment = require("../../services/delete_comment");
+const ejs = require('ejs');
+const path = require("path");
+const {auth_quick} = require("../../middlewares/auth");
 
-router.post('/post',async function (req, res, next) {
+router.post('/post', auth_quick, async function (req, res, next) {
     try {
         const comment = {
-            content: req.body["content"],
-            feed_id: req.body["feed_id"],
-            uploader_id: req.body["uploader_id"]
+            feed: req.body["comment_feed_id"],
+            content: req.body["comment_content"],
+            commenter: req["client_id"]
         }
-        res.send(await comment_a_feed(comment));
+        const new_comment = await comment_a_feed(comment);
+        const comment_template = path.join(process.cwd(), '/src/views/component/comment.ejs');
+
+        return res.send({
+            status: 200,
+            data: await ejs.renderFile(comment_template, {comment: new_comment}, {async: true})
+        });
     } catch (e) {
         next(e)
     }

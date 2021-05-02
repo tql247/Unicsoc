@@ -1,8 +1,8 @@
-const find_account_by_email = require("./accessor/find_account_by_email");
+const find_account_by_id = require("./accessor/find_account_by_id");
 
-async function get_account_data (email) {
+async function get_account_data (_id) {
     try {
-        const user = await find_account_by_email(email)
+        const user = await find_account_by_id(_id)
         if (user)
             return user
         const err = new Error();

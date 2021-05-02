@@ -1,0 +1,17 @@
+<form action="" class="add-comment-form">
+    <div class="input-group mb-1">
+        <input type="text" name="comment_content"
+               class="form-control"
+               placeholder="Nhập thảo luận"
+               aria-label="Recipient's username"
+               aria-describedby="basic-addon2">
+        <input class="hidden" name="comment_feed_id" value="<%= feed['_id'] %>">
+        <div class="input-group-append">
+            <button class="btn btn-secondary x-center" type="submit">
+                <span class="material-icons mr-ssm">
+                    Gửi
+                </span>
+            </button>
+        </div>
+    </div>
+</form>

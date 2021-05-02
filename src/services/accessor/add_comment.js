@@ -8,8 +8,8 @@ async function add_comment(comment) {
         return await CommentModel.create(
             {
                 content: comment["content"],
-                feed_id: comment["feed_id"],
-                uploader_id: comment["uploader_id"]
+                feed: comment["feed"],
+                commenter: comment["commenter"]
             }
         );
     } catch (e) {

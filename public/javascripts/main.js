@@ -3,7 +3,7 @@ function openUpdateModal() {
     document.getElementById("update_info_modal").style.zIndex = "100";
 }
 
-function closeUpdateModal(event) {
+function closeUpdateModal() {
     document.getElementById("update_info_modal").style.opacity = "0";
     document.getElementById("update_info_modal").style.zIndex = "-100";
 }
@@ -14,7 +14,7 @@ function openAddFeedModal() {
     document.getElementById("add_feed_modal").style.zIndex = "100";
 }
 
-function closeAddFeedModal(event) {
+function closeAddFeedModal() {
     document.querySelector("#add_feed_modal .overlay").style.opacity = "1";
     document.querySelector("#add_feed_modal .content").style.zIndex = "-11";
     document.getElementById("add_feed_modal").style.zIndex = "-100";
@@ -49,14 +49,17 @@ function addNewFeed(data) {
 }
 
 function updateFeed(_id, data) {
-    console.log('data')
-    console.log(data)
     $(`#${_id}`).replaceWith(data)
     $(".edit-feed-btn").on('click', handleEditFeedBtn)
 }
 
 function deleteFeed(_id) {
     $(`#${_id}`).replaceWith('')
+}
+
+function addComment(feed_id, data) {
+    const list_feed_cmt = $(`#${feed_id}`).find('.ls-cmt')
+    $(data).appendTo(list_feed_cmt);
 }
 
 function clearQueryUrl() {
@@ -116,7 +119,6 @@ $(document).ready(function () {
 
         return false;
     });
-
     $("#edit-feed-form").on("submit", function (e) {
         console.log('edit')
         activeLoading();
@@ -141,7 +143,6 @@ $(document).ready(function () {
         e.preventDefault();
         return false;
     });
-
     $("#delete-feed-form").on("submit", function (e) {
         $('#confirmDeleteFeed').modal('hide');
         activeLoading();
@@ -168,4 +169,30 @@ $(document).ready(function () {
 
     $(".edit-feed-btn").on('click', handleEditFeedBtn)
     $(".delete-feed-btn").on('click', handleDeleteFeedBtn)
+
+
+    $(".add-comment-form").on("submit", function (e) {
+        e.preventDefault();
+        activeLoading();
+
+        const _id = $(this).closest('.feed-item').attr('id')
+        const dataString = $(this).serialize();
+        const self = this;
+
+        $.ajax({
+            type: "POST",
+            url: "/comment/post",
+            data: dataString,
+            async: true,
+            success: (res) => {
+                clearQueryUrl()
+                if (res.status !== 200) location.reload()
+                addComment(_id, res.data);
+                inactiveLoading();
+                self.reset();
+            }
+        });
+
+        return false;
+    });
 })

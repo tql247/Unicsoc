@@ -8,9 +8,7 @@ const {check_password} = require("../utils/bcrypt");
 async function sign_token_to_user(acc) {
     const token = jwt.sign(
         {
-            id: acc["_id"],
-            email: acc["email"],
-            password: acc["password"],
+            _id: acc["_id"]
         },
         process.env.JWT_KEY,
         {
