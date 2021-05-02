@@ -33,6 +33,10 @@ const AccountSchema = new Schema({
         enum: ['admin', 'student', 'officer'],
         required: [true, 'Why no role?']
     },
+    topic: {
+        type: Array,
+        default: []
+    },
     token: {
         type: String,
     }

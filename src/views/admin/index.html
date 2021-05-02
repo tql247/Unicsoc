@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Administrator</title>
+    <link rel="shortcut icon" href="http://localhost:5000/public/images/UNISOC.png" type="image/png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="http://localhost:5000/public/stylesheets/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="http://localhost:5000/public/javascripts/main.js"></script>
+</head>
+<body class="container">
+<div class="row main">
+    <div class="col-xl-4 col-lg-4 col-md-4 p-relative ">
+        <div class="side-float">
+            <div class="navside border-tiny">
+                <div class="w-100">
+                    <div class="logo-main-admin-display">
+                        <img class="border-tiny" src="http://localhost:5000/public/images/UNISOC.png" alt="">
+                    </div>
+                </div>
+                <div class="controller">
+                    <div class="al-right controll-item active">
+                        Quản lý tài khoản
+                    </div>
+                    <div class="al-right controll-item">
+                        Quản lý thông báo
+                    </div>
+                    <div class="al-right controll-item">
+                        Quản lý bài viết và bình luận
+                    </div>
+                </div>
+                <div class="info-card bg-white d-middle-x">
+                    <h1>Admin</h1>
+                    <a class="color-danger" href="/user/logout">Đăng xuất</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--    feed -->
+    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-10 no-margin p-relative">
+        <div class="control-display border-tiny">
+            <div class="ls-acc">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Phòng/Ban</th>
+                        <th>Chuyên mục quản lý</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>CNTT</td>
+                        <td>
+                            CNTT <br> ICON
+                        </td>
+                        <td class="modify-btn">🛠</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Đại học</td>
+                        <td>
+                            Học Phí <br> Học vụ
+                        </td>
+                        <td class="modify-btn">🛠</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Thể dục thể thao</td>
+                        <td>Bơi lội</td>
+                        <td class="modify-btn">🛠</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <form action="" method="POST">
+                    <div class="">
+                        Thêm tài khoản mới
+                    </div>
+
+                    <label for="username">Username</label>
+                    <input type="text" class="mr-sm" name="username" id="username" placeholder="Nhập username">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" class="" name="password" id="password" placeholder="Mật khẩu">
+                    <br>
+                    <input type="submit" name="" class="lam-input hv-3d-lam account-btn bg-lam" value="Thêm">
+                    <div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
