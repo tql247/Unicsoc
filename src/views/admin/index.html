@@ -49,6 +49,43 @@
     <!--    feed -->
     <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-10 no-margin p-relative">
         <div class="control-display border-tiny">
+            <div>
+                <form action="" id="#add-acc-form">
+                    <div class="ml-1">
+                        <h4><strong>Thêm tài khoản mới</strong></h4>
+                    </div>
+
+                    <input type="text" class="p-sm-2 w-auto" name="username" id="username" placeholder="Nhập username">
+                    <input type="password" class="p-sm-2 w-auto" name="password" id="password" placeholder="Mật khẩu">
+                    <h5 class="ml-2 font-weight-bold mt-1">Chuyên mục quản lý</h5>
+                    <div class="ml-2 d-flex flex-wrap">
+                        <div class="flex-grow-1">
+                            <input type="checkbox" class="w-auto">
+                            <label class="w-auto">CNTT</label>
+                        </div>
+                        <div class="flex-grow-1">
+                            <input type="checkbox" class="w-auto">
+                            <label class="w-auto">ICON</label>
+                        </div>
+                        <div class="flex-grow-1">
+                            <input type="checkbox" class="w-auto">
+                            <label class="w-auto">Học phí</label>
+                        </div>
+                        <div class="flex-grow-1">
+                            <input type="checkbox" class="w-auto">
+                            <label class="w-auto">Học vụ</label>
+                        </div>
+                        <div class="flex-grow-1">
+                            <input type="checkbox" class="w-auto">
+                            <label class="w-auto">Bơi lội</label>
+                        </div>
+                    </div>
+                        <input type="submit"  class="ml-1 w-auto p-2 pr-5 pl-5 bg-info color-white" value="Thêm">
+                    <div>
+                    </div>
+                </form>
+            </div>
+            <br>
             <div class="ls-acc">
                 <table class="table table-striped table-hover">
                     <thead>
@@ -84,22 +121,6 @@
                     </tr>
                     </tbody>
                 </table>
-            </div>
-            <div>
-                <form action="" method="POST">
-                    <div class="">
-                        Thêm tài khoản mới
-                    </div>
-
-                    <label for="username">Username</label>
-                    <input type="text" class="mr-sm" name="username" id="username" placeholder="Nhập username">
-                    <label for="password">Mật khẩu</label>
-                    <input type="password" class="" name="password" id="password" placeholder="Mật khẩu">
-                    <br>
-                    <input type="submit" name="" class="lam-input hv-3d-lam account-btn bg-lam" value="Thêm">
-                    <div>
-                    </div>
-                </form>
             </div>
         </div>
     </div>

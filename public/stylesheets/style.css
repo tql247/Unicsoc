@@ -131,17 +131,28 @@
     overflow-y: auto;
 }
 
+.color-white {
+    color: white;
+}
+
 .controll-item {
     font-size: 14pt;
     margin: 20px 15px 15px;
     cursor: pointer;
     font-family: 'Work Sans', sans-serif;
     font-weight: 300;
+    transition: ease-in-out 100ms;
 }
 
 .controll-item.active {
     font-weight: 400;
     font-size: 18pt;
+}
+
+.controll-item:hover {
+    font-weight: 400;
+    font-size: 18pt;
+    transition: ease-in-out 100ms;
 }
 
 .logo-main-admin-display img{
