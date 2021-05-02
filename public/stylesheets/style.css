@@ -475,6 +475,11 @@ input,
     border-radius: 10000px;
 }
 
+.cmt_user_avatar {
+    width: 2.5em;
+    border-radius: 10000px;
+}
+
 .pd-sm {
     padding: 0.5em;
 }

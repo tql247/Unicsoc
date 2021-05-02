@@ -26,7 +26,12 @@ async function find_all_feed(index) {
                         {
                             $match: {
                                 $expr: {
-                                    $eq: ["$$feed_id", "$feed"]
+                                    $and: [
+                                        { $eq: ["$$feed_id", "$feed"] },
+                                    ]
+                                },
+                                deleted_at: {
+                                    $exists: false
                                 }
                             }
                         },

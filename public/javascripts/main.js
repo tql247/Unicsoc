@@ -62,6 +62,10 @@ function addComment(feed_id, data) {
     $(data).appendTo(list_feed_cmt);
 }
 
+function deleteComment(_id) {
+    $(`#${_id}`).replaceWith('')
+}
+
 function clearQueryUrl() {
     const uri = window.location.toString();
     if (uri.indexOf("?") > 0) {
@@ -88,6 +92,12 @@ function handleDeleteFeedBtn(e) {
     const target_id = e.currentTarget.closest('.feed-item').id;
     $("#delete-feed-id").val(target_id)
     $('#confirmDeleteFeed').modal('show');
+}
+
+function handleDeleteCmtBtn(e) {
+    const target_id = e.currentTarget.closest('.cmt').id;
+    $("#delete-cmt-id").val(target_id)
+    $('#confirmDeleteCmt').modal('show');
 }
 
 $(document).ready(function () {
@@ -195,4 +205,28 @@ $(document).ready(function () {
 
         return false;
     });
+    $("#delete-cmt-form").on("submit", function (e) {
+        e.preventDefault();
+        $('#confirmDeleteCmt').modal('hide');
+        activeLoading();
+
+        const dataString = $(this).serialize();
+        const _id = document.getElementById("delete-cmt-id").value
+        $.ajax({
+            type: "POST",
+            url: "/comment/delete",
+            data: dataString,
+            async: true,
+            success: (res) => {
+                clearQueryUrl()
+                if (res.status !== 200) location.reload()
+                deleteComment(_id)
+                inactiveLoading();
+            }
+        });
+
+        return false;
+    });
+
+    $(".delete-cmt-btn").on('click', handleDeleteCmtBtn);
 })

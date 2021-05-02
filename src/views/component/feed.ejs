@@ -1,7 +1,7 @@
 <div id="<%= feed["_id"] %>" class="mb-3 feed-item list-group-item flex-column align-items-start w-100">
     <div class="w-100 mb-3 pd-sm">
         <div class="float-right btn-float-right">
-            <% if(you.id === owner.id) { %>
+            <% if(you.email === owner.email) { %>
                 <span type="button" data-toggle="modal" data-whatever="" data-target="#editFeed"
                       class="edit-feed-btn material-icons hv-3d">
                     edit
@@ -15,9 +15,9 @@
         <div class="d-middle-y">
             <a href="" class="mr-sm">
                 <% if (owner.google_avatar) { %>
-                    <img id="user-avatar" class="feed_user_avatar" src="<%= owner.google_avatar %>">
+                    <img id="user-avatar" class="feed_user_avatar border-tiny" src="<%= owner.google_avatar %>">
                 <% } else { %>
-                    <img id="user-avatar" class="feed_user_avatar"
+                    <img id="user-avatar" class="feed_user_avatar border-tiny"
                          src="data:image/<%= owner.image.contentType %>;base64,<%= owner.image.data.toString('base64') %>">
                 <% } %>
             </a>

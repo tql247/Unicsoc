@@ -1,0 +1,30 @@
+<div class="cmt" id="<%= comment["_id"] %>">
+    <div class="list-group-item flex-column align-items-start mb-3">
+        <div class="d-flex w-100 justify-content-between">
+            <div class="d-middle-y">
+                <div class="mr-sm">
+                    <% if (comment["commenter"].google_avatar) { %>
+                        <img class="cmt_user_avatar border-tiny" src="<%= comment["commenter"].google_avatar %>">
+                    <% } else { %>
+                        <img class="cmt_user_avatar border-tiny"
+                             src="data:image/<%= comment["commenter"].image.contentType %>;base64,<%= comment["commenter"].image.data.toString('base64') %>">
+                    <% } %>
+                </div>
+                <div>
+                    <div>
+                        <strong><%= comment["commenter"].full_name %></strong>
+                    </div>
+                    <%= comment["content"] %>
+                </div>
+            </div>
+            <div>
+                <% if(you.email === comment["commenter"].email) { %>
+                <span type="button"
+                      class="delete-cmt-btn c-danger material-icons btn-float-right hv-3d">
+                            delete
+                </span>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>

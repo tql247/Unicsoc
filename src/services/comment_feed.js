@@ -7,8 +7,6 @@ async function comment_feed(comment) {
             content: comment["content"].trim(),
             commenter: comment["commenter"]
         }
-        console.log('new_comment')
-        console.log(new_comment)
         return await add_comment(new_comment)
     } catch (e) {
         throw e
