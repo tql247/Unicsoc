@@ -6,7 +6,9 @@ async function create_new_user(new_user) {
             email: new_user.email,
             password: new_user.password,
             full_name: new_user.full_name,
-            role: "faculty"
+            faculty: new_user.faculty,
+            role: "officer",
+            topic: new_user.topic
         }
 
         return add_account(new_account)

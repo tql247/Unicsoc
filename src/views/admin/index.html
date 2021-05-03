@@ -50,33 +50,34 @@
     <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-10 no-margin p-relative">
         <div class="control-display border-tiny">
             <div>
-                <form action="" id="#add-acc-form">
+                <form action="" id="add-acc-form">
                     <div class="ml-1">
                         <h4><strong>Thêm tài khoản mới</strong></h4>
                     </div>
 
+                    <input type="text" class="p-sm-2 w-auto" name="full_name" id="full_name" placeholder="Tên phòng ban">
                     <input type="text" class="p-sm-2 w-auto" name="username" id="username" placeholder="Nhập username">
                     <input type="password" class="p-sm-2 w-auto" name="password" id="password" placeholder="Mật khẩu">
                     <h5 class="ml-2 font-weight-bold mt-1">Chuyên mục quản lý</h5>
                     <div class="ml-2 d-flex flex-wrap">
                         <div class="flex-grow-1">
-                            <input type="checkbox" class="w-auto">
+                            <input name="topic" type="checkbox" class="w-auto" value="CNTT">
                             <label class="w-auto">CNTT</label>
                         </div>
                         <div class="flex-grow-1">
-                            <input type="checkbox" class="w-auto">
+                            <input name="topic" type="checkbox" class="w-auto" value="ICON">
                             <label class="w-auto">ICON</label>
                         </div>
                         <div class="flex-grow-1">
-                            <input type="checkbox" class="w-auto">
+                            <input name="topic" type="checkbox" class="w-auto" value="fee">
                             <label class="w-auto">Học phí</label>
                         </div>
                         <div class="flex-grow-1">
-                            <input type="checkbox" class="w-auto">
+                            <input name="topic" type="checkbox" class="w-auto" value="HV">
                             <label class="w-auto">Học vụ</label>
                         </div>
                         <div class="flex-grow-1">
-                            <input type="checkbox" class="w-auto">
+                            <input name="topic" type="checkbox" class="w-auto" value="BL">
                             <label class="w-auto">Bơi lội</label>
                         </div>
                     </div>

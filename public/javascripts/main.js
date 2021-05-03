@@ -101,6 +101,31 @@ function handleDeleteCmtBtn(e) {
 }
 
 $(document).ready(function () {
+    $("#add-acc-form").on("submit", function (e) {
+        e.preventDefault();
+        const self = this;
+        // activeLoading();
+
+        const dataString = $(this).serialize();
+        console.log(dataString)
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:5000/admin/create",
+            data: dataString,
+            async: true,
+            success: (res) => {
+                clearQueryUrl();
+                self.reset();
+                if (res.status !== 200) location.reload()
+                console.log(res)
+                // inactiveLoading();
+            }
+        });
+
+        return false;
+    });
+
+
     $("#add-feed-form").on("submit", function (e) {
         e.preventDefault();
         console.log('add')
