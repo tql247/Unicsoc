@@ -72,6 +72,11 @@
     font-size: 30pt;
 }
 
+.notify-nav {
+    display: flex;
+    justify-content: space-between;
+}
+
 .d-flex-horizon {
     justify-content: space-between;
     align-items: center;
