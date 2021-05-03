@@ -13,7 +13,9 @@ async function add_account(acc) {
                 class_id: acc.class_id,
                 faculty: acc.faculty,
                 role: acc.role,
-                topic: acc.topic
+                topic: acc.topic,
+                google_avatar: acc.google_avatar,
+                avatar: acc.avatar
             }
         );
     } catch (e) {

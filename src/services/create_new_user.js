@@ -8,7 +8,9 @@ async function create_new_user(new_user) {
             full_name: new_user.full_name,
             faculty: new_user.faculty,
             role: "officer",
-            topic: new_user.topic
+            topic: new_user.topic,
+            avatar: new_user.avatar,
+            google_avatar: '/public/images/officer/avatar.png'
         }
 
         return add_account(new_account)

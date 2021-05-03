@@ -103,8 +103,7 @@ function handleDeleteCmtBtn(e) {
 $(document).ready(function () {
     $("#add-acc-form").on("submit", function (e) {
         e.preventDefault();
-        const self = this;
-        // activeLoading();
+        activeLoading();
 
         const dataString = $(this).serialize();
         console.log(dataString)
@@ -115,10 +114,11 @@ $(document).ready(function () {
             async: true,
             success: (res) => {
                 clearQueryUrl();
-                self.reset();
-                if (res.status !== 200) location.reload()
-                console.log(res)
+                location.reload()
                 // inactiveLoading();
+            },
+            complete: () => {
+                location.reload();
             }
         });
 

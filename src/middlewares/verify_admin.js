@@ -1,5 +1,3 @@
-const jwt = require('jsonwebtoken');
-
 const verify_admin = async (req, res, next) => {
     try {
         console.log('---------------')

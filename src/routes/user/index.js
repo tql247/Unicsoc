@@ -10,10 +10,6 @@ const get_account_data = require("../../services/get_account_data");
 const {login_by_account} = require("../../services/login");
 
 
-router.get('/', async function (req, res) {
-    res.send('user.ejs');
-})
-
 router.get('/visit/:email', auth, async function (req, res, next) {
     try {
         const user = await get_account_data(req.params["email"])
@@ -79,10 +75,10 @@ router.get(
 
 router.post('/login', async function (req, res, next) {
     try {
-        const {email, password} = req.body
-        const token = await login_by_account({email: email, password: password})
+        const {username, password} = req.body
+        const token = await login_by_account({email: username, password: password})
         res.cookie('jwt', token)
-        return res.send(token)
+        return res.redirect('/')
     } catch (e) {
         next(e);
     }

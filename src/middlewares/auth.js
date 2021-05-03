@@ -28,10 +28,11 @@ function cookieHandle(cookie, next) {
     return data
 }
 
-async function auth (req, res, next) {
+async function auth(req, res, next) {
     try {
         const data = cookieHandle(req.cookies, next)
         req.user_profile = data.data;
+
         return next();
     } catch (error) {
         return next(error);

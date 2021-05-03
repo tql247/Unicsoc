@@ -127,7 +127,6 @@
 }
 
 .ls-acc {
-    max-height: calc(50vh - 20px);
     overflow-y: auto;
 }
 
