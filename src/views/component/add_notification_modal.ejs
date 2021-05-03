@@ -1,0 +1,36 @@
+<div class="add-feed-modal centroid" id="add_feed_modal">
+    <div class="overlay" onclick="closeAddFeedModal()">
+    </div>
+    <div class="content border-tiny bg-white">
+        <form action="" id="add-feed-form">
+            <div class="d-flex-top">
+                <div class="m-sm d-middle-x toolbar">
+                    <div class="font-strong">
+                        Nội dung
+                    </div>
+                    <div>
+                        <div class="div-controll font-md font-weigh-md color-main mt-10 btn"
+                             onclick="clickElement('add-feed-image')">Thêm ảnh
+                        </div>
+                        <input name="feed_picture" id="add-feed-image" class="hidden" type="file">
+                    </div>
+                    <div>
+                        <button class="border-tiny radius-sm pd-5-10 w-100 update-sm-btn" type="submit">Thêm</button>
+                    </div>
+                </div>
+
+                <div class="ml-2 w-100">
+                    <div
+                            class="r-text border-tiny pd-sm"
+                            id="feed-input-text"
+                            contenteditable="True"
+                    >
+                    </div>
+                    <input id="feed-input-text-hidden" name="feed_content" type="text" class="hidden">
+                </div>
+            </div>
+            <div>
+            </div>
+        </form>
+    </div>
+</div>

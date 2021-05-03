@@ -32,6 +32,18 @@ function closeEditFeedModal() {
     document.getElementById("edit_feed_modal").style.zIndex = "-100";
 }
 
+function openAddNotificationModal() {
+    document.querySelector(".add-notification-modal .overlay").style.opacity = "0.7";
+    document.querySelector(".add-notification-modal .content").style.zIndex = "101";
+    document.querySelector(".add-notification-modal").style.zIndex = "100";
+}
+
+function closeAddNotificationModal() {
+    document.querySelector(".add-notification-modal .overlay").style.opacity = "1";
+    document.querySelector(".add-notification-modal .content").style.zIndex = "-11";
+    document.querySelector(".add-notification-modal").style.zIndex = "-100";
+}
+
 function clickElement(id) {
     document.getElementById(id).click();
 }

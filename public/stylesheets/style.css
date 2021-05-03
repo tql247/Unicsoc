@@ -77,6 +77,10 @@
     align-items: center;
 }
 
+.vh-50 {
+    height: 25vh !important;
+}
+
 .d-middle-x {
     display: flex;
     flex-direction: column;
@@ -124,6 +128,16 @@
 .control-display {
     margin-top: 10px;
     height: calc(100vh - 20px);
+}
+
+.notify-emitter {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14pt;
+}
+
+.notify-title {
+    font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: 12pt;
 }
 
 .ls-acc {
@@ -744,6 +758,45 @@ body {
     width: 100%;
     max-width: 700px;
     margin: 10px 10px calc(100vw - 80%);
+    height: fit-content;
+}
+
+.font-family-default {
+    font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+
+.add-notification-title {
+    font-size: 14pt;
+    margin: 0 0 0.5rem 0;
+}
+
+.add-notification-modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -100;
+    transition: ease-in-out;
+}
+
+.add-notification-modal .overlay {
+    background-color: #FAFAFA;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -10;
+    opacity: 1;
+    transition: ease-in-out 100ms;
+}
+
+.add-notification-modal .content {
+    z-index: -11;
+    width: 100%;
+    max-width: 700px;
+    margin: 10px 10px 10vw;
     height: fit-content;
 }
 

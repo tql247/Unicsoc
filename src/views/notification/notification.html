@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timeline</title>
-    <link rel="shortcut icon" href="/public/images/UNISOC.png" type="image/png">
+    <link rel="shortcut icon" href="http://localhost:5000/public/images/UNISOC.png" type="image/png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="http://localhost:5000/public/stylesheets/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -25,20 +27,101 @@
     <!--    feed -->
     <div class="col-xl-7 col-lg-8 col-md-8 col-sm-9 col-10 no-margin p-relative">
         <div class="mt-10">
-            <div class="" id="feed_list">
-                <%- include('component/feed_list.ejs', {feed_list: feed_list, you: user}) %>
+            <div class="mb-1">
+                Lọc theo
+                <select class="form-control form-control w-auto d-inline">
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div>
+                <div class="border-tiny px-3 py-1 rounded mb-2">
+                    <div class="notify-emitter">
+                        Tên phòng ban
+                    </div>
+                    <p class="notify-title">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam debitis dolor eos fuga molestiae.
+                        <a href=""><em>Chi tiết</em></a>
+                    </p>
+
+                </div>
+                <div class="border-tiny px-3 py-1 rounded mb-2">
+                    <div class="notify-emitter">
+                        Tên phòng ban
+                    </div>
+                    <p class="notify-title">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam debitis dolor eos fuga molestiae.
+                        <a href=""><em>Chi tiết</em></a>
+                    </p>
+
+                </div>
             </div>
         </div>
 
-        <%- include('component/add_feed_btn.ejs') %>
+        <div class="btn-sticky-bottom-left btn-circle-sm bg-main d-text-center blur-border hv-3d"
+             onclick="openAddNotificationModal()">
+            &plus;
+        </div>
     </div>
 </div>
 
 <%- include('component/loading.ejs') %>
-<%- include('component/add_feed_modal.ejs') %>
-<%- include('component/edit_feed_modal.ejs') %>
-<%- include('component/confirm_delete.ejs') %>
-<%- include('component/cmt_confirm_delete.ejs') %>
+<div class="add-notification-modal centroid" id="add_notification_modal">
+    <div class="overlay" onclick="closeAddNotificationModal()">
+    </div>
+    <div class="content border-tiny bg-white font-family-default p-2 rounded">
+        <form action="" id="add-notification-form">
+            <div class="">
+                <div><h4>Thêm thông báo mới</h4></div>
+                <div class="mb-3">
+                    <div class="add-notification-title">
+                        Tiêu đề
+                    </div>
+                    <div class="">
+                        <div
+                                class="r-text border-tiny pd-sm"
+                                id="notification-title"
+                                contenteditable="True"
+                        >
+                        </div>
+                        <input id="notification-title-hidden" name="notification_content" type="text" class="hidden">
+                    </div>
+                </div>
+                <div>
+                    <div class="add-notification-title">
+                        Nội dung
+                    </div>
+                    <div class="">
+                        <div
+                                class="r-text border-tiny pd-sm vh-50"
+                                id="notification-content"
+                                contenteditable="True"
+                        >
+                        </div>
+                        <input id="notification-content-hidden" name="notification_content" type="text" class="hidden">
+                    </div>
+                </div>
+                <div class="d-flex d-flex-horizon mt-2">
+                    <div>
+                        Chuyên mục
+                        <select class="form-control form-control w-auto d-inline">
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button class="px-5 py-2 border-tiny radius-sm pd-5-10 w-100 update-sm-btn" type="submit">Thêm</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+            </div>
+        </form>
+    </div>
+</div>
+
 
 </body>
 </html>
