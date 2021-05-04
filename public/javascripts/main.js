@@ -121,6 +121,12 @@ function handleEditNotificationBtn(e) {
     openEditNotificationModal();
 }
 
+function handleDeleteNotificationBtn(e) {
+    const target_id = e.currentTarget.closest('.notification-item').id;
+    $("#delete-notification-id").val(target_id)
+    $('#confirmDeleteNotification').modal('show');
+}
+
 function handleEditFeedBtn(e) {
     const target_id = e.currentTarget.closest('.feed-item').id;
     setEditFeedModalContent(target_id);
@@ -211,7 +217,30 @@ $(document).ready(function () {
 
         return false;
     });
+    $("#delete-notification-form").on("submit", function (e) {
+        e.preventDefault();
+        $('#confirmDeleteNotification').modal('hide');
+        activeLoading();
+
+        const dataString = $(this).serialize();
+        $.ajax({
+            type: "POST",
+            url: "/notification/delete",
+            data: dataString,
+            async: true,
+            success: (res) => {
+                console.log(res)
+            },
+            complete: () => {
+                location.reload()
+            }
+        });
+
+        return false;
+    });
     $(".edit-notification-btn").on('click', handleEditNotificationBtn)
+    $(".delete-notification-btn").on('click', handleDeleteNotificationBtn)
+
 
 
     $("#add-feed-form").on("submit", function (e) {

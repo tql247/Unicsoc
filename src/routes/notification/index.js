@@ -2,6 +2,7 @@ const express = require('express');
 const post_notification = require("../../services/post_notification");
 const view_all_notification = require("../../services/view_notifications");
 const edit_notification = require("../../services/edit_notification");
+const delete_notification = require("../../services/delete_notification");
 const {auth} = require("../../middlewares/auth");
 const router = express.Router();
 
@@ -55,6 +56,20 @@ router.post('/edit',  auth, async function (req, res, next) {
         res.send({
             status: 200,
             data: await edit_notification(notification_edit, uploader)
+        })
+    } catch (e) {
+        next(e)
+    }
+})
+
+router.post('/delete',  auth, async function (req, res, next) {
+    try {
+        const {notification_id_delete} = req.body;
+        const uploader = req["user_profile"]._id
+
+        res.send({
+            status: 200,
+            data: await delete_notification(notification_id_delete, uploader)
         })
     } catch (e) {
         next(e)
