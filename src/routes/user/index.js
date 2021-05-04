@@ -24,6 +24,7 @@ router.get('/visit/:email', auth, async function (req, res, next) {
 router.get('/me', auth, async function (req, res, next) {
     try {
         const user = req["user_profile"]
+        console.log(user)
         const feed_list = await view_feeds(1, user._id)
         return res.render('user/profile', {user, feed_list})
     } catch (e) {
@@ -43,8 +44,9 @@ router.post('/me/update', auth, uploader.single('new_avatar'), async function (r
             // avatar: req.body["avatar"]
         }
 
-        await update_user_info(user_req)
-        return res.redirect('back');
+        const token = await update_user_info(user_req);
+        res.cookie('jwt', token)
+        return res.redirect('back')
     } catch (e) {
         next(e)
     }
@@ -107,18 +109,14 @@ router.get(
                 try {
                     const {displayName, email, picture} = info
                     const token = await login_by_google({email: email, name: displayName, google_avatar: picture})
-                    res.cookie('jwt', token)
-                    next();
+                    res.cookie('jwt', token);
+                    return res.redirect('/')
                 } catch (e) {
                     next(e);
                 }
             }
         )(req, res, next);
     },
-    (req, res, next) => {
-        return res.redirect('/');
-        // return res.redirect('back');
-    }
 );
 
 module.exports = router;

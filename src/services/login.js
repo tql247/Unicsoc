@@ -8,8 +8,7 @@ const {check_password} = require("../utils/bcrypt");
 async function sign_token_to_user(acc) {
     const token = jwt.sign(
         {
-            _id: acc["_id"],
-            data: acc
+            _id: acc["_id"]
         },
         process.env.JWT_KEY,
         {
@@ -82,5 +81,6 @@ async function login_by_account(user) {
 
 module.exports = {
     login_by_google,
-    login_by_account
+    login_by_account,
+    sign_token_to_user
 }

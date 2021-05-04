@@ -1,5 +1,6 @@
 const make_image_obj = require("../utils/make_image_obj");
 const update_account = require("./accessor/update_account");
+const {sign_token_to_user} = require("./login");
 
 async function update_user_info(user_req) {
     try {
@@ -11,8 +12,8 @@ async function update_user_info(user_req) {
             faculty: user_req.faculty,
             avatar: make_image_obj(user_req.avatar)
         }
-
-        return await update_account(new_user_info)
+        const user = await update_account(new_user_info)
+        return await sign_token_to_user(user)
     } catch (e) {
         throw e
     }

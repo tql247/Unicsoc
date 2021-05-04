@@ -5,6 +5,7 @@ async function get_account_data (_id) {
         const user = await find_account_by_id(_id)
         if (user)
             return user
+
         const err = new Error();
         err.message = "Email not exist";
         err.name = "Page not found"

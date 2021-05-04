@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const get_account_data = require("../services/get_account_data");
 
 function cookieHandle(cookie, next) {
     if (!cookie) {
@@ -31,8 +32,7 @@ function cookieHandle(cookie, next) {
 async function auth(req, res, next) {
     try {
         const data = cookieHandle(req.cookies, next)
-        req.user_profile = data.data;
-
+        req.user_profile = await get_account_data(data._id);
         return next();
     } catch (error) {
         return next(error);
