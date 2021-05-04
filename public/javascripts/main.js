@@ -242,7 +242,6 @@ $(document).ready(function () {
     $(".delete-notification-btn").on('click', handleDeleteNotificationBtn)
 
 
-
     $("#add-feed-form").on("submit", function (e) {
         e.preventDefault();
         console.log('add')
@@ -369,3 +368,9 @@ $(document).ready(function () {
     });
     $(".delete-cmt-btn").on('click', handleDeleteCmtBtn);
 })
+
+const socket = io.connect('localhost:3000');
+
+socket.on('outside', function() {
+    console.log('outside');
+});

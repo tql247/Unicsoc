@@ -10,6 +10,11 @@ router.get('/', auth, role_redirect, async (req, res) => {
     return res.render('index', {user, feed_list})
 })
 
+router.get('/test', (req, res)=>{
+    io.emit('outside');
+    res.send('hm')
+})
+
 const admin = require('./admin');
 router.use('/admin', admin);
 
