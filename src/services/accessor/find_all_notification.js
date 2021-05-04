@@ -16,7 +16,6 @@ const find_all_notification = async function (index) {
     } finally {
         await mongoose.connection.close()
     }
-    return await NotificationModel.find().exec();
 }
 
 module.exports = find_all_notification

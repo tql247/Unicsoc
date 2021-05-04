@@ -44,6 +44,18 @@ function closeAddNotificationModal() {
     document.querySelector(".add-notification-modal").style.zIndex = "-100";
 }
 
+function openEditNotificationModal() {
+    document.querySelector("#edit_notification_modal .overlay").style.opacity = "0.7";
+    document.querySelector("#edit_notification_modal .content").style.zIndex = "101";
+    document.getElementById("edit_notification_modal").style.zIndex = "100";
+}
+
+function closeEditNotificationModal() {
+    document.querySelector("#edit_notification_modal .overlay").style.opacity = "1";
+    document.querySelector("#edit_notification_modal .content").style.zIndex = "-11";
+    document.getElementById("edit_notification_modal").style.zIndex = "-100";
+}
+
 function clickElement(id) {
     document.getElementById(id).click();
 }
@@ -86,7 +98,16 @@ function clearQueryUrl() {
     }
 }
 
-function setFeedModalContent(_id) {
+function setEditNotificationModalContent(_id) {
+    const parentModal = $("#edit_notification_modal")
+    const title = $(`#${_id}`).find(".notify-title").text().trim();
+    const content = $(`#${_id}`).find(".notify-detail").text().trim();
+    parentModal.find("#edit_notification_id").val(_id)
+    parentModal.find("#edit-notification-title").text(title)
+    parentModal.find("#edit-notification-content").text(content)
+}
+
+function setEditFeedModalContent(_id) {
     const parentModal = $("#edit_feed_modal")
     const content = $(`#${_id}`).find(".feed-content").text().trim();
     // const image_url = $(`#${_id}`).querySelector("")
@@ -94,9 +115,15 @@ function setFeedModalContent(_id) {
     parentModal.find(".edit-feed-content").text(content)
 }
 
+function handleEditNotificationBtn(e) {
+    const target_id = e.currentTarget.closest('.notification-item').id;
+    setEditNotificationModalContent(target_id);
+    openEditNotificationModal();
+}
+
 function handleEditFeedBtn(e) {
     const target_id = e.currentTarget.closest('.feed-item').id;
-    setFeedModalContent(target_id);
+    setEditFeedModalContent(target_id);
     openEditFeedModal();
 }
 
@@ -161,6 +188,31 @@ $(document).ready(function () {
 
         return false;
     });
+    $("#edit-notification-form").on("submit", function (e) {
+        e.preventDefault();
+        console.log('edit-notification')
+        // activeLoading();
+        document.getElementById("edit-notification-title-hidden").value = document.getElementById("edit-notification-title").textContent
+        document.getElementById("edit-notification-content-hidden").value = document.getElementById("edit-notification-content").textContent
+
+        const dataString = $(this).serialize();
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:5000/notification/edit",
+            data: dataString,
+            async: true,
+            success: (res) => {
+                console.log(res)
+            },
+            complete: () => {
+                location.reload()
+            }
+        });
+
+        return false;
+    });
+    $(".edit-notification-btn").on('click', handleEditNotificationBtn)
+
 
     $("#add-feed-form").on("submit", function (e) {
         e.preventDefault();
@@ -191,7 +243,6 @@ $(document).ready(function () {
         return false;
     });
     $("#edit-feed-form").on("submit", function (e) {
-        console.log('edit')
         activeLoading();
 
         document.getElementById("edit_feed_content_hidden").value = document.getElementById("edit-feed-input-text").textContent
@@ -237,7 +288,6 @@ $(document).ready(function () {
         e.preventDefault();
         return false;
     });
-
     $(".edit-feed-btn").on('click', handleEditFeedBtn)
     $(".delete-feed-btn").on('click', handleDeleteFeedBtn)
 
@@ -288,6 +338,5 @@ $(document).ready(function () {
 
         return false;
     });
-
     $(".delete-cmt-btn").on('click', handleDeleteCmtBtn);
 })

@@ -1,0 +1,39 @@
+<% notification_list.forEach((notification) => { %>
+    <div class="border-tiny px-3 py-1 rounded mb-2 notification-item" id="<%= notification._id %>">
+        <div class="d-flex d-flex-horizon">
+            <div class="notify-emitter">
+                <%= notification.uploader.full_name %>
+            </div>
+            <div>
+                <div>
+<!--                    <em class="notify-date">dd/mm/yyyy</em>-->
+                    <em class="notify-date"><%= notification.created_at.toLocaleString() %></em>
+                </div>
+            </div>
+        </div>
+        <div class="notify-title">
+            <%= notification.title %>
+        </div>
+        <div class="notify-detail hidden">
+            <%= notification.detail %>
+        </div>
+
+        <div class="d-flex d-flex-horizon">
+            <a href=""><em>Chi tiết</em></a>
+            <div>
+                <span type="button"
+                      data-toggle="modal"
+                      data-target="#editFeed"
+                      class="edit-notification-btn material-icons hv-3d">
+                    edit
+                </span>
+                <span type="button"
+                      data-toggle="modal"
+                      data-target="#confirmDeleteFeed"
+                      class="delete-feed-btn material-icons hv-3d c-danger">
+                    delete
+                </span>
+            </div>
+        </div>
+    </div>
+<% }) %>

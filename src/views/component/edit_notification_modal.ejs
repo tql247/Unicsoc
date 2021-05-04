@@ -1,49 +1,51 @@
-<div class="add-notification-modal centroid" id="add_notification_modal">
-    <div class="overlay" onclick="closeAddNotificationModal()">
+<div class="edit-notification-modal centroid" id="edit_notification_modal">
+    <div class="overlay" onclick="closeEditNotificationModal()">
     </div>
     <div class="content border-tiny bg-white font-family-default p-2 rounded">
-        <form action="" id="add-notification-form">
+        <form action="" id="edit-notification-form">
+            <input type="text" id="edit_notification_id" name="edit_notification_id" class="hidden">
             <div class="">
-                <div><h4>Thêm thông báo mới</h4></div>
+                <div><h4>Chỉnh sửa thông báo</h4></div>
                 <div class="mb-3">
-                    <div class="add-notification-title">
+                    <div class="edit-notification-title">
                         Tiêu đề
                     </div>
                     <div class="">
                         <div
                                 class="r-text border-tiny pd-sm"
-                                id="notification-title"
+                                id="edit-notification-title"
                                 contenteditable="True"
                         >
                         </div>
-                        <input id="notification-title-hidden" name="notification_title" type="text" class="hidden">
+                        <input id="edit-notification-title-hidden" name="edit_notification_title" type="text" class="hidden">
                     </div>
                 </div>
                 <div>
-                    <div class="add-notification-title">
+                    <div class="edit-notification-title">
                         Nội dung
                     </div>
                     <div class="">
                         <div
                                 class="r-text border-tiny pd-sm vh-50"
-                                id="notification-content"
+                                id="edit-notification-content"
                                 contenteditable="True"
                         >
                         </div>
-                        <input id="notification-content-hidden" name="notification_content" type="text" class="hidden">
+                        <input id="edit-notification-content-hidden" name="edit_notification_content" type="text" class="hidden">
                     </div>
                 </div>
                 <div class="d-flex d-flex-horizon mt-2">
                     <div>
                         Chuyên mục
-                        <select name="notify_topic" class="form-control form-control w-auto d-inline">
+                        <select name="edit_notify_topic" class="form-control form-control w-auto d-inline">
                             <option value="1">One</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
                         </select>
                     </div>
                     <div>
-                        <button class="px-5 py-2 border-tiny radius-sm pd-5-10 w-100 update-sm-btn" type="submit">Thêm
+                        <button class="px-5 py-2 border-tiny radius-sm pd-5-10 w-100 update-sm-btn" type="submit">
+                            Sửa
                         </button>
                     </div>
                 </div>

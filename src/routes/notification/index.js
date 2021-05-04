@@ -1,6 +1,7 @@
 const express = require('express');
 const post_notification = require("../../services/post_notification");
 const view_all_notification = require("../../services/view_notifications");
+const edit_notification = require("../../services/edit_notification");
 const {auth} = require("../../middlewares/auth");
 const router = express.Router();
 
@@ -41,11 +42,19 @@ router.post('/post', auth,  async function (req, res, next) {
     }
 })
 
-router.post('/get',  async function (req, res, next) {
+router.post('/edit',  auth, async function (req, res, next) {
     try {
+        const notification_edit = {
+            edit_notification_id,
+            edit_notification_title,
+            edit_notification_content,
+            edit_notify_topic
+        } = req.body;
+        const uploader = req["user_profile"]._id
+
         res.send({
             status: 200,
-            data: "OK"
+            data: await edit_notification(notification_edit, uploader)
         })
     } catch (e) {
         next(e)
