@@ -138,6 +138,30 @@ $(document).ready(function () {
     });
 
 
+    $("#add-notification-form").on("submit", function (e) {
+        e.preventDefault();
+        console.log('add-notification')
+        // activeLoading();
+        document.getElementById("notification-title-hidden").value = document.getElementById("notification-title").textContent
+        document.getElementById("notification-content-hidden").value = document.getElementById("notification-content").textContent
+
+        const dataString = $(this).serialize();
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:5000/notification/post",
+            data: dataString,
+            async: true,
+            success: (res) => {
+                console.log(res)
+            },
+            complete: () => {
+                // location.reload()
+            }
+        });
+
+        return false;
+    });
+
     $("#add-feed-form").on("submit", function (e) {
         e.preventDefault();
         console.log('add')

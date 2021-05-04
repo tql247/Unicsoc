@@ -7,14 +7,22 @@ const router = express.Router();
 const ejs = require('ejs');
 const path = require("path");
 const delete_feed = require("../../services/delete_feed");
+const view_feeds = require("../../services/view_feeds");
 
 router.get('/', async function (req, res) {
     res.send('feed');
 })
 
-router.post('/all', async function (req, res, next) {
+router.post('/view', auth, async function (req, res, next) {
     try {
-        res.send("all");
+        const user_id = req.body["user_id"]
+        const feed_list = await view_feeds(1, user_id)
+        const template_path = path.join(process.cwd(), '/src/views/component/feed_list.ejs')
+        const you = req["user_profile"]
+        return res.send({
+            status: 200,
+            data: await ejs.renderFile(template_path, {feed_list: feed_list, you: you}, {async: true})
+        });
     } catch (e) {
         next(e)
     }

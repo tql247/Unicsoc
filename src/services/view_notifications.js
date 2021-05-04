@@ -1,7 +1,9 @@
 const find_all_notification = require("./accessor/find_all_notification");
 
-async function view_all_notification(index) {
+async function view_all_notification(index, uploader_id) {
     try {
+        if (uploader_id)
+            return await find_all_notification(index, uploader_id)
         return await find_all_notification(index)
     } catch (e) {
         throw e

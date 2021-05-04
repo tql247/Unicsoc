@@ -13,15 +13,14 @@ const NotificationSchema = new Schema({
     topic: {
         type: String,
         required: [true, 'Why no topic?'],
-        enum: ['Học phí', 'Khoa CNTT', 'Đoàn hội', 'Phòng đại học'],
-    },
-    date: {
-        type: Date,
-        default: Date.now
+        // enum: ['Học phí', 'Khoa CNTT', 'Đoàn hội', 'Phòng đại học'],
     },
     uploader : {
         type: Schema.Types.ObjectId,
-        ref: 'account'
+        ref: 'Account',
+        localField: 'uploader',
+        foreignField: '_id',
+        justOne: true
     },
     created_at: {
         type: Date,

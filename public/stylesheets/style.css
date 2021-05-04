@@ -54,6 +54,10 @@
     overflow: hidden;
 }
 
+.notify-date {
+    font-family: "Times New Roman", serif;
+}
+
 .btn-full {
     display: flex;
     margin: -6px;
@@ -142,7 +146,8 @@
 
 .notify-title {
     font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-    font-size: 12pt;
+    font-size: 14pt;
+    font-weight: 400;
 }
 
 .ls-acc {

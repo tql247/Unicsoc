@@ -1,13 +1,23 @@
 const NotificationModel = require("../../models/Notification");
+const connect = require("./connection");
+const mongoose = require('mongoose');
+
 const find_all_notification = async function (index) {
-    return await NotificationModel.
-        find().
-        where('deleted_at').
-        equals(null).
-        sort({"date": "desc"}).
-        skip((index - 1)*10). // 10 is number of notification each page.
-        limit(10). // show only 10 notifications each page.
-        exec();
+    try {
+        await connect();
+        return await NotificationModel.find({'deleted_at': null}).
+            sort({"created_at": "desc"}).
+            skip((index - 1) * 10). // 10 is number of notification each page.
+            limit(10). // show only 10 notifications each page.
+            populate('uploader', "full_name").
+            exec();
+    } catch (e) {
+        throw e
+    } finally {
+        await mongoose.connection.close()
+    }
+    return await NotificationModel.find().exec();
 }
 
 module.exports = find_all_notification
+
