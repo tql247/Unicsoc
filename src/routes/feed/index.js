@@ -22,7 +22,6 @@ router.post('/view', auth, async function (req, res, next) {
         const feed_list = await view_feeds(feed_index, user_id)
         const template_path = path.join(process.cwd(), '/src/views/component/feed_list_all.ejs')
         const html_data = await ejs.renderFile(template_path, {feed_list: feed_list, you: you}, {async: true})
-        console.log(html_data)
         return res.send({
             status: 200,
             data: html_data

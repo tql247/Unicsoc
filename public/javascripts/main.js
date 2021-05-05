@@ -158,14 +158,10 @@ function handleLoadMoreFeed(res) {
 }
 
 function loadMoreFeed() {
-    console.log('request')
-
     // Kiểm tra có đang tải hay không, nếu đang tải thì thôi
     if (window.isLoadingFeed) {
         return
     }
-
-    console.log('allow')
 
     // Đánh dấu là đang tải
     window.isLoadingFeed = true
