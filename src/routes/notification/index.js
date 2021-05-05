@@ -5,12 +5,13 @@ const edit_notification = require("../../services/edit_notification");
 const delete_notification = require("../../services/delete_notification");
 const {auth} = require("../../middlewares/auth");
 const router = express.Router();
+const ejs = require('ejs');
+const path = require("path");
 
 router.get('/', auth, async function (req, res) {
     try {
         const notification_list = await view_all_notification(1, null)
         const user = req["user_profile"]
-        console.log(notification_list)
         return res.render('notification/notification', {notification_list, user});
     } catch (e) {
         throw e
@@ -34,9 +35,17 @@ router.post('/post', auth,  async function (req, res, next) {
             notify_topic
         } = req.body;
         const uploader = req["user_profile"]._id
+        const q_notify = await post_notification(notification, uploader)
+        const quick_notify_template = path.join(process.cwd(), '/src/views/component/quick_notify.ejs');
+        const data = await ejs.renderFile(quick_notify_template, {q_notify}, {async: true})
+
+        io.emit('new-notify', {
+            data: data
+        })
+
         res.send({
             status: 200,
-            data: await post_notification(notification, uploader)
+            data: data
         });
     } catch (e) {
         next(e)

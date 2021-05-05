@@ -145,6 +145,12 @@ function handleDeleteCmtBtn(e) {
     $('#confirmDeleteCmt').modal('show');
 }
 
+function beep() {
+    const audio = new Audio(
+        'https://media.geeksforgeeks.org/wp-content/uploads/20190531135120/beep.mp3');
+    audio.play();
+}
+
 $(document).ready(function () {
     $("#add-acc-form").on("submit", function (e) {
         e.preventDefault();
@@ -174,7 +180,7 @@ $(document).ready(function () {
     $("#add-notification-form").on("submit", function (e) {
         e.preventDefault();
         console.log('add-notification')
-        // activeLoading();
+        activeLoading();
         document.getElementById("notification-title-hidden").value = document.getElementById("notification-title").textContent
         document.getElementById("notification-content-hidden").value = document.getElementById("notification-content").textContent
 
@@ -188,7 +194,7 @@ $(document).ready(function () {
                 console.log(res)
             },
             complete: () => {
-                // location.reload()
+                location.reload()
             }
         });
 
@@ -371,6 +377,10 @@ $(document).ready(function () {
 
 const socket = io.connect('localhost:3000');
 
-socket.on('outside', function() {
+socket.on('outside', function () {
     console.log('outside');
+});
+
+socket.on('new-notify', function (data) {
+    $(data.data).prependTo("#qw-notify-list")
 });

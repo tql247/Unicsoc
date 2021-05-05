@@ -5,7 +5,8 @@ const NotificationModel = require("../../models/Notification");
 async function add_notification (notification) {
     try {
         await connect();
-        return await NotificationModel.create(
+
+        const notify = await NotificationModel.create(
             {
                 title: notification.notification_title,
                 detail: notification.notification_content,
@@ -13,6 +14,8 @@ async function add_notification (notification) {
                 uploader: notification.uploader
             }
         );
+
+        return await notify.populate('uploader', "full_name").execPopulate()
     } catch (e) {
         throw e
     } finally {
