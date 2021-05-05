@@ -21,6 +21,7 @@
         <div class="d-flex d-flex-horizon">
             <a href=""><em>Chi tiết</em></a>
             <div>
+                <% if(notification.uploader.email === user.email) {%>
                 <span type="button"
                       data-toggle="modal"
                       data-target="#editFeed"
@@ -33,6 +34,7 @@
                       class="delete-notification-btn material-icons hv-3d c-danger">
                     delete
                 </span>
+                <% } %>
             </div>
         </div>
     </div>

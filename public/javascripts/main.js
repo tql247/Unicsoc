@@ -145,11 +145,61 @@ function handleDeleteCmtBtn(e) {
     $('#confirmDeleteCmt').modal('show');
 }
 
+function handleLoadMoreFeed(res) {
+    if (res.status === 200) {
+        if (res.data) {
+            $(res.data).appendTo("#feed_list")
+            window.isLoadingFeed = false
+        }
+        else {
+            $("<h5 class='d-middle-x p-5'>Đã tải hết</h5>").appendTo("#feed_list")
+        }
+    }
+}
+
+function loadMoreFeed() {
+    console.log('request')
+
+    // Kiểm tra có đang tải hay không, nếu đang tải thì thôi
+    if (window.isLoadingFeed) {
+        return
+    }
+
+    console.log('allow')
+
+    // Đánh dấu là đang tải
+    window.isLoadingFeed = true
+    // Tăng trang đã tải lên 1
+    window.feedIndex++;
+
+    // Kiểm tra có phải đang xem trang cá nhân của mình hay không
+    if (window.location.href.match('/user/me')) {
+        //  Lấy bài viết của mình thôi
+    }
+    // Kiểm tra có phải đang xem trang cá nhân của ai đó không
+    else if (window.location.href.match('/user/visit')) {
+        //  Lấy bài viết của một người đó thôi
+    } else {
+        //    Lấy tất cả các bài viết
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:5000/feed/view",
+            dataType: "json",
+            data: {feedIndex: window.feedIndex},
+            async: true,
+            success: handleLoadMoreFeed
+        });
+    }
+
+}
+
 function beep() {
     const audio = new Audio(
-        'https://media.geeksforgeeks.org/wp-content/uploads/20190531135120/beep.mp3');
+        '/public/media/beep.wav');
     audio.play();
 }
+
+
 
 $(document).ready(function () {
     $("#add-acc-form").on("submit", function (e) {
@@ -373,6 +423,27 @@ $(document).ready(function () {
         return false;
     });
     $(".delete-cmt-btn").on('click', handleDeleteCmtBtn);
+
+    /*
+    * Hàm này dùng để tự động tải thêm bài viết, thông báo khi kéo đến cuối trang
+    * */
+    // Đánh dấu là có đang tải hay không, tránh trường hợp liên tục gửi request
+    // Dùng window để khai báo biến có thể dùng được ở mọi chỗ
+    window.isLoadingFeed = false;
+    // Đánh dấu trang đã tải
+    window.feedIndex = 1;
+    // Xử lý sự kiện lăn chuột hoặc scroll page
+    $(window).scroll(function () {
+        // Hàm này dùng để kiểm tra có phải đã lăn chuột xuống cuối trang hay không
+        if (Math.round($(window).scrollTop() + $(window).height()) > $(document).height() - 5) {
+            // Kiểm tra là đang xem thông báo hay đang xem bài viết
+            if (window.location.href.match('/notification')) {
+            } else {
+                // Nếu đang xem bài viết thì tải thêm bài viết
+                loadMoreFeed()
+            }
+        }
+    });
 })
 
 const socket = io.connect('localhost:3000');
@@ -382,5 +453,6 @@ socket.on('outside', function () {
 });
 
 socket.on('new-notify', function (data) {
+    beep()
     $(data.data).prependTo("#qw-notify-list")
 });

@@ -9,7 +9,7 @@ const find_all_notification = async function (index) {
             sort({"created_at": "desc"}).
             skip((index - 1) * 10). // 10 is number of notification each page.
             limit(10). // show only 10 notifications each page.
-            populate('uploader', "full_name").
+            populate('uploader', "full_name email").
             exec();
     } catch (e) {
         throw e

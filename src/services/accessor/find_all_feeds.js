@@ -59,6 +59,12 @@ async function find_all_feed(index) {
                 }
             },
             {
+                $project: {
+                    "uploader_id.password": 0,
+                    "uploader_id.token": 0
+                }
+            },
+            {
                 $limit: 10
             },
             {

@@ -15,15 +15,20 @@ router.get('/', async function (req, res) {
 
 router.post('/view', auth, async function (req, res, next) {
     try {
-        const user_id = req.body["user_id"]
-        const feed_list = await view_feeds(1, user_id)
-        const template_path = path.join(process.cwd(), '/src/views/component/feed_list.ejs')
+        console.log('I want more, bae')
         const you = req["user_profile"]
+        const user_id = req.body["my_feed"] ? you._id : req.body["host_id"]
+        const feed_index = req.body["feedIndex"] || 1
+        const feed_list = await view_feeds(feed_index, user_id)
+        const template_path = path.join(process.cwd(), '/src/views/component/feed_list_all.ejs')
+        const html_data = await ejs.renderFile(template_path, {feed_list: feed_list, you: you}, {async: true})
+        console.log(html_data)
         return res.send({
             status: 200,
-            data: await ejs.renderFile(template_path, {feed_list: feed_list, you: you}, {async: true})
+            data: html_data
         });
     } catch (e) {
+        console.log(e)
         next(e)
     }
 })

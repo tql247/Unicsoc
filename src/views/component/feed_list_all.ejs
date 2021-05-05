@@ -1,0 +1,105 @@
+<% feed_list.forEach((feed) => { %>
+    <div id="<%= feed["_id"] %>" class="mb-3 feed-item list-group-item flex-column align-items-start w-100">
+        <div class="w-100 mb-3 pd-sm">
+            <div class="float-right btn-float-right">
+                <% if(you.email === feed["uploader_id"].email) { %>
+                    <span type="button" data-toggle="modal" data-whatever="" data-target="#editFeed"
+                          class="edit-feed-btn material-icons hv-3d">
+                    edit
+                </span>
+                    <span type="button" data-toggle="modal" data-whatever="" data-target="#confirmDeleteFeed"
+                          class="delete-feed-btn material-icons hv-3d c-danger">
+                    delete
+                </span>
+                <% } %>
+            </div>
+            <div class="d-middle-y">
+                <a href="" class="mr-sm">
+                    <% if (feed["uploader_id"].google_avatar) { %>
+                        <img id="user-avatar" class="feed_user_avatar border-tiny"
+                             src="<%= feed["uploader_id"].google_avatar %>">
+                    <% } else { %>
+                        <img id="user-avatar" class="feed_user_avatar border-tiny"
+                             src="data:image/<%= feed["uploader_id"].image.contentType %>;base64,<%= feed["uploader_id"].image.data.toString('base64') %>">
+                    <% } %>
+                </a>
+                <div class="feed_title"><strong> <%= feed["uploader_id"].full_name %> </strong></div>
+            </div>
+            <div class="pd-sm feed-content">
+                <%= feed["content"] %>
+            </div>
+            <div class="pd-sm">
+                <!--                <div>-->
+                <!--                    <img width=" 100%" class="feed_cover" src="" alt="Ảnh đính kèm">-->
+                <!--                </div>-->
+                <!--                <div class="video-container">-->
+                <!--                    <iframe class="embed_iframe" src="https://www.youtube.com/embed/Wvq9HBirtrU"-->
+                <!--                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"-->
+                <!--                            allowfullscreen></iframe>-->
+                <!--                </div>-->
+            </div>
+        </div>
+        <hr>
+        <div class="cmt mt-1 pd-sm">
+            <div class="title mb-3 pd-sm">
+                <h5>Thảo luận</h5>
+            </div>
+            <div class="cmt-section pd-sm">
+                <div class="ls-cmt">
+                    <% feed["comments"].forEach((comment) => { %>
+                        <div class="cmt" id="<%= comment["_id"] %>">
+                            <div class="list-group-item flex-column align-items-start mb-3">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <div class="d-middle-y">
+                                        <div class="mr-sm">
+                                            <% if (comment["commenter"].google_avatar) { %>
+                                                <img class="cmt_user_avatar border-tiny"
+                                                     src="<%= comment["commenter"].google_avatar %>">
+                                            <% } else { %>
+                                                <img class="cmt_user_avatar border-tiny"
+                                                     src="data:image/<%= comment["commenter"].image.contentType %>;base64,<%= comment["commenter"].image.data.toString('base64') %>">
+                                            <% } %>
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <strong><%= comment["commenter"].full_name %></strong>
+                                            </div>
+                                            <%= comment["content"] %>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <% if(you.email === comment["commenter"].email) { %>
+                                            <span type="button"
+                                                  class="delete-cmt-btn c-danger material-icons btn-float-right hv-3d">
+                            delete
+                </span>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+                <div class="new-cmt">
+                    <form action="" class="add-comment-form">
+                        <div class="input-group mb-1">
+                            <input type="text" name="comment_content"
+                                   class="form-control"
+                                   placeholder="Nhập thảo luận"
+                                   aria-label="Recipient's username"
+                                   aria-describedby="basic-addon2">
+                            <input class="hidden" name="comment_feed_id" value="<%= feed['_id'] %>">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary x-center" type="submit">
+                <span class="material-icons mr-ssm">
+                    Gửi
+                </span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<% }); %>
