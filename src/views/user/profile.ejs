@@ -28,18 +28,18 @@
         <div class="border-tiny bg-white">
             <br>
             <div class="d-middle">
-                <% if (user.google_avatar) { %>
-                    <img id="avatar" class="avatar_cover" src="<%= user.google_avatar %>">
+                <% if (hoster.google_avatar) { %>
+                    <img id="avatar" class="avatar_cover" src="<%= hoster.google_avatar %>">
                 <% } else { %>
                     <img id="avatar" class="avatar_cover"
-                         src="data:image/<%= avatar.contentType %>;base64,<%= avatar.data.toString('base64') %>">
+                         src="data:image/<%= hoster.avatar.contentType %>;base64,<%= hoster.avatar.data.toString('base64') %>">
                 <% } %>
             </div>
             <div class="d-middle-x mt-10">
-                <div class="font-strong font-lg"><%= user.full_name %></div>
-                <div class="font-sm"><%= user.email %></div>
-                <div class="">Khoa: <%= user.faculty %></div>
-                <div class="">Lớp: <%= user.class_id %></div>
+                <div class="font-strong font-lg"><%= hoster.full_name %></div>
+                <div class="font-sm"><%= hoster.email %></div>
+                <div class="">Khoa: <%= hoster.faculty %></div>
+                <div class="">Lớp: <%= hoster.class_id %></div>
                 <div class="div-controll font-md font-weigh-md color-main mt-10 btn" onclick="openUpdateModal()">Thay đổi</div>
             </div>
         </div>
@@ -49,12 +49,15 @@
             </div>
         </div>
 
-
+        <% if (user.email === hoster.email) { %>
         <%- include('../component/add_feed_btn.ejs') %>
+        <% } %>
     </div>
 </div>
 
 
+<%- include('../component/edit_feed_modal.ejs') %>
+<%- include('../component/cmt_confirm_delete.ejs') %>
 <%- include('../component/update_info_modal.ejs', {user: user}) %>
 <%- include('../component/loading.ejs') %>
 <%- include('../component/add_feed_modal.ejs') %>
