@@ -1,5 +1,5 @@
 const update_notification = require("./accessor/update_notification");
-const find_notification_by_id = require("./accessor/find_nofitication_by_id");
+const find_notification_by_id = require("./accessor/find_notification_by_id");
 
 async function edit_notification (req_notification, uploader) {
     try {

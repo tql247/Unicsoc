@@ -8,6 +8,7 @@ const router = express.Router();
 const ejs = require('ejs');
 const path = require("path");
 const get_num_notification = require("../../services/get_num_notification");
+const view_notification_detail = require("../../services/view_notification_detail");
 
 router.get('/', auth, async function (req, res) {
     try {
@@ -41,23 +42,13 @@ router.get('/:topic/:index', auth, async function (req, res) {
     }
 })
 
-
-router.post('/view', auth, async function (req, res, next) {
+router.get('/detail/:topic/:id', auth, async function (req, res) {
     try {
-        console.log('I want read more, bae')
-        const you = req["user_profile"]
-        const topic_filter = req.body["topic_filter"]
-        const page_index = req.body["pageIndex"] || 1
-        const notification_list = await view_all_notification(page_index, topic_filter)
-        const template_path = path.join(process.cwd(), '/src/views/component/list_notification.ejs')
-        const html_data = await ejs.renderFile(template_path, {notification_list: notification_list, user: you}, {async: true})
-        return res.send({
-            status: 200,
-            data: html_data
-        });
+        const notification_detail = await view_notification_detail(req.params["id"])
+        const user = req["user_profile"]
+        return res.render('notification/notification_detail', {notification_detail, user});
     } catch (e) {
-        console.log(e)
-        next(e)
+        throw e
     }
 })
 

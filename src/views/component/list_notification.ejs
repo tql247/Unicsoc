@@ -12,14 +12,14 @@
             </div>
         </div>
         <div class="notify-title">
-            <%= notification.title %>
+            <%= notification.topic %> | <%= notification.title %>
         </div>
         <div class="notify-detail hidden">
             <%= notification.detail %>
         </div>
 
         <div class="d-flex d-flex-horizon">
-            <a href=""><em>Chi tiết</em></a>
+            <a href="<%= '/notification/detail/' + notification.topic + '/' + notification._id %>"><em>Chi tiết</em></a>
             <div>
                 <% if(notification.uploader.email === user.email) {%>
                 <span type="button"

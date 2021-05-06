@@ -1,5 +1,5 @@
-const find_notification_by_id = require("./accessor/find_nofitication_by_id");
 const soft_delete_notification = require("./accessor/soft_delete_notification");
+const find_notification_by_id = require("./accessor/find_notification_by_id");
 
 async function delete_notification(notification_id, user_id) {
     try {

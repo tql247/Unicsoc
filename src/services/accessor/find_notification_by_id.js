@@ -5,7 +5,7 @@ const NotificationModel = require("../../models/Notification");
 async function find_notification_by_id(_id) {
     try {
         await connect();
-        return await NotificationModel.findOne({'deleted_at': undefined, '_id': _id}).populate('uploader', "email").exec();
+        return await NotificationModel.findOne({'deleted_at': undefined, '_id': _id}).populate('uploader', "email full_name").exec();
     } catch (e) {
         throw e
     } finally {

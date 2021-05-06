@@ -41,7 +41,7 @@
                         const pageNum = Math.round(notification_num / 3);
                         const pageStart = Math.max(1, page_active - 1);
                         const prePage = srcLink + Math.max((parseInt(page_active) - 1), 1)
-                        const nextPage = srcLink + Math.max((parseInt(page_active) + 1), 1)
+                        const nextPage = srcLink + Math.min((parseInt(page_active) + 1), pageNum)
                     %>
                     <ul class="pagination">
                         <li class="page-item">
@@ -53,7 +53,7 @@
                         for (let i = pageStart; i < pageNum+1 && i < pageStart + 3; i++) {
                         %>
                             <li class="page-item <% if(parseInt(page_active) === (i)) { %> active <% } %>"><a
-                                        class="page-link" href="<%= srcLink + '/' + i %>"><%= i %></a></li>
+                                        class="page-link" href="<%= srcLink + i %>"><%= i %></a></li>
                         <% } %>
                         <li class="page-item">
                             <a class="page-link" href="<%= nextPage %>" aria-label="Next">
