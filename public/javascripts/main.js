@@ -74,7 +74,6 @@ function addNewFeed(data) {
 
 function updateFeed(_id, data) {
     $(`#${_id}`).replaceWith(data)
-    $(".edit-feed-btn").on('click', handleEditFeedBtn)
 }
 
 function deleteFeed(_id) {
@@ -150,11 +149,35 @@ function handleLoadMoreFeed(res) {
         if (res.data) {
             $(res.data).appendTo("#feed_list")
             window.isLoadingFeed = false
-        }
-        else {
+        } else {
             $("<h5 class='d-middle-x p-5'>Đã tải hết</h5>").appendTo("#feed_list")
         }
     }
+}
+
+function handleComment(e) {
+    e.preventDefault();
+    activeLoading();
+
+    const _id = $(this).closest('.feed-item').attr('id')
+    const dataString = $(this).serialize();
+    const self = this;
+
+    $.ajax({
+        type: "POST",
+        url: "/comment/post",
+        data: dataString,
+        async: true,
+        success: (res) => {
+            clearQueryUrl()
+            if (res.status !== 200) location.reload()
+            addComment(_id, res.data);
+            inactiveLoading();
+            self.reset();
+        }
+    });
+
+    return false;
 }
 
 function loadMoreFeed() {
@@ -197,8 +220,7 @@ function beep() {
     audio.play();
 }
 
-
-$(document).ready(function () {
+function eventStuff() {
     $("#add-acc-form").on("submit", function (e) {
         e.preventDefault();
         activeLoading();
@@ -224,7 +246,7 @@ $(document).ready(function () {
     });
 
 
-    $("#add-notification-form").on("submit", function (e) {
+    $(document).on("submit", "#add-notification-form", function (e) {
         e.preventDefault();
         console.log('add-notification')
         activeLoading();
@@ -247,7 +269,7 @@ $(document).ready(function () {
 
         return false;
     });
-    $("#edit-notification-form").on("submit", function (e) {
+    $(document).on("submit", "#edit-notification-form", function (e) {
         e.preventDefault();
         console.log('edit-notification')
         // activeLoading();
@@ -270,7 +292,7 @@ $(document).ready(function () {
 
         return false;
     });
-    $("#delete-notification-form").on("submit", function (e) {
+    $(document).on("submit", "#delete-notification-form", function (e) {
         e.preventDefault();
         $('#confirmDeleteNotification').modal('hide');
         activeLoading();
@@ -291,11 +313,11 @@ $(document).ready(function () {
 
         return false;
     });
-    $(".edit-notification-btn").on('click', handleEditNotificationBtn)
-    $(".delete-notification-btn").on('click', handleDeleteNotificationBtn)
+    $(document).on('click', ".edit-notification-btn", handleEditNotificationBtn)
+    $(document).on('click', ".delete-notification-btn", handleDeleteNotificationBtn)
 
 
-    $("#add-feed-form").on("submit", function (e) {
+    $(document).on("submit", "#add-feed-form", function (e) {
         e.preventDefault();
         console.log('add')
         activeLoading();
@@ -310,7 +332,7 @@ $(document).ready(function () {
             async: true,
             success: (res) => {
                 clearQueryUrl();
-                if (res.status !== 200) location.reload()
+                if (res.status !== 200) console.log(res)
                 addNewFeed(res.data)
                 closeAddFeedModal();
                 inactiveLoading();
@@ -319,7 +341,7 @@ $(document).ready(function () {
 
         return false;
     });
-    $("#edit-feed-form").on("submit", function (e) {
+    $(document).on("submit", "#edit-feed-form", function (e) {
         activeLoading();
 
         document.getElementById("edit_feed_content_hidden").value = document.getElementById("edit-feed-input-text").textContent
@@ -342,7 +364,7 @@ $(document).ready(function () {
         e.preventDefault();
         return false;
     });
-    $("#delete-feed-form").on("submit", function (e) {
+    $(document).on("submit", "#delete-feed-form", function (e) {
         $('#confirmDeleteFeed').modal('hide');
         activeLoading();
 
@@ -365,35 +387,12 @@ $(document).ready(function () {
         e.preventDefault();
         return false;
     });
-    $(".edit-feed-btn").on('click', handleEditFeedBtn)
-    $(".delete-feed-btn").on('click', handleDeleteFeedBtn)
+    $(document).on('click', ".edit-feed-btn", handleEditFeedBtn)
+    $(document).on('click', ".delete-feed-btn", handleDeleteFeedBtn)
 
 
-    $(".add-comment-form").on("submit", function (e) {
-        e.preventDefault();
-        activeLoading();
-
-        const _id = $(this).closest('.feed-item').attr('id')
-        const dataString = $(this).serialize();
-        const self = this;
-
-        $.ajax({
-            type: "POST",
-            url: "/comment/post",
-            data: dataString,
-            async: true,
-            success: (res) => {
-                clearQueryUrl()
-                if (res.status !== 200) location.reload()
-                addComment(_id, res.data);
-                inactiveLoading();
-                self.reset();
-            }
-        });
-
-        return false;
-    });
-    $("#delete-cmt-form").on("submit", function (e) {
+    $(document).on("submit", ".add-comment-form", handleComment);
+    $(document).on("submit", "#delete-cmt-form", function (e) {
         e.preventDefault();
         $('#confirmDeleteCmt').modal('hide');
         activeLoading();
@@ -415,8 +414,12 @@ $(document).ready(function () {
 
         return false;
     });
-    $(".delete-cmt-btn").on('click', handleDeleteCmtBtn);
+    $(document).on('click', ".delete-cmt-btn", handleDeleteCmtBtn);
+}
 
+
+$(document).ready(function () {
+    eventStuff();
     /*
     * Hàm này dùng để tự động tải thêm bài viết, thông báo khi kéo đến cuối trang
     * */
