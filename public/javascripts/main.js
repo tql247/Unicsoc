@@ -196,7 +196,6 @@ function beep() {
 }
 
 
-
 $(document).ready(function () {
     $("#add-acc-form").on("submit", function (e) {
         e.preventDefault();

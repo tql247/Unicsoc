@@ -7,8 +7,8 @@ const find_all_notification = async function (index) {
         await connect();
         return await NotificationModel.find({'deleted_at': null}).
             sort({"created_at": "desc"}).
-            skip((index - 1) * 10). // 10 is number of notification each page.
-            limit(10). // show only 10 notifications each page.
+            skip((index - 1) * 3). // 10 is number of notification each page.
+            limit(3). // show only 10 notifications each page.
             populate('uploader', "full_name email").
             exec();
     } catch (e) {

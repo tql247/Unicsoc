@@ -37,17 +37,26 @@
                     </select>
                 </div>
                 <nav aria-label="Page navigation example" class="p-0 m-0">
+                    <%
+                        const pageNum = Math.round(notification_num / 3);
+                        const pageStart = Math.max(1, page_active - 1);
+                        const prePage = srcLink + Math.max((parseInt(page_active) - 1), 1)
+                        const nextPage = srcLink + Math.max((parseInt(page_active) + 1), 1)
+                    %>
                     <ul class="pagination">
                         <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
+                            <a class="page-link" href="<%= prePage %>" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <%
+                        for (let i = pageStart; i < pageNum+1 && i < pageStart + 3; i++) {
+                        %>
+                            <li class="page-item <% if(parseInt(page_active) === (i)) { %> active <% } %>"><a
+                                        class="page-link" href="<%= srcLink + '/' + i %>"><%= i %></a></li>
+                        <% } %>
                         <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
+                            <a class="page-link" href="<%= nextPage %>" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
