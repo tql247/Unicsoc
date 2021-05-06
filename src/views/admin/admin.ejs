@@ -60,26 +60,12 @@
                     <input type="password" class="p-sm-2 w-auto" name="password" id="password" placeholder="Mật khẩu">
                     <h5 class="ml-2 font-weight-bold mt-1">Chuyên mục quản lý</h5>
                     <div class="ml-2 d-flex flex-wrap">
-                        <div class="flex-grow-1">
-                            <input name="topic" type="checkbox" class="w-auto" value="CNTT">
-                            <label class="w-auto">CNTT</label>
-                        </div>
-                        <div class="flex-grow-1">
-                            <input name="topic" type="checkbox" class="w-auto" value="ICON">
-                            <label class="w-auto">ICON</label>
-                        </div>
-                        <div class="flex-grow-1">
-                            <input name="topic" type="checkbox" class="w-auto" value="Học phí">
-                            <label class="w-auto">Học phí</label>
-                        </div>
-                        <div class="flex-grow-1">
-                            <input name="topic" type="checkbox" class="w-auto" value="Học vụ">
-                            <label class="w-auto">Học vụ</label>
-                        </div>
-                        <div class="flex-grow-1">
-                            <input name="topic" type="checkbox" class="w-auto" value="Bơi lội">
-                            <label class="w-auto">Bơi lội</label>
-                        </div>
+                        <% list_topic.forEach((topic)=> { %>
+                            <div class="flex-grow-1">
+                                <input name="topic" type="checkbox" class="w-auto" value="ICON">
+                                <label class="w-auto">ICON</label>
+                            </div>
+                        <% })%>
                     </div>
                         <input type="submit"  class="ml-1 w-auto p-2 pr-5 pl-5 bg-info color-white" value="Thêm">
                     <div>

@@ -3,15 +3,14 @@ const {auth} = require("../../middlewares/auth");
 const create_new_user = require("../../services/create_new_user");
 const get_all_officer_info = require("../../services/get_all_officer_info");
 const verify_admin = require("../../middlewares/verify_admin");
+const list_topic = require("../../utils/dict_declare");
 const router = express.Router();
 
 router.get('/', auth, verify_admin, async function (req, res, next) {
     try {
-        console.log('officers')
         const officers = await get_all_officer_info()
-        console.log(officers)
-        return res.render('admin/admin.ejs', {officers})
-        // res.send()
+        const list_topic = list_topic
+        return res.render('admin/admin.ejs', {officers, list_topic})
     } catch (e) {
         next(e)
     } finally {
