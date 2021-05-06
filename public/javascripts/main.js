@@ -443,9 +443,10 @@ $(document).ready(function () {
     });
 })
 
-const socket = io.connect('localhost:3000');
+const socket = io.connect('localhost:5000');
 
 socket.on('outside', function () {
+    beep()
     console.log('outside');
 });
 
