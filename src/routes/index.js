@@ -7,6 +7,8 @@ const role_redirect = require("../middlewares/role_redirect");
 router.get('/', auth, role_redirect, async (req, res) => {
     const user = req["user_profile"]
     const feed_list = await view_feeds(1, null)
+    console.log('feed_list')
+    console.log(feed_list)
     return res.render('index', {user, feed_list})
 })
 

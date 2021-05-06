@@ -4,11 +4,10 @@ const make_image_obj = require("../utils/make_image_obj");
 
 async function post_feed(feed) {
     try {
-        const image = make_image_obj(feed.image)
+        const image = await make_image_obj(feed.image)
         const extract_url = extract_url_from_text(feed["content"])
-
         const new_feed = {
-            content: feed["content"].trim(),
+            content: feed["content"].trim() || " ",
             image: image,
             uploader_id: feed["uploader_id"],
             embed_url: extract_url

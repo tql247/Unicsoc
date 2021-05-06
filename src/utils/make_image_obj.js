@@ -1,6 +1,6 @@
 async function make_image_obj(image_file) {
     if (!image_file) return null;
-    if (!image_file.data || !image_file.contentType) return null;
+    if (!image_file.mimetype || !image_file.path) return null;
 
     const fs = require('fs');
     const image_data = fs.readFileSync(image_file.path);
@@ -10,7 +10,7 @@ async function make_image_obj(image_file) {
         data: new Buffer.from(encode_image, 'base64')
     };
 
-    fs.unlinkSync(image_file.path)
+    await fs.unlinkSync(image_file.path)
 
     return image_obj
 }

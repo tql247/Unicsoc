@@ -15,10 +15,11 @@
         <div class="d-middle-y">
             <a href="/user/visit/<%= feed["uploader_id"].email %>" class="mr-sm">
                 <% if (feed["uploader_id"].google_avatar) { %>
-                    <img id="user-avatar" class="feed_user_avatar border-tiny" src="<%= feed["uploader_id"].google_avatar %>">
+                    <img id="user-avatar" class="feed_user_avatar border-tiny"
+                         src="<%= feed["uploader_id"].google_avatar %>">
                 <% } else { %>
                     <img id="user-avatar" class="feed_user_avatar border-tiny"
-                         src="data:image/<%= feed["uploader_id"].image.contentType %>;base64,<%= feed["uploader_id"].image.data.toString('base64') %>">
+                         src="data:image/<%= feed["uploader_id"].avatar.contentType %>;base64,<%= feed["uploader_id"].avatar.data.toString('base64') %>">
                 <% } %>
             </a>
             <div class="feed_title"><strong> <%= feed["uploader_id"].full_name %> </strong></div>
@@ -27,14 +28,20 @@
             <%= feed["content"] %>
         </div>
         <div class="pd-sm">
-            <!--                <div>-->
-            <!--                    <img width=" 100%" class="feed_cover" src="" alt="Ảnh đính kèm">-->
-            <!--                </div>-->
-            <!--                <div class="video-container">-->
-            <!--                    <iframe class="embed_iframe" src="https://www.youtube.com/embed/Wvq9HBirtrU"-->
-            <!--                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"-->
-            <!--                            allowfullscreen></iframe>-->
-            <!--                </div>-->
+            <% if (feed["image"]) { %>
+                <div>
+                    <img width=" 100%" class="feed_cover"
+                         src="data:image/<%= feed["image"].contentType %>;base64,<%= feed["image"].data.toString('base64') %>"
+                         alt="Ảnh đính kèm">
+                </div>
+            <% } %>
+            <% if (feed["embed_url"]) { %>
+            <div class="video-container">
+                <iframe class="embed_iframe" src="https://www.youtube.com/embed/Wvq9HBirtrU"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </div>
+            <% } %>
         </div>
     </div>
     <hr>
@@ -44,12 +51,30 @@
         </div>
         <div class="cmt-section pd-sm">
             <div class="ls-cmt">
-                <% feed["comments"].forEach((comment) => { %>
+                <%
+                if (feed["comments"]) {
+                feed["comments"].forEach((comment) => { %>
                     <%- include('comment.ejs', {comment}) %>
-                <% }) %>
+                <% }) } %>
             </div>
             <div class="new-cmt">
-                <%- include('add_comment.ejs', {feed}) %>
+                <form action="" class="add-comment-form">
+                    <div class="input-group mb-1">
+                        <input type="text" name="comment_content"
+                               class="form-control"
+                               placeholder="Nhập thảo luận"
+                               aria-label="Recipient's username"
+                               aria-describedby="basic-addon2">
+                        <input class="hidden" name="comment_feed_id" value="<%= feed['_id'] %>">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary x-center" type="submit">
+                <span class="material-icons mr-ssm">
+                    Gửi
+                </span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

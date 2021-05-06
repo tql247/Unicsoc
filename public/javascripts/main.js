@@ -181,7 +181,7 @@ function loadMoreFeed() {
         //    Lấy tất cả các bài viết
         $.ajax({
             type: "POST",
-            url: "http://localhost:5000/feed/view",
+            url: "/feed/view",
             dataType: "json",
             data: {feedIndex: window.feedIndex},
             async: true,
@@ -207,7 +207,7 @@ $(document).ready(function () {
         console.log(dataString)
         $.ajax({
             type: "POST",
-            url: "http://localhost:5000/admin/create",
+            url: "/admin/create",
             data: dataString,
             async: true,
             success: (res) => {
@@ -234,7 +234,7 @@ $(document).ready(function () {
         const dataString = $(this).serialize();
         $.ajax({
             type: "POST",
-            url: "http://localhost:5000/notification/post",
+            url: "/notification/post",
             data: dataString,
             async: true,
             success: (res) => {
@@ -257,7 +257,7 @@ $(document).ready(function () {
         const dataString = $(this).serialize();
         $.ajax({
             type: "POST",
-            url: "http://localhost:5000/notification/edit",
+            url: "/notification/edit",
             data: dataString,
             async: true,
             success: (res) => {
@@ -299,21 +299,17 @@ $(document).ready(function () {
         e.preventDefault();
         console.log('add')
         activeLoading();
-
         document.getElementById("feed-input-text-hidden").value = document.getElementById("feed-input-text").textContent
-        const dataString = $(this).serialize();
+
         $.ajax({
             type: "POST",
             url: "/feed/post",
-            data: dataString,
+            processData: false,
+            contentType: false,
+            data: new FormData(this),
             async: true,
             success: (res) => {
-                // clear query string
-                const uri = window.location.toString();
-                if (uri.indexOf("?") > 0) {
-                    const clean_uri = uri.substring(0, uri.indexOf("?"));
-                    window.history.replaceState({}, document.title, clean_uri);
-                }
+                clearQueryUrl();
                 if (res.status !== 200) location.reload()
                 addNewFeed(res.data)
                 closeAddFeedModal();

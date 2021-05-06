@@ -75,13 +75,13 @@ async function find_all_feed_by_account(index, uploader_id) {
                 }
             },
             {
-                $limit: 10
-            },
-            {
-                $skip: (index - 1) * 10
-            },
-            {
                 $sort: {'created_at': -1}
+            },
+            {
+                $skip: (index-1)*10
+            },
+            {
+                $limit: 10
             }
         ])
     } catch (e) {

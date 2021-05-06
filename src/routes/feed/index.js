@@ -41,12 +41,15 @@ router.post('/post', auth, uploader.single('feed_picture'), async function (req,
             uploader_id: you._id
         }
         const new_feed = await post_a_feed(req_feed);
-        const template_path = path.join(process.cwd(), '/src/views/component/feed.ejs')
+        const template_path = path.join(process.cwd(), '/src/views/component/feed.ejs');
+
         return res.send({
             status: 200,
             data: await ejs.renderFile(template_path, {feed: new_feed, owner: you, you: you}, {async: true})
         });
     } catch (e) {
+        console.log('errrr')
+        console.log(e)
         next(e)
     }
 })

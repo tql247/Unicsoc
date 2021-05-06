@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 async function add_feed (feed) {
     try {
         await connect();
-        return await FeedModel.create(
+        const new_feed = await FeedModel.create(
             {
                 content: feed["content"],
                 image: feed["image"],
@@ -13,6 +13,8 @@ async function add_feed (feed) {
                 uploader_id: feed["uploader_id"]
             }
         );
+
+        return await new_feed.populate('uploader_id').execPopulate()
     } catch (e) {
         throw e
     } finally {

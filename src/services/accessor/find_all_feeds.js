@@ -19,6 +19,12 @@ async function find_all_feed(index) {
               $unwind: '$uploader_id'
             },
             {
+              $project: {
+                  "uploader_id.password": 0,
+                  "uploader_id.token": 0
+              }
+            },
+            {
                 $lookup: {
                     from: "comment",
                     let: {"feed_id": "$_id"},
@@ -65,13 +71,13 @@ async function find_all_feed(index) {
                 }
             },
             {
-                $limit: 10
+                $sort: {'created_at': -1}
             },
             {
                 $skip: (index-1)*10
             },
             {
-                $sort: {'created_at': -1}
+                $limit: 10
             }
         ])
     } catch (e) {
