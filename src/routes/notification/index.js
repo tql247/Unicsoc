@@ -10,11 +10,9 @@ const path = require("path");
 const get_num_notification = require("../../services/get_num_notification");
 const view_notification_detail = require("../../services/view_notification_detail");
 
-router.get('/', auth, async function (req, res) {
+router.get('/', async function (req, res) {
     try {
-        const notification_list = await view_all_notification(1, null)
-        const user = req["user_profile"]
-        return res.render('notification/notification', {notification_list, user});
+        return res.redirect('/notification/1');
     } catch (e) {
         throw e
     }

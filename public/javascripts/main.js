@@ -442,15 +442,7 @@ $(document).ready(function () {
         }
     });
 })
-let socket;
-try {
-    socket = io.connect('localhost:5000');
-} catch (e) {
-    console.log(e)
-}
-if (!socket) {
-    socket = io.connect('https://universitysocial.herokuapp.com/');
-}
+let socket = io.connect('https://universitysocial.herokuapp.com/');
 
 socket.on('outside', function () {
     beep()
