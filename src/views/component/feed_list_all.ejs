@@ -29,14 +29,22 @@
                 <%= feed["content"] %>
             </div>
             <div class="pd-sm">
-                <!--                <div>-->
-                <!--                    <img width=" 100%" class="feed_cover" src="" alt="Ảnh đính kèm">-->
-                <!--                </div>-->
-                <!--                <div class="video-container">-->
-                <!--                    <iframe class="embed_iframe" src="https://www.youtube.com/embed/Wvq9HBirtrU"-->
-                <!--                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"-->
-                <!--                            allowfullscreen></iframe>-->
-                <!--                </div>-->
+                <% if (feed["image"]) {
+                if (feed["image"].contentType) {
+                %>
+                    <div>
+                        <img width="100%" class="feed_cover"
+                             src="data:image/<%= feed["image"].contentType %>;base64,<%= feed["image"].data.toString('base64') %>"
+                             alt="Ảnh đính kèm">
+                    </div>
+                <% }} %>
+                <% if (feed["embed_url"]) { %>
+                    <div class="video-container">
+                        <iframe class="embed_iframe" src="<%= feed["embed_url"] %>"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                <% } %>
             </div>
         </div>
         <hr>
