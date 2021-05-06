@@ -3,12 +3,14 @@
         <div class="d-flex w-100 justify-content-between">
             <div class="d-middle-y">
                 <div class="mr-sm">
-                    <% if (comment["commenter"].google_avatar) { %>
-                        <img class="cmt_user_avatar border-tiny" src="<%= comment["commenter"].google_avatar %>">
-                    <% } else { %>
-                        <img class="cmt_user_avatar border-tiny"
-                             src="data:image/<%= comment["commenter"].image.contentType %>;base64,<%= comment["commenter"].image.data.toString('base64') %>">
-                    <% } %>
+                    <a href="/user/visit/<%= comment["commenter"].email %>">
+                        <% if (comment["commenter"].google_avatar) { %>
+                            <img class="cmt_user_avatar border-tiny" src="<%= comment["commenter"].google_avatar %>">
+                        <% } else { %>
+                            <img class="cmt_user_avatar border-tiny"
+                                 src="data:image/<%= comment["commenter"].image.contentType %>;base64,<%= comment["commenter"].image.data.toString('base64') %>">
+                        <% } %>
+                    </a>
                 </div>
                 <div>
                     <div>
