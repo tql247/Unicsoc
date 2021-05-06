@@ -75,6 +75,13 @@ async function find_all_feed_by_account(index, uploader_id) {
                 }
             },
             {
+                $match: {
+                    deleted_at: {
+                        $exists: false
+                    }
+                }
+            },
+            {
                 $sort: {'created_at': -1}
             },
             {

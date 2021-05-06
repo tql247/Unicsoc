@@ -16,13 +16,13 @@ async function find_all_feed(index) {
                 }
             },
             {
-              $unwind: '$uploader_id'
+                $unwind: '$uploader_id'
             },
             {
-              $project: {
-                  "uploader_id.password": 0,
-                  "uploader_id.token": 0
-              }
+                $project: {
+                    "uploader_id.password": 0,
+                    "uploader_id.token": 0
+                }
             },
             {
                 $lookup: {
@@ -33,7 +33,7 @@ async function find_all_feed(index) {
                             $match: {
                                 $expr: {
                                     $and: [
-                                        { $eq: ["$$feed_id", "$feed"] },
+                                        {$eq: ["$$feed_id", "$feed"]},
                                     ]
                                 },
                                 deleted_at: {
@@ -44,7 +44,7 @@ async function find_all_feed(index) {
                         {
                             $lookup: {
                                 from: "account",
-                                let: {"commenter_id":"$commenter"},
+                                let: {"commenter_id": "$commenter"},
                                 pipeline: [
                                     {
                                         $match: {
@@ -65,6 +65,13 @@ async function find_all_feed(index) {
                 }
             },
             {
+                $match: {
+                    deleted_at: {
+                        $exists: false
+                    }
+                }
+            },
+            {
                 $project: {
                     "uploader_id.password": 0,
                     "uploader_id.token": 0
@@ -74,7 +81,7 @@ async function find_all_feed(index) {
                 $sort: {'created_at': -1}
             },
             {
-                $skip: (index-1)*10
+                $skip: (index - 1) * 10
             },
             {
                 $limit: 10
