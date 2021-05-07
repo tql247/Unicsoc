@@ -42,7 +42,7 @@ router.post('/me/update', auth, uploader.single('new_avatar'), async function (r
             password: req.body["password"],
             class_id: req.body["class_id"],
             faculty: req.body["faculty"],
-            // avatar: req.body["avatar"]
+            avatar: req["file"]
         }
 
         const token = await update_user_info(user_req);
