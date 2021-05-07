@@ -26,9 +26,8 @@ router.get('/visit/:email', auth, async function (req, res, next) {
 router.get('/me', auth, async function (req, res, next) {
     try {
         const user = req["user_profile"]
-        console.log(user)
         const feed_list = await view_feeds(1, user._id)
-        return res.render('user/profile', {user, feed_list})
+        return res.render('user/profile', {user, feed_list, hoster: user})
     } catch (e) {
         next(e)
     }

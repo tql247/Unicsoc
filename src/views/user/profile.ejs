@@ -40,7 +40,11 @@
                 <div class="font-sm"><%= hoster.email %></div>
                 <div class="">Khoa: <%= hoster.faculty %></div>
                 <div class="">Lớp: <%= hoster.class_id %></div>
-                <div class="div-controll font-md font-weigh-md color-main mt-10 btn" onclick="openUpdateModal()">Thay đổi</div>
+                <% if(user.email === hoster.email) { %>
+                    <div class="div-controll font-md font-weigh-md color-main mt-10 btn" onclick="openUpdateModal()">
+                        Thay đổi
+                    </div>
+                <% } %>
             </div>
         </div>
         <div class="mt-10">
@@ -50,7 +54,7 @@
         </div>
 
         <% if (user.email === hoster.email) { %>
-        <%- include('../component/add_feed_btn.ejs') %>
+            <%- include('../component/add_feed_btn.ejs') %>
         <% } %>
     </div>
 </div>
