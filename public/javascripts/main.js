@@ -432,6 +432,12 @@ function eventStuff() {
         return false;
     });
     $(document).on('click', ".delete-cmt-btn", handleDeleteCmtBtn);
+
+
+    $('#topic-filter').on('change', function (e) {
+        if (this.value === "Tất cả")  window.location.href = '/notification/1'
+        window.location.href = '/notification/' + this.value + '/1'
+    });
 }
 
 

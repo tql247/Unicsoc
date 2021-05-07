@@ -9,6 +9,7 @@ const ejs = require('ejs');
 const path = require("path");
 const get_num_notification = require("../../services/get_num_notification");
 const view_notification_detail = require("../../services/view_notification_detail");
+const list_topic = require("../../utils/dict_declare");
 
 router.get('/', async function (req, res) {
     try {
@@ -23,7 +24,15 @@ router.get('/:index', auth, async function (req, res) {
         const notification_list = await view_all_notification(req.params["index"], null)
         const user = req["user_profile"]
         const notification_num = await get_num_notification()
-        return res.render('notification/notification', {srcLink: req.originalUrl.replace(/([^\/]+$)/, ''), notification_list, user, notification_num, page_active: req.params["index"]});
+        return res.render('notification/notification', {
+            selectedTopic: null,
+            list_topic,
+            srcLink: req.originalUrl.replace(/([^\/]+$)/, ''),
+            notification_list,
+            user,
+            notification_num,
+            page_active: req.params["index"]
+        });
     } catch (e) {
         throw e
     }
@@ -31,10 +40,18 @@ router.get('/:index', auth, async function (req, res) {
 
 router.get('/:topic/:index', auth, async function (req, res) {
     try {
-        const notification_list = await view_all_notification(req.params["index"], null)
+        const notification_list = await view_all_notification(req.params["index"], req.params["topic"])
         const user = req["user_profile"]
+        const selectedTopic = req.params["topic"]
         const notification_num = await get_num_notification(req.params["topic"])
-        return res.render('notification/notification', {srcLink: req.originalUrl.replace(/([^\/]+$)/, ''), notification_list, user, notification_num, page_active: req.params["index"]});
+        return res.render('notification/notification', {
+            selectedTopic,
+            srcLink: req.originalUrl.replace(/([^\/]+$)/, ''),
+            notification_list,
+            user,
+            notification_num,
+            page_active: req.params["index"]
+        });
     } catch (e) {
         throw e
     }

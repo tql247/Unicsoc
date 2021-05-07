@@ -30,36 +30,41 @@
             <div class="notify-nav mb-n2">
                 <div>
                     Lọc theo
-                    <select class="form-control form-control w-auto d-inline">
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-control form-control w-auto d-inline" id="topic-filter">
+                        <option value="" <%if(!selectedTopic) {%> selected <%}%>>Tất cả</option>
+                        <% list_topic.forEach((topic) => { %>
+                            <option value="<%= topic %>" <%if(selectedTopic === topic) {%> selected <%}%>><%= topic %></option>
+                        <% }) %>
                     </select>
                 </div>
                 <nav aria-label="Page navigation example" class="p-0 m-0">
                     <%
-                        const pageNum = Math.round(notification_num / 3);
-                        const pageStart = Math.max(1, page_active - 1);
-                        const prePage = srcLink + Math.max((parseInt(page_active) - 1), 1)
-                        const nextPage = srcLink + Math.min((parseInt(page_active) + 1), pageNum)
+                    const pageNum = Math.ceil(notification_num / 10);
+                    const pageStart = Math.max(1, page_active - 1);
+                    const prePage = srcLink + Math.max((parseInt(page_active) - 1), 1)
+                    const nextPage = srcLink + Math.min((parseInt(page_active) + 1), pageNum)
                     %>
                     <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="<%= prePage %>" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
+                        <% if (Math.max((parseInt(page_active) - 1), 1) !== parseInt(page_active)) { %>
+                            <li class="page-item">
+                                <a class="page-link" href="<%= prePage %>" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        <% } %>
                         <%
-                        for (let i = pageStart; i < pageNum+1 && i < pageStart + 3; i++) {
+                        for (let i = pageStart; i < pageNum + 1 && i < pageStart + 3; i++) {
                         %>
                             <li class="page-item <% if(parseInt(page_active) === (i)) { %> active <% } %>"><a
                                         class="page-link" href="<%= srcLink + i %>"><%= i %></a></li>
                         <% } %>
-                        <li class="page-item">
-                            <a class="page-link" href="<%= nextPage %>" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
+                        <% if (Math.min((parseInt(page_active) + 1), pageNum) !== parseInt(page_active)) { %>
+                            <li class="page-item">
+                                <a class="page-link" href="<%= nextPage %>" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        <% } %>
                     </ul>
                 </nav>
             </div>
