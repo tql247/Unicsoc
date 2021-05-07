@@ -6,7 +6,7 @@ async function find_account_by_email (email) {
     try {
         await connect();
         return await AccountModel.
-            findOne({'email': email}, "-token -password").
+            findOne({'email': email}, "-token").
             exec();
     }catch (e) {
         throw e

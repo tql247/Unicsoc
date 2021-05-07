@@ -62,6 +62,8 @@ async function login_by_account(user) {
             e.message = "Incorrect email or password"
             throw e
         }
+        console.log('acc')
+        console.log(acc)
 
         let verify = await check_password(user.password, acc["password"]);
 

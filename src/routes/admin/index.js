@@ -9,7 +9,6 @@ const router = express.Router();
 router.get('/', auth, verify_admin, async function (req, res, next) {
     try {
         const officers = await get_all_officer_info()
-        const list_topic = list_topic
         return res.render('admin/admin.ejs', {officers, list_topic})
     } catch (e) {
         next(e)

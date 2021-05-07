@@ -62,8 +62,8 @@
                     <div class="ml-2 d-flex flex-wrap">
                         <% list_topic.forEach((topic)=> { %>
                             <div class="flex-grow-1">
-                                <input name="topic" type="checkbox" class="w-auto" value="ICON">
-                                <label class="w-auto">ICON</label>
+                                <input name="topic" type="checkbox" class="w-auto" value="<%= topic %>">
+                                <label class="w-auto"><%= topic %></label>
                             </div>
                         <% })%>
                     </div>
