@@ -196,10 +196,27 @@ function loadMoreFeed() {
     // Kiểm tra có phải đang xem trang cá nhân của mình hay không
     if (window.location.href.match('/user/me')) {
         //  Lấy bài viết của mình thôi
+        $.ajax({
+            type: "POST",
+            url: "/feed/view",
+            dataType: "json",
+            data: {feedIndex: window.feedIndex, my_feed: true},
+            async: true,
+            success: handleLoadMoreFeed
+        });
     }
     // Kiểm tra có phải đang xem trang cá nhân của ai đó không
     else if (window.location.href.match('/user/visit')) {
         //  Lấy bài viết của một người đó thôi
+        //    Lấy tất cả các bài viết
+        $.ajax({
+            type: "POST",
+            url: "/feed/view",
+            dataType: "json",
+            data: {feedIndex: window.feedIndex, host_id: $("#hoster-id").val()},
+            async: true,
+            success: handleLoadMoreFeed
+        });
     } else {
         //    Lấy tất cả các bài viết
         $.ajax({
