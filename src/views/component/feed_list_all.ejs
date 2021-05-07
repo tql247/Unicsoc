@@ -14,7 +14,7 @@
                 <% } %>
             </div>
             <div class="d-middle-y">
-                <a href="" class="mr-sm">
+                <a href="/user/visit/<%= feed["uploader_id"].email %>" class="mr-sm">
                     <% if (feed["uploader_id"].google_avatar) { %>
                         <img id="user-avatar" class="feed_user_avatar border-tiny"
                              src="<%= feed["uploader_id"].google_avatar %>">
