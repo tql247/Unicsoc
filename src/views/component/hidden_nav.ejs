@@ -1,0 +1,29 @@
+<div class="hidden-nav border-tiny">
+    <div class="spacious">
+        <a href="/">
+            <div class="hidden-control hidden-logo-main border-tiny border-circle">
+                <img class="w-100 h-100" src="/public/images/UNISOC.png" alt="">
+            </div>
+        </a>
+        <a href="/notification">
+            <div class="hidden-control hidden-logo-main">
+                <img class="w-100 h-100" src="/public/images/notification.png" alt="">
+            </div>
+        </a>
+        <a href="/user/me">
+            <div class="hidden-control hidden-avatar border-tiny border-circle overflow-hidden">
+                <% if (user.google_avatar) { %>
+                    <img class="w-100 h-100" src="<%= user.google_avatar %>">
+                <% } else { %>
+                    <img class="w-100 h-100"
+                         src="data:image/<%= user.avatar.contentType %>;base64,<%= user.avatar.data.toString('base64') %>">
+                <% } %>
+            </div>
+        </a>
+        <a href="/user/loggout">
+            <div class="hidden-control hidden-logout">
+                <img class="w-100 h-100" src="/public/images/logout.png" alt="">
+            </div>
+        </a>
+    </div>
+</div>

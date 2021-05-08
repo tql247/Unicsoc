@@ -487,7 +487,9 @@ input,
 
 .feed-content {
     height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+
 
 .feed-list {
     /* background-color: red; */
@@ -541,8 +543,8 @@ input,
 
 .avatar_cover {
     height: 100%;
-    max-height: 4em;
-    max-width: 4em;
+    max-height: 3.5em;
+    max-width: 3.5em;
     border-radius: 50%;
 }
 
@@ -671,6 +673,72 @@ body {
     }
 }
 
+
+@media screen and (max-width: 1200px) and (min-width: 768px) {
+    .info-card .item-text {
+        display: none;
+    }
+
+    .navside {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .div-controll {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .card-avatar {
+        margin-right: 0 !important;
+    }
+}
+
+
+@media screen and (max-width: 992px){
+    .right-view {
+        display: none;
+    }
+}
+
+.hidden-nav {
+    display: none;
+    position: fixed;
+    background: white;
+    left: 0;
+    width: 100vw;
+    z-index: 1000;
+    height: 65px;
+}
+
+@media screen and (max-width: 768px){
+    .side-float {
+        display: none;
+    }
+
+    #feed_list {
+        margin-top: 70px;
+    }
+
+    .profile {
+        margin-top: 70px;
+    }
+
+    .md-d-none {
+        display: none;
+    }
+
+    .notify-nav {
+        margin-top: 70px;
+    }
+
+    .hidden-nav {
+        display: block;
+    }
+}
+
 .pdt-sm {
     padding-top: 20px;
 }
@@ -736,6 +804,18 @@ body {
     font-size: 14pt;
 }
 
+.spacious {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 65px;
+}
+
+.hidden-control {
+    height: 45px;
+    width: 45px;
+}
+
 .border-tiny {
     box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0, rgba(27, 31, 35, 0.15) 0 0 0 1px;
 }
@@ -746,6 +826,10 @@ body {
 
 .w-max {
     width: max-content;
+}
+
+.card-avatar {
+    margin-right: 1em;
 }
 
 .mr-sm {

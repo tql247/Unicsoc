@@ -16,15 +16,17 @@
 </head>
 <body class="container near-white">
 
+<%- include('../component/hidden_nav.ejs') %>
+
 <div class="row main">
-    <div class="col-xl-3 col-lg-2 col-md-2 p-relative">
+    <div class="col-xl-3 col-lg-3 col-md-2 p-relative no-margin no-padding md-d-none">
         <div class="side-float">
             <%- include('../component/user_sidebar.ejs', {user: user}) %>
         </div>
     </div>
 
-    <div class="col-xl-6 col-lg-8 col-md-8 col-sm-9 col-10 no-margin p-relative">
-        <div class="border-tiny bg-white">
+    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 no-margin p-relative">
+        <div class="border-tiny bg-white profile">
             <br>
             <div class="d-middle-x">
                 <div class="d-middle profile_avatar_cover-box">
@@ -63,7 +65,7 @@
     </div>
 
 
-    <div class="col-xl-3 col-lg-2 col-md-2 p-relative no-margin no-padding">
+    <div class="col-xl-3 col-lg-3 col-md-2 p-relative no-margin no-padding">
         <div class="side-float">
             <%- include('../component/sight_right.ejs') %>
         </div>
