@@ -8,6 +8,7 @@ const uploader = require("../../middlewares/uploader");
 const view_feeds = require("../../services/view_feeds");
 const get_account_data = require("../../services/get_account_data");
 const view_profile_by_email = require("../../services/view_profile_by_email");
+const view_all_notification = require("../../services/view_notifications");
 const {login_by_account} = require("../../services/login");
 
 
@@ -16,7 +17,8 @@ router.get('/visit/:email', auth, async function (req, res, next) {
         const user = req["user_profile"]
         const hoster = await view_profile_by_email(req.params["email"])
         const feed_list = await view_feeds(1, hoster["_id"])
-        return res.render('user/profile', {hoster, user, feed_list})
+        const notification_list = await view_all_notification(1, null)
+        return res.render('user/profile', {hoster, user, feed_list, notification_list})
     } catch (e) {
         next(e)
     }
@@ -27,7 +29,8 @@ router.get('/me', auth, async function (req, res, next) {
     try {
         const user = req["user_profile"]
         const feed_list = await view_feeds(1, user._id)
-        return res.render('user/profile', {user, feed_list, hoster: user})
+        const notification_list = await view_all_notification(1, null)
+        return res.render('user/profile', {user, feed_list, hoster: user, notification_list})
     } catch (e) {
         next(e)
     }

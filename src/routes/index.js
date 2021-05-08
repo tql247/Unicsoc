@@ -7,7 +7,8 @@ const role_redirect = require("../middlewares/role_redirect");
 router.get('/', auth, role_redirect, async (req, res) => {
     const user = req["user_profile"]
     const feed_list = await view_feeds(1, null)
-    return res.render('index', {user, feed_list})
+    const notification_list = await view_all_notification(1, null)
+    return res.render('index', {user, feed_list, notification_list})
 })
 
 router.get('/test', (req, res)=>{
@@ -28,6 +29,7 @@ const feed = require('./feed');
 router.use('/feed', feed);
 
 const notification = require('./notification');
+const view_all_notification = require("../services/view_notifications");
 router.use('/notification', notification);
 
 module.exports = router;

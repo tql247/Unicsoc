@@ -4,23 +4,31 @@
             <img class="" src="/public/images/UNISOC.png" alt="">
         </div>
     </a>
-    <div class="qw-notify">
-        <div class="" id="qw-notify-list">
-
+    <div class="mt-3">
+        <div>
+            <a href="/user/me">
+                <div class="div-controll color-main py-3">Tài khoản</div>
+            </a>
         </div>
-        <div class="al-right">
-            <br>
-            <a href="/notification">>> Xem tất cả thông báo</a>&emsp;
+        <div class="">
+            <a class="color-danger" href="/notification">
+                <div class="div-controll color-main py-3">Thông báo</div>
+            </a>
+        </div>
+        <div class="">
+            <a class="color-danger" href="/user/logout">
+                <div class="div-controll color-danger py-3">Đăng xuất</div>
+            </a>
         </div>
     </div>
-    <div class="info-card bg-white">
+    <div class="info-card">
         <div class="user-info d-flex-top">
             <div>
                 <div class="mr-sm">
                     <% if (user.google_avatar) { %>
-                        <img id="user-avatar" class="avatar_cover" src="<%= user.google_avatar %>">
+                        <img id="user-avatar" class="side_avatar_cover" src="<%= user.google_avatar %>">
                     <% } else { %>
-                        <img id="user-avatar" class="avatar_cover"
+                        <img id="user-avatar" class="side_avatar_cover"
                              src="data:image/<%= user.avatar.contentType %>;base64,<%= user.avatar.data.toString('base64') %>">
                     <% } %>
                 </div>
@@ -28,16 +36,6 @@
             <div class="item-text">
                 <div id="user_full_name" class="item-subtitle"><strong><%= user.full_name %></strong></div>
                 <div class="font-sm"><%= user.email %></div>
-                <div>
-                    <div>
-                        <a href="/user/me">
-                            <div class="div-controll font-md font-weigh-md color-main">Tài khoản</div>
-                        </a>
-                    </div>
-                    <div class="pdt-sm">
-                        <a class="color-danger" href="/user/logout">Đăng xuất</a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

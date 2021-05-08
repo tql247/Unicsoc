@@ -16,7 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
     <script src="/public/javascripts/main.js"></script>
 </head>
-<body class="container">
+<body class="container near-white">
 
 <div class="row main">
     <div class="col-xl-5 col-lg-4 col-md-4 p-relative">
@@ -29,7 +29,8 @@
         <div class="mt-10">
             <div class="mt-5">
                 <h3><%= notification_detail.title %></h3>
-                <div><%= notification_detail.uploader.full_name %> | <%= notification_detail.created_at.toLocaleString() %></div>
+                <div><%= notification_detail.uploader.full_name %>
+                    | <%= notification_detail.created_at.toLocaleString() %></div>
                 <p class="mt-5">
                     <%= notification_detail.detail %>
                 </p>

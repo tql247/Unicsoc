@@ -1,0 +1,16 @@
+<div class="font-family-default font-lg">Thông báo gần đây</div>
+<div class="qw-notify mt-3">
+    <div class="" id="qw-notify-list">
+        <% notification_list.forEach((q_notify)=>{%>
+            <div class="d-flex-top mt-2">
+                <div>
+                    <img class="notify-user-avatar" src="/public/images/avatar.png">
+                </div>
+                <div>
+                    <div class="font-family-default"><%= q_notify.uploader.full_name %></div>
+                    <div><a class="font-sm" href="<%= '/notification/detail/' + q_notify.topic + '/' + q_notify._id %>"><%= q_notify.title %></a></div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
