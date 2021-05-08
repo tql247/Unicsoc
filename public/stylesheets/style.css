@@ -241,6 +241,11 @@
     align-items: center;
 }
 
+#preview_feed_image {
+    width: 100%;
+    max-width: 6em;
+}
+
 .centroid {
     min-height: 90vh;
     display: flex;

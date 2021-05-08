@@ -10,10 +10,18 @@
                     </div>
                     <div>
                         <div class="div-controll font-md font-weigh-md color-main mt-10 btn"
-                             onclick="clickElement('add-feed-image')">Thêm ảnh
+                             onclick="clickElement('add-feed-image')"
+                        >Chọn ảnh
                         </div>
-                        <input name="feed_picture" id="add-feed-image" class="hidden" type="file">
+                        <img src="" alt=""  id="preview_feed_image">
+                        <input name="feed_picture"
+                               id="add-feed-image"
+                               class="hidden"
+                               type="file"
+                               onchange=" $('#preview_feed_image').attr('src', window.URL.createObjectURL(this.files[0]))"
+                        >
                     </div>
+                    <br>
                     <div>
                         <button class="border-tiny radius-sm pd-5-10 w-100 update-sm-btn" type="submit">Thêm</button>
                     </div>
@@ -26,8 +34,10 @@
                             contenteditable="True"
                     >
                     </div>
-                    <input id="feed-input-text-hidden" name="feed_content" type="text" class="hidden">
-                </div>
+                    <input id="feed-input-text-hidden"
+                           name="feed_content" type="text"
+                           class="hidden">
+                    </div>
             </div>
             <div>
             </div>
