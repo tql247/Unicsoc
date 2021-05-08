@@ -1,14 +1,14 @@
 <div class="update-info-modal" id="update_info_modal">
     <div class="p-relative centroid content">
         <table>
-            <form action="/user/me/update" method="POST" enctype="multipart/form-data">
+            <form action="/user/me/update" id="update_info_form" action="" method="POST" enctype="multipart/form-data">
                 <tr>
                     <td class="" align="right">
-                        <div class="m-sm">
+                        <div class="m-sm avatar-box">
                             <% if (user.google_avatar) { %>
-                                <img id="avatar" class="avatar_cover" src="<%= user.google_avatar %>">
+                                <img id="preview_avatar" class="preview_avatar" src="<%= user.google_avatar %>">
                             <% } else { %>
-                                <img id="avatar" class="avatar_cover"
+                                <img id="preview_avatar" class="preview_avatar"
                                      src="data:image/<%= user.avatar.contentType %>;base64,<%= user.avatar.data.toString('base64') %>">
                             <% } %>
                         </div>
@@ -16,10 +16,10 @@
                     <td>
                         <div>
                             <div class="font-lg"><%= user.email %></div>
-                            <div class="div-controll font-sm font-strong color-main">
+                            <div class="div-controll font-sm font-strong color-main" id="update-avatar">
                                 Đổi ảnh đại diện
                             </div>
-                            <input type="file" name="new_avatar" class="hidden">
+                            <input type="file" onchange=" $('#preview_avatar').attr('src', window.URL.createObjectURL(this.files[0]))" name="new_avatar" id="update-avatar-hidden" class="hidden">
                         </div>
                     </td>
                 </tr>

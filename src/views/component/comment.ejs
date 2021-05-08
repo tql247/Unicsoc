@@ -8,7 +8,7 @@
                             <img class="cmt_user_avatar border-tiny" src="<%= comment["commenter"].google_avatar %>">
                         <% } else { %>
                             <img class="cmt_user_avatar border-tiny"
-                                 src="data:image/<%= comment["commenter"].image.contentType %>;base64,<%= comment["commenter"].image.data.toString('base64') %>">
+                                 src="data:image/<%= comment["commenter"].avatar.contentType %>;base64,<%= comment["commenter"].avatar.data.toString('base64') %>">
                         <% } %>
                     </a>
                 </div>

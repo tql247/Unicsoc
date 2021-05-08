@@ -237,6 +237,22 @@ function beep() {
     audio.play();
 }
 
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            $('#blah').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]); // convert to base64 string
+    }
+}
+
+$("#imgInp").change(function() {
+    readURL(this);
+});
+
 function eventStuff() {
     $("#add-acc-form").on("submit", function (e) {
         e.preventDefault();
@@ -433,11 +449,18 @@ function eventStuff() {
     });
     $(document).on('click', ".delete-cmt-btn", handleDeleteCmtBtn);
 
+    $(document).on("submit", "#update_info_form", function (e) {
+        activeLoading();
+    });
 
     $('#topic-filter').on('change', function (e) {
         if (this.value === "Tất cả")  window.location.href = '/notification/1'
         window.location.href = '/notification/' + this.value + '/1'
     });
+
+    $("#update-avatar").on('click', function (e) {
+        $("#update-avatar-hidden").click();
+    })
 }
 
 

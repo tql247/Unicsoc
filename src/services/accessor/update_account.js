@@ -16,6 +16,10 @@ async function update_account(user) {
             await AccountModel.findOneAndUpdate({email: user.email}, {
                 avatar: user.avatar
             });
+
+            await AccountModel.findOneAndUpdate({email: user.email}, {
+                google_avatar: null
+            });
         }
 
         return await AccountModel.findOneAndUpdate({email: user.email}, {

@@ -10,8 +10,10 @@ async function update_user_info(user_req) {
             password: user_req.password,
             class_id: user_req.class_id,
             faculty: user_req.faculty,
-            avatar: make_image_obj(user_req.avatar)
+            avatar: await make_image_obj(user_req.avatar)
         }
+
+
         const user = await update_account(new_user_info)
         return await sign_token_to_user(user)
     } catch (e) {

@@ -27,13 +27,15 @@
     <div class="col-xl-7 col-lg-8 col-md-8 col-sm-9 col-10 no-margin p-relative">
         <div class="border-tiny bg-white">
             <br>
-            <div class="d-middle">
-                <% if (hoster.google_avatar) { %>
-                    <img id="avatar" class="avatar_cover" src="<%= hoster.google_avatar %>">
-                <% } else { %>
-                    <img id="avatar" class="avatar_cover"
-                         src="data:image/<%= hoster.avatar.contentType %>;base64,<%= hoster.avatar.data.toString('base64') %>">
-                <% } %>
+            <div class="d-middle-x">
+                <div class="d-middle profile_avatar_cover-box">
+                    <% if (hoster.google_avatar) { %>
+                        <img id="avatar" class="profile_avatar_cover" src="<%= hoster.google_avatar %>">
+                    <% } else { %>
+                        <img id="avatar" class="profile_avatar_cover"
+                             src="data:image/<%= hoster.avatar.contentType %>;base64,<%= hoster.avatar.data.toString('base64') %>">
+                    <% } %>
+                </div>
             </div>
             <div class="d-middle-x mt-10 pb-2">
                 <div class="hidden" id="hoster-id"><%= hoster._id %></div>

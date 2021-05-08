@@ -8,6 +8,12 @@
     width: 200px;
 }
 
+.avatar-box {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}
+
 .app-view-controll {
     flex-grow: 1;
 }
@@ -524,9 +530,17 @@ input,
     border-radius: 3px;
 }
 
+
 .avatar_cover {
-    width: 6em;
+    height: 100%;
+    max-height: 6em;
+    max-width: 6em;
     border-radius: 50%;
+}
+
+.preview_avatar {
+    height: 100%;
+    max-height: 6em;
 }
 
 .font-sm {
@@ -542,12 +556,28 @@ input,
 }
 
 .feed_user_avatar {
-    width: 4em;
+    height: 100%;
+    max-height: 4em;
+    max-width: 4em;
+    border-radius: 10000px;
+}
+
+.profile_avatar_cover-box {
+    width: 8em;
+    height: 8em;
+}
+
+.profile_avatar_cover {
+    height: 100%;
+    max-height: 8em;
+    max-width: 8em;
     border-radius: 10000px;
 }
 
 .cmt_user_avatar {
-    width: 2.5em;
+    height: 100%;
+    max-height: 2.5em;
+    max-width: 2.5em;
     border-radius: 10000px;
 }
 

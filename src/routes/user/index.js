@@ -35,7 +35,6 @@ router.get('/me', auth, async function (req, res, next) {
 
 router.post('/me/update', auth, uploader.single('new_avatar'), async function (req, res, next) {
     try {
-        console.log(req.body)
         const user_req = {
             email: req["user_profile"].email,
             full_name: req.body["full_name"] || req["user_profile"].full_name,
