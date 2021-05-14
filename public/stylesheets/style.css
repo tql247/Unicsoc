@@ -306,12 +306,11 @@ body {
 
 .loginbox {
     width: 400px;
-    height: 550px;
     background: white;
     color: rgb(51, 92, 153);
     box-sizing: border-box;
     border-radius: 3%;
-    padding: 10px 30px 0;
+    padding: 10px 30px 30px;
     box-shadow: 1px 1px 7px rgb(51, 92, 153);
 }
 
@@ -932,6 +931,10 @@ body {
     left: 0;
     z-index: -100;
     transition: ease-in-out;
+}
+
+.error {
+    color: red !important;
 }
 
 .add-notification-modal .overlay {

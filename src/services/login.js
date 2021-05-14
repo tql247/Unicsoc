@@ -24,13 +24,13 @@ async function sign_token_to_user(acc) {
 
 async function login_by_google(user) {
     try {
-        // if (!user.email.match("@student.tdtu.edu.vn")) {
-        //     const e = new Error()
-        //     e.status = 401
-        //     e.name = "Unauthorized"
-        //     e.message = 'Invalid email'
-        //     throw e
-        // }
+        if (!user.email.match("@student.tdtu.edu.vn")) {
+            const e = new Error()
+            e.status = 401
+            e.name = "Unauthorized"
+            e.message = 'Invalid email'
+            throw e
+        }
 
         let acc = await find_account_by_email(user.email);
 

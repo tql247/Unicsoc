@@ -461,6 +461,18 @@ function eventStuff() {
     $("#update-avatar").on('click', function (e) {
         $("#update-avatar-hidden").click();
     })
+
+    $("#loginForm").validate({
+        rules: {
+            password: "required",
+            username: "required"
+        },
+        messages: {
+            password: "Vui lòng nhập mật khẩu",
+            username: "Vui lòng nhập username"
+        }
+    });
+
 }
 
 
@@ -487,14 +499,14 @@ $(document).ready(function () {
         }
     });
 })
-let socket = io.connect('https://universitysocial.herokuapp.com/');
+let socketClient = io.connect('https://universitysocial.herokuapp.com/');
 
-socket.on('outside', function () {
+socketClient.on('outside', function () {
     beep()
     console.log('outside');
 });
 
-socket.on('new-notify', function (data) {
+socketClient.on('new-notify', function (data) {
     beep()
     $(data.data).prependTo("#qw-notify-list")
 });
