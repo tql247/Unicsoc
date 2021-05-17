@@ -2,6 +2,7 @@ const FeedModel = require("../../models/Feed");
 const connect = require("./connection");
 const mongoose = require('mongoose');
 
+// tìm tất cả bài viết theo index
 async function find_all_feed(index) {
     try {
         await connect();

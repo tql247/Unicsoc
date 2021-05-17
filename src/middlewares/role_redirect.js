@@ -1,3 +1,4 @@
+// chuyển hướng trang theo vai trò tương ứng
 const role_redirect = async (req, res, next) => {
     try {
         const role = req["user_profile"].role

@@ -4,7 +4,7 @@ const add_account = require("./accessor/add_account");
 const update_account_token = require("./accessor/update_account_token");
 const {check_password} = require("../utils/bcrypt");
 
-
+// Dùng để tạo ra json web token với _id của người dùng ẩn bên trong
 async function sign_token_to_user(acc) {
     const token = jwt.sign(
         {
@@ -21,9 +21,10 @@ async function sign_token_to_user(acc) {
     return token
 }
 
-
+// đăng nhập bằng tài khoản google
 async function login_by_google(user) {
     try {
+        // kiểm tra mail có phải email trường tdt hay không
         if (!user.email.match("@student.tdtu.edu.vn")) {
             const e = new Error()
             e.status = 401
@@ -32,8 +33,10 @@ async function login_by_google(user) {
             throw e
         }
 
+        // kiểm tra email đã tồn tại hay chưa
         let acc = await find_account_by_email(user.email);
 
+        // nếu chưa thì tạo tài khoản mới với email này
         if (!acc) {
             const new_user = {
                 email: user.email,
@@ -51,8 +54,10 @@ async function login_by_google(user) {
     }
 }
 
+// đăng nhập bằng tài khoản
 async function login_by_account(user) {
     try {
+        // kiểm tra email có trong hệ thống hay không
         let acc = await find_account_by_email(user.email);
 
         if (!acc) {
@@ -62,9 +67,8 @@ async function login_by_account(user) {
             e.message = "Incorrect email or password"
             throw e
         }
-        console.log('acc')
-        console.log(acc)
 
+        // kiểm tra mật khẩu có trùng khớp
         let verify = await check_password(user.password, acc["password"]);
 
         if (!verify) {

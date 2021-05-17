@@ -2,6 +2,7 @@ const connect = require("./connection");
 const mongoose = require('mongoose');
 const CommentModel = require("../../models/Comment");
 
+// thêm bình luận
 async function add_comment(comment) {
     try {
         await connect();

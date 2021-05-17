@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const connect = require("./connection");
 const AccountModel = require("../../models/Account");
 
+// tìm tài khoản theo _id
 async function find_account_by_id (id) {
     try {
         await connect();

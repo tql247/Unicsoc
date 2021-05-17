@@ -1,6 +1,7 @@
 const find_cmt_by_id = require("./accessor/find_cmt_by_id");
 const soft_delete_cmt = require("./accessor/soft_delete_comment");
 
+// dùng để xoá bình luận
 async function delete_comment(comment_id, user_id) {
     try {
         const cmt = await find_cmt_by_id(comment_id)

@@ -1,3 +1,4 @@
+// kiểm tra quyền admin của tài khoản
 const verify_admin = async (req, res, next) => {
     try {
         console.log('---------------')

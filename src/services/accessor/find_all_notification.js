@@ -2,6 +2,7 @@ const NotificationModel = require("../../models/Notification");
 const connect = require("./connection");
 const mongoose = require('mongoose');
 
+// tìm tất cả thông báo theo index
 const find_all_notification = async function (index) {
     try {
         await connect();

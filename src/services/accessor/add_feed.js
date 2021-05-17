@@ -2,6 +2,7 @@ const FeedModel = require("../../models/Feed");
 const connect = require("./connection");
 const mongoose = require('mongoose');
 
+// thêm bài viết
 async function add_feed (feed) {
     try {
         await connect();

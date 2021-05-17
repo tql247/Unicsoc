@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const AccountModel = require("../../models/Account");
 const {hash_password} = require("../../utils/bcrypt");
 
+// cập nhật thông tin tài khoản
 async function update_account(user) {
     try {
         await connect();

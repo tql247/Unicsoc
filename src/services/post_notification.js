@@ -1,5 +1,6 @@
 const add_notification = require("./accessor/add_notification");
 
+// Hàm này dùng để đăng thông báo
 async function post_notification(req_notification, uploader) {
     try {
         const new_notification = {

@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const connect = require("./connection");
 const AccountModel = require("../../models/Account");
 
+// tìm tất cả account có role là officer
 async function find_all_officer () {
     try {
         await connect();

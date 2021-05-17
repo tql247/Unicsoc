@@ -2,6 +2,7 @@ const NotificationModel = require("../../models/Notification");
 const connect = require("./connection");
 const mongoose = require('mongoose');
 
+// đếm tất cả thông báo có trong hệ thống
 const count_notification = async function () {
     try {
         await connect();

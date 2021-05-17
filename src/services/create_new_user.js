@@ -1,5 +1,6 @@
 const add_account = require("./accessor/add_account");
 
+// dùng để tạo user mới, chỉ dành cho admin
 async function create_new_user(new_user) {
     try {
         const new_account = {

@@ -1,6 +1,7 @@
 const soft_delete_feed = require("./accessor/soft_delete_feed");
 const find_feed_by_id = require("./accessor/find_feed_by_id");
 
+// hàm này dùng để xoá bài viết
 async function delete_feed(feed_id, user_id) {
     try {
         const feed = await find_feed_by_id(feed_id)

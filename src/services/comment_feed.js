@@ -1,5 +1,6 @@
 const add_comment = require("./accessor/add_comment");
 
+// dùng để bình luận một bài viết
 async function comment_feed(comment) {
     try {
         const new_comment = {

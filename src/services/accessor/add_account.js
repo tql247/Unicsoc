@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const AccountModel = require("../../models/Account");
 const {hash_password} = require("../../utils/bcrypt");
 
+// thêm tài khoản
 async function add_account(acc) {
     try {
         await connect();

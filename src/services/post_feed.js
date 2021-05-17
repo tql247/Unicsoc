@@ -2,6 +2,7 @@ const add_new_feed = require("./accessor/add_feed");
 const extract_url_from_text = require("../utils/extract_url_from_text");
 const make_image_obj = require("../utils/make_image_obj");
 
+// Hàm này dùng để đăng bài viết
 async function post_feed(feed) {
     try {
         const image = await make_image_obj(feed.image)
@@ -20,7 +21,3 @@ async function post_feed(feed) {
 }
 
 module.exports = post_feed
-
-
-// const imbase64 = Buffer.from(image.data).toString('base64')
-// res.render('index', {image: image})

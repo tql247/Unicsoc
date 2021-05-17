@@ -1,6 +1,7 @@
 const soft_delete_notification = require("./accessor/soft_delete_notification");
 const find_notification_by_id = require("./accessor/find_notification_by_id");
 
+// hàm này dùng để xoá thông báo
 async function delete_notification(notification_id, user_id) {
     try {
         const notification = await find_notification_by_id(notification_id)

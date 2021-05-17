@@ -2,6 +2,7 @@ const connect = require("./connection");
 const mongoose = require('mongoose');
 const NotificationModel = require("../../models/Notification");
 
+// cập nhật thông báo
 async function update_notification(notification) {
     try {
         await connect();

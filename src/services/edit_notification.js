@@ -1,6 +1,7 @@
 const update_notification = require("./accessor/update_notification");
 const find_notification_by_id = require("./accessor/find_notification_by_id");
 
+// hàm này dùng để chỉnh sửa thông tin
 async function edit_notification (req_notification, uploader) {
     try {
         const notification = await find_notification_by_id(req_notification.edit_notification_id)

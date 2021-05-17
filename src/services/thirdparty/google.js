@@ -1,3 +1,4 @@
+// dùng để đăng nhập bằng google
 const passport = require('passport');
 const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 
@@ -13,6 +14,8 @@ passport.use(
     'google',
     new GoogleStrategy(
         {
+            // thông tin lấy được từ trang
+            // https://console.cloud.google.com/apis/credentials
             clientID: '570748689448-us112vadq54ouu9o56gc5rm9f430vort.apps.googleusercontent.com',
             clientSecret: 'zR_CoI_3wV6iD-vZe3SOXTDK',
             callbackURL: '/user/login/google/callback'

@@ -2,6 +2,8 @@ const connect = require("./connection");
 const mongoose = require('mongoose');
 const AccountModel = require("../../models/Account");
 
+// cập nhật token cho tài khoản, nhằm để lưu trữ và
+// xác thực token của người dùng có đáng tin hay không
 async function update_account_token(email, jwt) {
     try {
         await connect();

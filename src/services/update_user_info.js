@@ -2,6 +2,7 @@ const make_image_obj = require("../utils/make_image_obj");
 const update_account = require("./accessor/update_account");
 const {sign_token_to_user} = require("./login");
 
+// hàm này dùng để cập nhật thông tin người dùng
 async function update_user_info(user_req) {
     try {
         const new_user_info = {

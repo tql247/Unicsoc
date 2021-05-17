@@ -3,6 +3,7 @@ const make_image_obj = require("../utils/make_image_obj");
 const find_feed_by_id = require("./accessor/find_feed_by_id");
 const extract_url_from_text = require("../utils/extract_url_from_text");
 
+// hàm này dùng để chỉnh sửa bài viết
 async function edit_feed(feed_content) {
     try {
         const feed = await find_feed_by_id(feed_content._id)
