@@ -25,13 +25,13 @@ async function sign_token_to_user(acc) {
 async function login_by_google(user) {
     try {
         // kiểm tra mail có phải email trường tdt hay không
-        if (!user.email.match("@student.tdtu.edu.vn")) {
-            const e = new Error()
-            e.status = 401
-            e.name = "Unauthorized"
-            e.message = 'Invalid email'
-            throw e
-        }
+//         if (!user.email.match("@student.tdtu.edu.vn")) {
+//             const e = new Error()
+//             e.status = 401
+//             e.name = "Unauthorized"
+//             e.message = 'Invalid email'
+//             throw e
+//         }
 
         // kiểm tra email đã tồn tại hay chưa
         let acc = await find_account_by_email(user.email);
